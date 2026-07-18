@@ -3,174 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PulseTrack — Smart LED Fitness Band | Track Steps, Time & More</title>
-<meta name="description" content="The PulseTrack Smart Band tracks your steps, calories and time on a bright LED display. Waterproof, ultra-light and fits every wrist. 60-day money-back guarantee.">
+<title>PulseTrack® | Vibrating Alarm Band — Wake Up On Time, Every Time</title>
+<meta name="description" content="The PulseTrack vibrating alarm band wakes even the deepest sleepers with silent vibration — without waking your partner. 100-day risk-free trial.">
 <style>
   /* ============================================
      BRAND SETTINGS — edit these to rebrand fast
      ============================================ */
   :root{
-    --brand-name:'PulseTrack';
-    --accent:#2f6bff;
-    --accent-dark:#1e4fd6;
-    --cta:#ff5a36;
-    --cta-dark:#e04322;
-    --ink:#0e1320;
-    --ink-soft:#3c4356;
+    --navy:#0b1f3a;
+    --blue:#1656d6;
+    --blue-soft:#eaf0ff;
+    --green:#00b67a;        /* trust/review green */
+    --green-soft:#e6f7f0;
+    --cta:#1656d6;
+    --cta-dark:#0f41a8;
+    --ink:#101828;
+    --ink-soft:#475467;
+    --line:#e6e9f0;
     --bg:#ffffff;
-    --bg-soft:#f4f6fb;
-    --gold:#ffb400;
+    --bg-soft:#f7f8fb;
     --radius:16px;
-    --shadow:0 10px 30px rgba(14,19,32,.10);
+    --shadow:0 8px 28px rgba(16,24,40,.08);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
-  img{max-width:100%;display:block}
   a{text-decoration:none;color:inherit}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
-  /* ---------- Announcement bar (urgency) ---------- */
-  .announce{background:var(--ink);color:#fff;text-align:center;font-size:.85rem;padding:9px 14px;letter-spacing:.02em}
-  .announce b{color:var(--gold)}
+  /* ---------- Photo placeholders (swap for real images) ---------- */
+  .ph{background:repeating-linear-gradient(45deg,#f1f3f8,#f1f3f8 12px,#e9ecf4 12px,#e9ecf4 24px);border:2px dashed #c3cad9;border-radius:var(--radius);display:grid;place-items:center;color:#8b93a7;font-weight:600;font-size:.9rem;text-align:center;padding:16px}
+  .ph small{display:block;font-weight:500;font-size:.75rem;margin-top:4px;opacity:.8}
+  .ph-hero{aspect-ratio:1/1;width:100%;max-width:480px}
+  .ph-wide{aspect-ratio:16/10;width:100%}
+  .ph-sq{aspect-ratio:1/1;width:100%}
+  .ph-thumb{aspect-ratio:1/1;width:72px;border-radius:10px;padding:6px;font-size:.6rem}
+
+  /* ---------- Announcement bar ---------- */
+  .announce{background:var(--navy);color:#fff;text-align:center;font-size:.83rem;padding:9px 14px}
+  .announce b{color:#7fd4ff}
 
   /* ---------- Header ---------- */
-  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid #e8ebf2}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
-  .logo span{color:var(--accent)}
-  .nav a.btn-sm{background:var(--cta);color:#fff;padding:9px 18px;border-radius:999px;font-weight:700;font-size:.9rem;transition:.2s}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{font-weight:800;font-size:1.3rem;letter-spacing:-.02em;color:var(--navy)}
+  .logo sup{font-size:.6rem}
+  .nav-links{display:flex;gap:26px;font-size:.9rem;font-weight:600;color:var(--ink-soft)}
+  .nav a.btn-sm{background:var(--cta);color:#fff;padding:9px 20px;border-radius:999px;font-weight:700;font-size:.88rem;transition:.2s}
   .nav a.btn-sm:hover{background:var(--cta-dark)}
 
   /* ---------- Buttons ---------- */
-  .btn{display:inline-block;background:var(--cta);color:#fff;font-weight:800;font-size:1.05rem;padding:16px 38px;border-radius:999px;box-shadow:0 8px 24px rgba(255,90,54,.35);transition:.2s;text-align:center;border:none;cursor:pointer}
+  .btn{display:inline-block;background:var(--cta);color:#fff;font-weight:800;font-size:1.02rem;padding:16px 36px;border-radius:999px;box-shadow:0 8px 22px rgba(22,86,214,.32);transition:.2s;text-align:center;border:none;cursor:pointer}
   .btn:hover{background:var(--cta-dark);transform:translateY(-2px)}
-  .btn-sub{display:block;font-size:.78rem;font-weight:500;opacity:.85;margin-top:4px}
+  .btn-sub{display:block;font-size:.76rem;font-weight:500;opacity:.85;margin-top:4px}
   .micro{font-size:.8rem;color:var(--ink-soft);margin-top:10px}
-  .micro svg{vertical-align:-2px;margin-right:4px}
+
+  /* ---------- Trust stars ---------- */
+  .tp{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;font-weight:700;color:var(--ink)}
+  .tp .sq{display:inline-flex;gap:2px}
+  .tp .sq i{width:18px;height:18px;background:var(--green);display:grid;place-items:center;color:#fff;font-style:normal;font-size:.7rem}
+  .tp small{color:var(--ink-soft);font-weight:500}
 
   /* ---------- Hero ---------- */
-  .hero{background:radial-gradient(1200px 600px at 80% -10%,#e6edff 0%,transparent 60%),var(--bg-soft);padding:56px 0 64px;overflow:hidden}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-  .stars{color:var(--gold);letter-spacing:2px;font-size:1rem}
-  .rating-line{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--ink-soft);margin-bottom:18px;font-weight:600}
-  h1{font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.12;letter-spacing:-.03em;font-weight:900;margin-bottom:18px}
-  h1 em{font-style:normal;color:var(--accent)}
-  .hero p.lead{font-size:1.12rem;color:var(--ink-soft);margin-bottom:26px;max-width:34rem}
-  .hero-usps{list-style:none;margin:0 0 28px;display:grid;gap:10px}
-  .hero-usps li{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.98rem}
-  .tick{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:#e2f7e9;color:#12923f;display:grid;place-items:center;font-size:.8rem;font-weight:900}
-  .price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
-  .price-now{font-size:2rem;font-weight:900}
-  .price-was{font-size:1.15rem;color:#98a0b3;text-decoration:line-through}
-  .save-pill{background:#ffe9e2;color:var(--cta-dark);font-weight:800;font-size:.8rem;padding:4px 12px;border-radius:999px}
+  .hero{background:linear-gradient(180deg,var(--bg-soft),#fff);padding:52px 0 60px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  h1{font-size:clamp(1.9rem,4.2vw,2.9rem);line-height:1.12;letter-spacing:-.03em;font-weight:900;margin:16px 0 16px;color:var(--navy)}
+  .hero p.lead{font-size:1.08rem;color:var(--ink-soft);margin-bottom:24px;max-width:33rem}
+  .usps{list-style:none;display:grid;gap:10px;margin-bottom:26px}
+  .usps li{display:flex;align-items:flex-start;gap:10px;font-weight:600;font-size:.97rem}
+  .tick{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;font-size:.8rem;font-weight:900;margin-top:2px}
+  .guarantee-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .gchip{background:#fff;border:1px solid var(--line);border-radius:999px;font-size:.78rem;font-weight:700;padding:7px 14px;color:var(--ink-soft)}
+  .hero-media{display:grid;gap:14px;justify-items:center}
+  .thumbs{display:flex;gap:10px}
 
-  /* ---------- Product visual ---------- */
-  .product-stage{position:relative;display:grid;place-items:center;padding:20px}
-  .glow{position:absolute;inset:10%;background:radial-gradient(closest-side,#c9d8ff,transparent 70%);filter:blur(10px)}
-  .band-svg{position:relative;width:min(420px,90%);filter:drop-shadow(0 24px 40px rgba(14,19,32,.25))}
-  .float-chip{position:absolute;background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:10px 14px;font-size:.8rem;font-weight:700;display:flex;gap:8px;align-items:center;animation:float 4s ease-in-out infinite}
-  .float-chip small{display:block;font-weight:500;color:var(--ink-soft)}
-  .chip-1{top:6%;left:0}
-  .chip-2{bottom:10%;right:0;animation-delay:1.2s}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-
-  /* ---------- Trust bar ---------- */
-  .trustbar{background:#fff;border-bottom:1px solid #edf0f6;padding:18px 0}
-  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
-  .trust-grid div{font-size:.85rem;font-weight:700;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:6px}
-  .trust-grid svg{width:26px;height:26px;color:var(--accent)}
+  /* ---------- Logo / press strip ---------- */
+  .press{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;background:#fff}
+  .press .wrap{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;color:#98a0b3;font-weight:800;letter-spacing:.06em;font-size:.95rem}
+  .press span{opacity:.75}
 
   /* ---------- Sections ---------- */
-  section{padding:72px 0}
-  .kicker{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;margin-bottom:10px}
-  h2{font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:-.02em;font-weight:900;line-height:1.15;margin-bottom:14px}
+  section{padding:76px 0}
+  .kicker{color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;margin-bottom:10px}
+  h2{font-size:clamp(1.55rem,3.2vw,2.25rem);letter-spacing:-.02em;font-weight:900;line-height:1.15;margin-bottom:14px;color:var(--navy)}
   .center{text-align:center}
-  .sub{color:var(--ink-soft);max-width:38rem;margin:0 auto 44px;font-size:1.05rem}
-
-  /* ---------- Benefits ---------- */
+  .sub{color:var(--ink-soft);max-width:40rem;margin:0 auto 44px;font-size:1.03rem}
   .bg-soft{background:var(--bg-soft)}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .card{background:#fff;border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow)}
-  .card .ico{width:52px;height:52px;border-radius:14px;background:#e8efff;color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
-  .card h3{font-size:1.1rem;margin-bottom:8px;font-weight:800}
-  .card p{font-size:.95rem;color:var(--ink-soft)}
 
-  /* ---------- Specs / fit ---------- */
-  .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .spec-list{list-style:none;display:grid;gap:14px;margin-top:22px}
-  .spec-list li{display:flex;justify-content:space-between;gap:20px;border-bottom:1px dashed #dfe3ec;padding-bottom:12px;font-size:.97rem}
-  .spec-list li b{font-weight:800}
-  .spec-list li span{color:var(--ink-soft)}
-  .colors{display:flex;gap:12px;margin-top:24px;align-items:center}
-  .swatch{width:34px;height:34px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #d6dbe6}
-  .colors small{color:var(--ink-soft);font-weight:600}
+  /* ---------- Problem section ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .split p{color:var(--ink-soft);margin-bottom:14px}
+  .split p b{color:var(--ink)}
+
+  /* ---------- Feature cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:#fff;border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow)}
+  .card .ico{width:50px;height:50px;border-radius:14px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin-bottom:16px;font-size:1.3rem}
+  .card h3{font-size:1.06rem;margin-bottom:8px;font-weight:800;color:var(--navy)}
+  .card p{font-size:.93rem;color:var(--ink-soft)}
+
+  /* ---------- How it works ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step}
+  .step{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);text-align:center}
+  .step .num{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:900;margin:0 auto 14px}
+  .step h3{font-size:1rem;font-weight:800;margin:14px 0 6px;color:var(--navy)}
+  .step p{font-size:.9rem;color:var(--ink-soft)}
+  .step .ph{margin-top:8px}
+
+  /* ---------- Comparison table ---------- */
+  .compare{max-width:760px;margin:0 auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .compare table{width:100%;border-collapse:collapse;font-size:.93rem}
+  .compare th,.compare td{padding:14px 18px;text-align:center;border-bottom:1px solid var(--line)}
+  .compare th{font-size:.85rem}
+  .compare td:first-child,.compare th:first-child{text-align:left;font-weight:600}
+  .compare th.us{background:var(--blue-soft);color:var(--blue);font-weight:900}
+  .compare td.us{background:var(--blue-soft);font-weight:800;color:var(--green)}
+  .compare .no{color:#d92d20;font-weight:700}
+  .compare .meh{color:#b54708;font-weight:700}
 
   /* ---------- Reviews ---------- */
-  .review{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
-  .review .stars{font-size:.9rem;margin-bottom:10px}
-  .review p{font-size:.95rem;margin-bottom:14px}
-  .reviewer{display:flex;align-items:center;gap:12px;font-size:.85rem}
-  .avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800}
-  .verified{color:#12923f;font-weight:700;font-size:.75rem}
+  .review{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+  .review .sq{display:flex;gap:3px;margin-bottom:12px}
+  .review .sq i{width:20px;height:20px;background:var(--green);display:grid;place-items:center;color:#fff;font-style:normal;font-size:.75rem}
+  .review h4{font-size:.98rem;margin-bottom:6px;color:var(--navy)}
+  .review p{font-size:.92rem;color:var(--ink-soft);margin-bottom:14px}
+  .reviewer{display:flex;align-items:center;gap:10px;font-size:.85rem}
+  .avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:.8rem}
+  .verified{color:var(--green);font-weight:700;font-size:.74rem}
 
-  /* ---------- Offer / pricing ---------- */
-  .offer{background:linear-gradient(160deg,var(--ink) 0%,#1b2440 100%);color:#fff}
-  .offer h2,.offer .kicker{color:#fff}
-  .offer .kicker{color:var(--gold)}
-  .offer-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:38px;max-width:520px;margin:0 auto;text-align:center}
-  .countdown{display:flex;gap:10px;justify-content:center;margin:20px 0 26px}
-  .cd{background:rgba(255,255,255,.1);border-radius:12px;padding:12px 0;width:74px}
-  .cd b{display:block;font-size:1.6rem;font-weight:900}
-  .cd small{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;opacity:.7}
-  .offer .price-now{color:#fff}
-  .offer .price-was{color:#8b93ab}
-  .stock{font-size:.85rem;margin-top:16px;color:#ffb9a6;font-weight:700}
-  .guarantee-line{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;font-size:.85rem;opacity:.85}
+  /* ---------- Offer ---------- */
+  .offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .buy-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;box-shadow:var(--shadow)}
+  .price-row{display:flex;align-items:baseline;gap:12px;margin:14px 0 6px}
+  .price-now{font-size:2.1rem;font-weight:900;color:var(--navy)}
+  .price-was{font-size:1.15rem;color:#98a0b3;text-decoration:line-through}
+  .save-pill{background:var(--green-soft);color:var(--green);font-weight:800;font-size:.78rem;padding:4px 12px;border-radius:999px}
+  .options{display:grid;gap:10px;margin:20px 0}
+  .opt{display:flex;justify-content:space-between;align-items:center;border:2px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;font-size:.93rem;transition:.15s}
+  .opt:hover{border-color:#b9c6e8}
+  .opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+  .opt b{display:block}
+  .opt small{color:var(--ink-soft)}
+  .opt .tag{background:var(--blue);color:#fff;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:999px;letter-spacing:.04em}
+  .opt .p{font-weight:900;color:var(--navy)}
+  .stock{font-size:.84rem;color:#d92d20;font-weight:700;margin-top:14px}
+  .pay-icons{display:flex;gap:8px;margin-top:16px;color:#98a0b3;font-size:.75rem;font-weight:700;align-items:center;flex-wrap:wrap}
+  .pay-icons span{border:1px solid var(--line);border-radius:6px;padding:3px 9px}
 
   /* ---------- Guarantee ---------- */
-  .guarantee{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:#fff;border-radius:var(--radius);padding:34px;box-shadow:var(--shadow);max-width:760px;margin:0 auto}
-  .badge-60{flex:0 0 auto;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#ffd75e,var(--gold));display:grid;place-items:center;text-align:center;color:#5c3d00;font-weight:900;line-height:1.1;font-size:.85rem;box-shadow:0 8px 20px rgba(255,180,0,.4)}
-  .badge-60 b{font-size:1.6rem;display:block}
+  .guarantee{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:#fff;border-radius:var(--radius);padding:34px;box-shadow:var(--shadow);max-width:780px;margin:0 auto}
+  .badge-100{flex:0 0 auto;width:116px;height:116px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#39d6a0,var(--green));display:grid;place-items:center;text-align:center;color:#fff;font-weight:900;line-height:1.1;font-size:.8rem;box-shadow:0 8px 20px rgba(0,182,122,.35)}
+  .badge-100 b{font-size:1.5rem;display:block}
 
   /* ---------- FAQ ---------- */
   details{background:#fff;border-radius:12px;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
-  summary{cursor:pointer;padding:18px 22px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
-  summary::after{content:"+";font-size:1.3rem;color:var(--accent);font-weight:800;transition:.2s}
+  summary{cursor:pointer;padding:18px 22px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--navy)}
+  summary::after{content:"+";font-size:1.3rem;color:var(--blue);font-weight:800;transition:.2s}
   details[open] summary::after{transform:rotate(45deg)}
-  details p{padding:0 22px 18px;color:var(--ink-soft);font-size:.95rem}
+  details p{padding:0 22px 18px;color:var(--ink-soft);font-size:.94rem}
 
   /* ---------- Footer ---------- */
-  footer{background:var(--ink);color:#9aa2b8;font-size:.85rem;padding:40px 0;text-align:center}
+  footer{background:var(--navy);color:#9fb0c9;font-size:.85rem;padding:44px 0;text-align:center}
   footer .logo{color:#fff;margin-bottom:10px}
+  footer nav{display:flex;gap:22px;justify-content:center;margin:14px 0;font-weight:600}
 
   /* ---------- Sticky mobile CTA ---------- */
-  .sticky-cta{position:fixed;bottom:0;left:0;right:0;background:#fff;box-shadow:0 -6px 24px rgba(14,19,32,.12);padding:10px 16px;display:none;align-items:center;justify-content:space-between;gap:14px;z-index:60}
-  .sticky-cta .p{font-weight:900}
+  .sticky-cta{position:fixed;bottom:0;left:0;right:0;background:#fff;box-shadow:0 -6px 24px rgba(16,24,40,.12);padding:10px 16px;display:none;align-items:center;justify-content:space-between;gap:14px;z-index:60}
+  .sticky-cta .p{font-weight:900;color:var(--navy)}
   .sticky-cta .p s{color:#98a0b3;font-weight:500;font-size:.8rem;margin-left:6px}
-  .sticky-cta .btn{padding:12px 22px;font-size:.95rem}
+  .sticky-cta .btn{padding:12px 22px;font-size:.92rem}
 
-  @media(max-width:880px){
-    .hero-grid,.fit-grid{grid-template-columns:1fr}
-    .cards{grid-template-columns:1fr}
-    .trust-grid{grid-template-columns:repeat(2,1fr)}
-    .product-stage{order:-1}
+  @media(max-width:900px){
+    .hero-grid,.split,.offer-grid{grid-template-columns:1fr}
+    .cards,.steps{grid-template-columns:1fr}
+    .hero-media{order:-1}
+    .nav-links{display:none}
     .sticky-cta{display:flex}
     body{padding-bottom:70px}
     .guarantee{grid-template-columns:1fr;text-align:center;justify-items:center}
+    .compare{overflow-x:auto}
   }
 </style>
 </head>
 <body>
 
 <!-- Announcement bar -->
-<div class="announce">🔥 SUMMER SALE: <b>50% OFF</b> + Free Shipping — ends tonight at midnight</div>
+<div class="announce">✨ <b>100-Day Risk-Free Trial</b> — Love it or get every penny back · Free tracked shipping</div>
 
 <!-- Header -->
 <header>
   <div class="wrap nav">
-    <a href="#" class="logo">Pulse<span>Track</span></a>
-    <a href="#offer" class="btn-sm">Get 50% Off</a>
+    <a href="#" class="logo">PulseTrack<sup>®</sup></a>
+    <nav class="nav-links">
+      <a href="#how">How It Works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#offer" class="btn-sm">Shop Now</a>
   </div>
 </header>
 
@@ -178,173 +207,188 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="rating-line"><span class="stars">★★★★★</span> 4.8/5 — loved by 12,000+ happy customers</div>
-      <h1>Track Your Steps. Own Your Day. <em>All From Your Wrist.</em></h1>
-      <p class="lead">The PulseTrack Smart Band shows your time, steps and calories on a bright LED display — ultra-light, comfortable and built for everyday life.</p>
-      <ul class="hero-usps">
-        <li><span class="tick">✓</span> Bright LED display — readable even in sunlight</li>
-        <li><span class="tick">✓</span> Tracks steps, calories &amp; time automatically</li>
-        <li><span class="tick">✓</span> Featherlight comfort — you'll forget it's on</li>
-        <li><span class="tick">✓</span> Fits every wrist: 12–19 cm adjustable strap</li>
+      <span class="tp">
+        <span class="sq"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span>
+        Excellent <small>· 4.7 based on 2,300+ reviews</small>
+      </span>
+      <h1>Never Sleep Through Your Alarm Again</h1>
+      <p class="lead">The PulseTrack band wakes you with powerful silent vibration on your wrist — impossible for your brain to tune out, and completely silent for the person sleeping next to you.</p>
+      <ul class="usps">
+        <li><span class="tick">✓</span> Wakes even the deepest sleepers — vibration ramps up until you're awake</li>
+        <li><span class="tick">✓</span> 100% silent — never disturb your partner again</li>
+        <li><span class="tick">✓</span> Long battery life — charge it about once a week</li>
+        <li><span class="tick">✓</span> No app, no phone needed — works entirely on its own</li>
       </ul>
-      <div class="price-row">
-        <span class="price-now">£14.99</span>
-        <span class="price-was">£29.99</span>
-        <span class="save-pill">SAVE 50%</span>
+      <a class="btn" href="#offer">Try It Risk-Free for 100 Days →<span class="btn-sub">Free shipping · 30-second setup</span></a>
+      <div class="guarantee-chips">
+        <span class="gchip">🚚 Free Tracked Shipping</span>
+        <span class="gchip">🛡 100-Day Trial</span>
+        <span class="gchip">⏰ Wake-Up Guarantee</span>
       </div>
-      <a class="btn" href="#offer">Claim My 50% Discount →<span class="btn-sub">Free shipping · 60-day money-back guarantee</span></a>
-      <p class="micro">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#12923f" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Secure checkout · Ships within 24 hours
-      </p>
     </div>
-
-    <!-- Product visual (replace with real photo: <img src="images/product.jpg" alt="PulseTrack Smart Band">) -->
-    <div class="product-stage">
-      <div class="glow"></div>
-      <svg class="band-svg" viewBox="0 0 420 300" role="img" aria-label="PulseTrack smart band showing time and activity icons on LED display">
-        <defs>
-          <linearGradient id="bandBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#3a4157"/><stop offset=".5" stop-color="#171c2b"/><stop offset="1" stop-color="#0b0e17"/>
-          </linearGradient>
-          <linearGradient id="bandTop" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#f2f4f8"/><stop offset="1" stop-color="#c7ccd8"/>
-          </linearGradient>
-        </defs>
-        <!-- band ellipse top -->
-        <ellipse cx="210" cy="95" rx="165" ry="52" fill="url(#bandTop)"/>
-        <ellipse cx="210" cy="95" rx="148" ry="42" fill="#0b0e17"/>
-        <!-- band body -->
-        <path d="M45 95 v70 c0 60 74 92 165 92 s165 -32 165 -92 v-70 c0 29 -74 52 -165 52 S45 124 45 95 Z" fill="url(#bandBody)"/>
-        <!-- display -->
-        <g font-family="'Segoe UI',Arial,sans-serif">
-          <text x="120" y="215" fill="#fff" font-size="64" font-weight="800" letter-spacing="2" style="font-variant-numeric:tabular-nums">20:38</text>
-          <!-- activity icons -->
-          <g fill="#e8ecf5" font-size="16">
-            <text x="318" y="175">🏃</text>
-            <text x="318" y="198">🔥</text>
-            <text x="318" y="221">📅</text>
-          </g>
-        </g>
-        <!-- texture stripes -->
-        <g stroke="#2a3148" stroke-width="3" opacity=".8">
-          <line x1="352" y1="150" x2="374" y2="146"/><line x1="352" y1="162" x2="376" y2="158"/><line x1="352" y1="174" x2="376" y2="170"/><line x1="352" y1="186" x2="374" y2="182"/>
-        </g>
-      </svg>
-      <div class="float-chip chip-1">👣 <span>8,432 steps<small>today</small></span></div>
-      <div class="float-chip chip-2">🔥 <span>326 kcal<small>burned</small></span></div>
+    <div class="hero-media">
+      <div class="ph ph-hero">📷 Main product photo<small>(band on wrist, hero shot)</small></div>
+      <div class="thumbs">
+        <div class="ph ph-thumb">photo</div>
+        <div class="ph ph-thumb">photo</div>
+        <div class="ph ph-thumb">photo</div>
+        <div class="ph ph-thumb">photo</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Trust bar -->
-<div class="trustbar">
-  <div class="wrap trust-grid">
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>60-Day Guarantee</div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h4l3 3v5h-7"/><circle cx="6" cy="18" r="2"/><circle cx="19" cy="18" r="2"/></svg>Free UK Shipping</div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure Checkout</div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9z"/></svg>12,000+ Customers</div>
+<!-- Press strip -->
+<div class="press">
+  <div class="wrap">
+    <span>AS FEATURED IN</span><span>— add press / media logos here —</span>
   </div>
 </div>
 
-<!-- Benefits -->
-<section class="bg-soft" id="benefits">
+<!-- Problem / agitation -->
+<section>
+  <div class="wrap split">
+    <div>
+      <div class="kicker">The Problem With Sound Alarms</div>
+      <h2>Your Brain Learns to Ignore Sound. It Can't Ignore Touch.</h2>
+      <p>If you've ever slept straight through a blaring phone alarm — or hit snooze five times without even remembering it — you're not lazy. <b>Your brain filters out repetitive sounds while you sleep.</b> It's called habituation, and it's why the alarm that woke you a year ago barely registers today.</p>
+      <p>Physical vibration is different. <b>Touch signals go through a separate pathway your sleeping brain can't tune out.</b> The band starts gently, then steps up through increasing intensity levels until you're up — no sound, no snooze spiral, no angry partner.</p>
+      <p style="margin-top:18px"><a class="btn" href="#offer">Wake Up On Time Tomorrow →</a></p>
+    </div>
+    <div class="ph ph-wide">📷 Lifestyle photo<small>(person waking up wearing the band)</small></div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="bg-soft">
   <div class="wrap">
     <div class="center">
-      <div class="kicker">Why You'll Love It</div>
-      <h2>Everything You Need. Nothing You Don't.</h2>
-      <p class="sub">No confusing apps. No charging every night. Just glance at your wrist and stay on top of your goals.</p>
+      <div class="kicker">Why It Works</div>
+      <h2>Built for Heavy Sleepers. Loved by Light Sleepers' Partners.</h2>
+      <p class="sub">Every detail is designed around one job: getting you out of bed on time, without waking anyone else.</p>
     </div>
     <div class="cards">
       <div class="card">
-        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <h3>Big, Bright LED Display</h3>
-        <p>Crisp white digits you can read at a glance — indoors, outdoors, day or night. No squinting, ever.</p>
+        <div class="ico">💪</div>
+        <h3>Escalating Vibration</h3>
+        <p>Starts gentle, then cycles through stronger intensity levels until you respond. Your brain can't habituate to it the way it does to sound.</p>
       </div>
       <div class="card">
-        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4.5 13H12l-1 9L19.5 11H12l1-9z"/></svg></div>
-        <h3>Automatic Activity Tracking</h3>
-        <p>Steps, calories and daily activity tracked automatically. Watch your numbers climb and stay motivated all day.</p>
+        <div class="ico">🤫</div>
+        <h3>Silent for Your Partner</h3>
+        <p>All the wake-up power happens on your wrist. The person next to you sleeps straight through — every single morning.</p>
       </div>
       <div class="card">
-        <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9z"/></svg></div>
-        <h3>All-Day Comfort</h3>
-        <p>Soft, skin-friendly silicone strap that weighs almost nothing. Wear it at the gym, at work, even while you sleep.</p>
+        <div class="ico">🔋</div>
+        <h3>Charge Once a Week</h3>
+        <p>A single quick charge keeps it running for days on end. No nightly charging routine, no dead-battery mornings.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📵</div>
+        <h3>No App. No Phone.</h3>
+        <p>Set your alarms directly on the band. Leave your phone in another room and reclaim your bedroom from screens.</p>
+      </div>
+      <div class="card">
+        <div class="ico">⏱</div>
+        <h3>Time, Steps &amp; More</h3>
+        <p>A bright LED display shows the time, your daily steps and calories at a glance — a full fitness band, not just an alarm.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🪶</div>
+        <h3>Featherlight Comfort</h3>
+        <p>Soft, skin-friendly strap that fits wrists from 12–19 cm and is so light you'll forget you're wearing it — even while sleeping.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Fit & specs -->
-<section id="fit">
-  <div class="wrap fit-grid">
-    <div>
-      <div class="kicker">Perfect Fit, Guaranteed</div>
-      <h2>One Band. Every Wrist.</h2>
-      <p style="color:var(--ink-soft)">The adjustable strap fits wrists from <b>12 cm to 19 cm</b> (4.72–7.48 in) — perfect for men, women and teens. The slim 1.8 cm profile sits flat under sleeves and never gets in the way.</p>
-      <ul class="spec-list">
-        <li><b>Strap fits</b><span>12–19 cm / 4.72–7.48 in wrists</span></li>
-        <li><b>Display width</b><span>5 cm / 1.96 in</span></li>
-        <li><b>Band height</b><span>1.8 cm / 0.70 in — slim profile</span></li>
-        <li><b>Tracks</b><span>Time · Steps · Calories · Date</span></li>
-        <li><b>Material</b><span>Soft-touch, skin-friendly silicone</span></li>
-      </ul>
-      <div class="colors">
-        <small>Colours:</small>
-        <span class="swatch" style="background:#12141c" title="Midnight Black"></span>
-        <span class="swatch" style="background:#e9e9ee" title="Arctic White"></span>
-        <span class="swatch" style="background:#7c2430" title="Berry Red"></span>
+<!-- How it works -->
+<section id="how">
+  <div class="wrap">
+    <div class="center">
+      <div class="kicker">Simple by Design</div>
+      <h2>Set It Tonight. Wake Up On Time Tomorrow.</h2>
+      <p class="sub">No manuals, no pairing, no learning curve — you'll be set up in under a minute.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div class="ph ph-sq">📷 Photo<small>(setting the alarm)</small></div>
+        <h3>Set Your Alarm</h3>
+        <p>Use the buttons on the band to set your wake-up time. Takes about 30 seconds.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div class="ph ph-sq">📷 Photo<small>(wearing band in bed)</small></div>
+        <h3>Wear It to Sleep</h3>
+        <p>The featherlight strap is comfortable all night — you won't even notice it's there.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div class="ph ph-sq">📷 Photo<small>(waking up refreshed)</small></div>
+        <h3>Wake Up Silently</h3>
+        <p>Powerful vibration ramps up on your wrist until you're awake — while your partner sleeps on.</p>
       </div>
     </div>
-    <div class="product-stage">
-      <div class="glow"></div>
-      <svg class="band-svg" viewBox="0 0 420 300" aria-hidden="true">
-        <defs>
-          <linearGradient id="bandBody2" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#4a5168"/><stop offset=".5" stop-color="#20263a"/><stop offset="1" stop-color="#0d101c"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="210" cy="95" rx="165" ry="52" fill="#e8eaf1"/>
-        <ellipse cx="210" cy="95" rx="148" ry="42" fill="#0b0e17"/>
-        <path d="M45 95 v70 c0 60 74 92 165 92 s165 -32 165 -92 v-70 c0 29 -74 52 -165 52 S45 124 45 95 Z" fill="url(#bandBody2)"/>
-        <text x="128" y="212" fill="#fff" font-size="58" font-weight="800" letter-spacing="2" font-family="'Segoe UI',Arial,sans-serif">12:05</text>
-        <text x="150" y="245" fill="#9fb4ff" font-size="16" font-weight="700" font-family="'Segoe UI',Arial,sans-serif">10,214 steps</text>
-      </svg>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="bg-soft">
+  <div class="wrap">
+    <div class="center">
+      <div class="kicker">The Difference</div>
+      <h2>Why Thousands Are Ditching Their Phone Alarm</h2>
+      <p class="sub">See how the PulseTrack band stacks up against the alternatives.</p>
+    </div>
+    <div class="compare">
+      <table>
+        <tr><th></th><th class="us">PulseTrack</th><th>Phone Alarm</th><th>Sound Alarm Clock</th></tr>
+        <tr><td>Wakes deep sleepers</td><td class="us">✓</td><td class="no">✗</td><td class="meh">Sometimes</td></tr>
+        <tr><td>Silent for your partner</td><td class="us">✓</td><td class="no">✗</td><td class="no">✗</td></tr>
+        <tr><td>Works without your phone</td><td class="us">✓</td><td class="no">✗</td><td class="us" style="color:var(--green)">✓</td></tr>
+        <tr><td>Beats snooze-button habit</td><td class="us">✓</td><td class="no">✗</td><td class="no">✗</td></tr>
+        <tr><td>Tracks steps &amp; calories</td><td class="us">✓</td><td class="meh">App needed</td><td class="no">✗</td></tr>
+        <tr><td>Risk-free trial</td><td class="us">100 days</td><td class="no">—</td><td class="no">Rarely</td></tr>
+      </table>
     </div>
   </div>
 </section>
 
 <!-- Reviews -->
-<section class="bg-soft" id="reviews">
+<section id="reviews">
   <div class="wrap">
     <div class="center">
-      <div class="kicker">Real Customers, Real Results</div>
-      <h2>Rated ★ 4.8/5 by 12,000+ Customers</h2>
-      <p class="sub">Here's what people are saying after their first week with PulseTrack.</p>
+      <div class="kicker">Customer Stories</div>
+      <h2>Join Thousands of Well-Rested Customers</h2>
+      <p class="sub">Real experiences from people who finally stopped oversleeping.</p>
     </div>
     <div class="cards">
       <div class="review">
-        <div class="stars">★★★★★</div>
-        <p>"Honestly surprised at the quality for the price. The display is so bright and clear, and I love checking my steps without pulling my phone out. Already ordered one for my husband."</p>
+        <div class="sq"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <h4>"I've been late to work zero times since"</h4>
+        <p>I'm the deepest sleeper I know — I've slept through fire alarms. This thing gets me up every single morning. The vibration getting stronger is the trick; by level three I'm always awake.</p>
         <div class="reviewer">
-          <span class="avatar" style="background:#2f6bff">SM</span>
-          <span><b>Sarah M.</b><br><span class="verified">✔ Verified Buyer</span></span>
+          <span class="avatar" style="background:#1656d6">MR</span>
+          <span><b>Marcus R.</b><br><span class="verified">✔ Verified Buyer</span></span>
         </div>
       </div>
       <div class="review">
-        <div class="stars">★★★★★</div>
-        <p>"So light I forget I'm wearing it. Fits my small wrist perfectly which is rare. It's become my little daily motivator — I actually walk more now just to see the number go up!"</p>
+        <div class="sq"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <h4>"My husband finally sleeps through my 5am starts"</h4>
+        <p>I'm up at 5 for shift work and my husband isn't. This band saved our mornings — I wake up instantly and he doesn't hear a thing. Honestly wish I'd found it years ago.</p>
         <div class="reviewer">
-          <span class="avatar" style="background:#12923f">JT</span>
-          <span><b>Jess T.</b><br><span class="verified">✔ Verified Buyer</span></span>
+          <span class="avatar" style="background:#00b67a">LB</span>
+          <span><b>Laura B.</b><br><span class="verified">✔ Verified Buyer</span></span>
         </div>
       </div>
       <div class="review">
-        <div class="stars">★★★★☆</div>
-        <p>"Simple, does exactly what it says. No fiddly app needed. Delivery was quick too — arrived in two days. Would recommend to anyone who wants the basics done well."</p>
+        <div class="sq"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+        <h4>"Comfortable enough to forget it's on"</h4>
+        <p>I was worried about sleeping with something on my wrist but it's genuinely so light I don't notice it. Battery lasts me over a week and the step counter is a nice bonus.</p>
         <div class="reviewer">
-          <span class="avatar" style="background:#ff5a36">DK</span>
-          <span><b>Dan K.</b><br><span class="verified">✔ Verified Buyer</span></span>
+          <span class="avatar" style="background:#0b1f3a">JP</span>
+          <span><b>Jamie P.</b><br><span class="verified">✔ Verified Buyer</span></span>
         </div>
       </div>
     </div>
@@ -352,30 +396,45 @@
 </section>
 
 <!-- Offer -->
-<section class="offer" id="offer">
-  <div class="wrap">
-    <div class="center">
-      <div class="kicker">Limited-Time Offer</div>
-      <h2>Get Yours at 50% Off — Today Only</h2>
+<section class="bg-soft" id="offer">
+  <div class="wrap offer-grid">
+    <div class="hero-media">
+      <div class="ph ph-hero">📷 Product photo<small>(clean studio shot for buy box)</small></div>
+      <div class="thumbs">
+        <div class="ph ph-thumb">photo</div>
+        <div class="ph ph-thumb">photo</div>
+        <div class="ph ph-thumb">photo</div>
+      </div>
     </div>
-    <div class="offer-box">
-      <div class="stars" style="color:var(--gold)">★★★★★ <span style="color:#cdd3e4;font-size:.85rem">12,000+ happy customers</span></div>
-      <div class="countdown" id="countdown">
-        <div class="cd"><b id="cd-h">05</b><small>hrs</small></div>
-        <div class="cd"><b id="cd-m">42</b><small>min</small></div>
-        <div class="cd"><b id="cd-s">18</b><small>sec</small></div>
+    <div class="buy-box">
+      <span class="tp">
+        <span class="sq"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span>
+        <small>4.7 · 2,300+ reviews</small>
+      </span>
+      <h2 style="font-size:1.5rem;margin-top:10px">PulseTrack® Vibrating Alarm Band</h2>
+      <div class="price-row">
+        <span class="price-now">£24.99</span>
+        <span class="price-was">£49.99</span>
+        <span class="save-pill">SAVE 50%</span>
       </div>
-      <div class="price-row" style="justify-content:center">
-        <span class="price-now">£14.99</span>
-        <span class="price-was">£29.99</span>
-        <span class="save-pill">50% OFF</span>
+      <p style="font-size:.9rem;color:var(--ink-soft)">Wake up on time every day — or your money back.</p>
+      <div class="options">
+        <div class="opt" onclick="pick(this)">
+          <span><b>1× Band</b><small>Perfect to try it out</small></span>
+          <span class="p">£24.99</span>
+        </div>
+        <div class="opt sel" onclick="pick(this)">
+          <span><b>2× Bands <span class="tag">MOST POPULAR</span></b><small>One for you, one for your partner</small></span>
+          <span class="p">£39.99</span>
+        </div>
+        <div class="opt" onclick="pick(this)">
+          <span><b>3× Bands <span class="tag" style="background:var(--green)">BEST VALUE</span></b><small>Family pack — save the most</small></span>
+          <span class="p">£54.99</span>
+        </div>
       </div>
-      <a class="btn" href="#" style="width:100%">Yes! I Want My PulseTrack →<span class="btn-sub">Free shipping · Ships within 24 hours</span></a>
-      <div class="stock">⚠ Only 23 left in stock at this price</div>
-      <div class="guarantee-line">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-        60-day money-back guarantee — love it or get a full refund
-      </div>
+      <a class="btn" href="#" style="width:100%">Add to Cart — Risk-Free →<span class="btn-sub">100-day trial · Free tracked shipping</span></a>
+      <div class="stock">⚠ High demand — limited stock at sale price</div>
+      <div class="pay-icons"><span>VISA</span><span>Mastercard</span><span>PayPal</span><span>Apple Pay</span><span>Klarna</span></div>
     </div>
   </div>
 </section>
@@ -384,10 +443,10 @@
 <section>
   <div class="wrap">
     <div class="guarantee">
-      <div class="badge-60"><span><b>60</b>DAY<br>GUARANTEE</span></div>
+      <div class="badge-100"><span><b>100</b>DAY<br>TRIAL</span></div>
       <div>
-        <h2 style="font-size:1.4rem">Try It Risk-Free for 60 Days</h2>
-        <p style="color:var(--ink-soft)">Wear it. Test it. Live with it. If you don't absolutely love your PulseTrack, send it back within 60 days for a full refund — no questions, no hassle, no hard feelings. You have nothing to lose.</p>
+        <h2 style="font-size:1.4rem">Our 100-Day Wake-Up Guarantee</h2>
+        <p style="color:var(--ink-soft)">Sleep on it — literally — for 100 days. If the band doesn't get you up on time, or you simply don't love it, send it back for a full refund. No forms, no fine print, no hard feelings. The risk is entirely on us.</p>
       </div>
     </div>
   </div>
@@ -397,33 +456,41 @@
 <section class="bg-soft" id="faq">
   <div class="wrap" style="max-width:760px">
     <div class="center">
-      <div class="kicker">Questions? Answered.</div>
+      <div class="kicker">Good Questions</div>
       <h2>Frequently Asked Questions</h2>
-      <p class="sub">Still unsure? Here's everything you need to know.</p>
+      <p class="sub">Everything you need to know before you order.</p>
     </div>
     <details open>
-      <summary>Will it fit my wrist?</summary>
-      <p>Yes — the adjustable strap fits wrists from 12 cm to 19 cm (4.72–7.48 in), which covers virtually all adults and teens. Multiple holes let you dial in the perfect fit.</p>
+      <summary>Is the vibration really strong enough to wake a heavy sleeper?</summary>
+      <p>Yes — that's exactly what it's built for. The vibration starts gently and steps up through increasingly strong levels until you respond, so even very deep sleepers wake up. And if it somehow doesn't work for you, the 100-day guarantee means you get a full refund.</p>
     </details>
     <details>
-      <summary>Do I need an app or my phone to use it?</summary>
-      <p>No. PulseTrack works completely on its own — no app, no pairing, no account. Everything shows directly on the LED display.</p>
+      <summary>Will it wake up my partner?</summary>
+      <p>No. The vibration happens only on your wrist and is silent to everyone else. It's the single most-loved feature among couples with different schedules.</p>
     </details>
     <details>
-      <summary>How long does shipping take?</summary>
-      <p>Orders ship within 24 hours and typically arrive in 2–5 working days with free tracked shipping.</p>
+      <summary>Do I need an app or my phone?</summary>
+      <p>No. Alarms are set directly on the band with its buttons — no app, no Bluetooth, no account. It works completely on its own.</p>
     </details>
     <details>
-      <summary>What does it track?</summary>
-      <p>Time, date, steps and estimated calories burned — the essentials, always visible at a glance.</p>
+      <summary>Is it comfortable to sleep in?</summary>
+      <p>Very. The strap is soft, skin-friendly silicone and the whole band is extremely light. It fits wrists from 12–19 cm (4.72–7.48 in), so it works for almost everyone.</p>
     </details>
     <details>
-      <summary>What if I don't like it?</summary>
-      <p>You're covered by our 60-day money-back guarantee. If it's not for you, contact us for a full refund — no questions asked.</p>
+      <summary>How long does the battery last?</summary>
+      <p>Days on a single charge with normal use — most customers charge about once a week. A full charge takes around an hour over USB.</p>
+    </details>
+    <details>
+      <summary>How fast is shipping?</summary>
+      <p>Orders ship within 24 hours with free tracked delivery, typically arriving in 2–5 working days.</p>
+    </details>
+    <details>
+      <summary>What if it's not for me?</summary>
+      <p>You have a full 100 days to decide. Not convinced? Contact us and we'll refund you in full — no questions asked.</p>
     </details>
     <div class="center" style="margin-top:36px">
-      <a class="btn" href="#offer">Get 50% Off Before It's Gone →</a>
-      <p class="micro">Sale ends tonight at midnight</p>
+      <a class="btn" href="#offer">Start My 100-Day Trial →</a>
+      <p class="micro">Free shipping · Full refund guarantee</p>
     </div>
   </div>
 </section>
@@ -431,7 +498,12 @@
 <!-- Footer -->
 <footer>
   <div class="wrap">
-    <div class="logo">Pulse<span style="color:var(--accent)">Track</span></div>
+    <div class="logo">PulseTrack<sup>®</sup></div>
+    <nav>
+      <a href="#how">How It Works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
     <p>© 2026 PulseTrack. All rights reserved.</p>
     <p style="margin-top:6px">Contact: vintedreselling1505@gmail.com</p>
   </div>
@@ -439,22 +511,17 @@
 
 <!-- Sticky mobile CTA -->
 <div class="sticky-cta">
-  <div class="p">£14.99 <s>£29.99</s></div>
-  <a class="btn" href="#offer">Get 50% Off</a>
+  <div class="p">£24.99 <s>£49.99</s></div>
+  <a class="btn" href="#offer">Try Risk-Free</a>
 </div>
 
 <script>
-  // Evergreen countdown: resets to end of each day (local time)
-  function tick(){
-    var now=new Date();
-    var end=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
-    var d=Math.max(0,end-now);
-    var h=Math.floor(d/36e5), m=Math.floor(d%36e5/6e4), s=Math.floor(d%6e4/1e3);
-    document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
-    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
-    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+  function pick(el){
+    document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel')});
+    el.classList.add('sel');
+    var price=el.querySelector('.p').textContent;
+    document.querySelector('.sticky-cta .p').firstChild.textContent=price+' ';
   }
-  tick(); setInterval(tick,1000);
 </script>
 
 </body>
