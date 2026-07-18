@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — STORE NAME HERE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%233e7c59%22/></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar">
+    <div class="navbar-inner container">
+      <a href="index.html" class="logo">LOGO&nbsp;HERE</a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#product">Shop</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="cart-button" id="cart-button" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== CHECKOUT ===================== -->
+  <main class="checkout-page">
+    <div class="container">
+      <h1 class="section-title">Checkout</h1>
+
+      <div class="checkout-grid">
+        <!-- Checkout form -->
+        <form class="checkout-form" id="checkout-form" novalidate>
+          <h3>Contact &amp; Shipping</h3>
+
+          <label for="co-name">Full name</label>
+          <input type="text" id="co-name" name="name" placeholder="Jane Doe" required>
+
+          <label for="co-email">Email</label>
+          <input type="email" id="co-email" name="email" placeholder="jane@example.com" required>
+
+          <label for="co-address">Address</label>
+          <input type="text" id="co-address" name="address" placeholder="123 Main Street" required>
+
+          <div class="form-row">
+            <div>
+              <label for="co-city">City</label>
+              <input type="text" id="co-city" name="city" placeholder="City" required>
+            </div>
+            <div>
+              <label for="co-zip">Postal code</label>
+              <input type="text" id="co-zip" name="zip" placeholder="00000" required>
+            </div>
+          </div>
+
+          <h3>Payment</h3>
+          <div class="payment-placeholder placeholder-box">
+            <span>PAYMENT INTEGRATION PLACEHOLDER<br>(Stripe / PayPal / etc. goes here)</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-large">Place Order</button>
+          <p class="form-message" id="form-message"></p>
+        </form>
+
+        <!-- Order summary -->
+        <aside class="order-summary">
+          <h3>Order Summary</h3>
+          <div id="summary-items">
+            <!-- Summary items rendered by JavaScript -->
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summary-subtotal">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>SHIPPING COST HERE</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span id="summary-total">$0.00</span>
+          </div>
+          <a href="index.html#product" class="continue-link">← Continue shopping</a>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2026 STORE NAME HERE. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===================== CART DRAWER ===================== -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
+    <div class="cart-drawer-header">
+      <h3>Your Cart</h3>
+      <button class="drawer-close" id="drawer-close" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- Cart items rendered by JavaScript -->
+    </div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cart-total">$0.00</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary btn-block" id="checkout-btn">Checkout</a>
+    </div>
+  </aside>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
