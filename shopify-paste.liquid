@@ -5,17 +5,19 @@
   Delete them if you don't want doubles.
 
   TO MAKE THE BUY BUTTON WORK:
-  1. In Shopify admin go to Products -> Add product, and create your product
-     (name, price, photos), then click Save.
-  2. Open the product in your store and look at its web address — the last part
-     is the "handle", e.g. yourstore.com/products/shock-alarm-bracelet
-                                                  ^^^^^^^^^^^^^^^^^^^^
-  3. On the line just below this comment, replace CHANGE-ME-product-handle
-     with your handle (keep the quotes). The ADD TO CART button then becomes a
-     real working button showing the live price, and the fake [£XX.XX] prices
-     update automatically too.
+  Just create your product in Shopify admin: Products -> Add product,
+  give it a name, price and photos, click Save, and make sure its status
+  is "Active" with the "Online Store" sales channel ticked.
+  This page automatically finds the first product in your store and wires
+  the ADD TO CART button to it — no code changes needed.
+
+  (Only if you later sell MORE than one product: replace
+  CHANGE-ME-product-handle below with the handle of the product this page
+  should sell, e.g. 'shock-alarm-bracelet' — the last part of the
+  product's web address.)
 {% endcomment %}
 {% assign dl_product = all_products['CHANGE-ME-product-handle'] %}
+{% if dl_product == blank %}{% assign dl_product = collections.all.products.first %}{% endif %}
 
 <style>
   :root{
