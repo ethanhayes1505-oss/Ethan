@@ -2,19 +2,19 @@
    THEME — edit these variables to restyle the whole site
    ========================================================================== */
 :root {
-  --color-bg: #faf7f2;          /* warm cream background */
+  --color-bg: #fff9f7;          /* warm blush-white background */
   --color-surface: #ffffff;     /* cards / panels */
-  --color-primary: #3e7c59;     /* fresh green */
-  --color-primary-dark: #315f45;
-  --color-accent: #eef4ef;      /* pale green tint for section backgrounds */
-  --color-text: #26332c;        /* deep charcoal-green */
-  --color-muted: #6b7a70;       /* secondary text */
-  --color-border: #e4e0d8;
-  --color-placeholder: #e9e6df; /* grey placeholder image boxes */
+  --color-primary: #d6336c;     /* raspberry pink */
+  --color-primary-dark: #b02458;
+  --color-accent: #fdeef4;      /* pale pink tint for section backgrounds */
+  --color-text: #2b2230;        /* deep plum-charcoal */
+  --color-muted: #7a6b77;       /* secondary text */
+  --color-border: #f0dfe6;
+  --color-placeholder: #f3e9ed; /* grey placeholder image boxes */
   --color-star: #e8b93c;        /* review stars */
   --radius: 16px;
   --radius-pill: 999px;
-  --shadow: 0 6px 24px rgba(38, 51, 44, 0.08);
+  --shadow: 0 6px 24px rgba(43, 34, 48, 0.08);
   --nav-height: 68px;
 }
 
@@ -51,7 +51,7 @@ h1, h2, h3, h4 { line-height: 1.2; }
 /* Grey placeholder boxes for images */
 .placeholder-box {
   background: var(--color-placeholder);
-  border: 2px dashed #c9c4b9;
+  border: 2px dashed #d9bfcc;
   border-radius: var(--radius);
   display: flex;
   align-items: center;
@@ -99,7 +99,7 @@ h1, h2, h3, h4 { line-height: 1.2; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(250, 247, 242, 0.92);
+  background: rgba(255, 249, 247, 0.94);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -413,7 +413,7 @@ h1, h2, h3, h4 { line-height: 1.2; }
    ========================================================================== */
 .footer {
   background: var(--color-text);
-  color: #e9ede9;
+  color: #f2ebef;
   padding-top: 3.5rem;
 }
 
@@ -425,21 +425,21 @@ h1, h2, h3, h4 { line-height: 1.2; }
 }
 
 .footer-logo { font-weight: 800; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
-.footer-tagline { color: #b6c2ba; font-size: 0.95rem; margin-bottom: 0.6rem; }
-.footer-contact { color: #b6c2ba; font-size: 0.95rem; }
-.footer-contact a { color: #e9ede9; }
+.footer-tagline { color: #c8bac4; font-size: 0.95rem; margin-bottom: 0.6rem; }
+.footer-contact { color: #c8bac4; font-size: 0.95rem; }
+.footer-contact a { color: #f2ebef; }
 
-.footer-col h4 { margin-bottom: 0.9rem; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; color: #b6c2ba; }
+.footer-col h4 { margin-bottom: 0.9rem; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; color: #c8bac4; }
 
 .footer-col a {
   display: block;
-  color: #e9ede9;
+  color: #f2ebef;
   text-decoration: none;
   margin-bottom: 0.55rem;
   transition: color 0.2s ease;
 }
 
-.footer-col a:hover { color: #9fd6b8; }
+.footer-col a:hover { color: #f4a3c0; }
 
 .social-icons { display: flex; gap: 0.9rem; }
 .social-icons a { display: inline-flex; }
@@ -449,7 +449,7 @@ h1, h2, h3, h4 { line-height: 1.2; }
   padding: 1.2rem 0;
   text-align: center;
   font-size: 0.85rem;
-  color: #b6c2ba;
+  color: #c8bac4;
 }
 
 /* ==========================================================================
@@ -459,7 +459,7 @@ h1, h2, h3, h4 { line-height: 1.2; }
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(38, 51, 44, 0.45);
+  background: rgba(43, 34, 48, 0.45);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.25s ease, visibility 0.25s ease;
@@ -481,7 +481,7 @@ h1, h2, h3, h4 { line-height: 1.2; }
   flex-direction: column;
   transform: translateX(100%);
   transition: transform 0.3s ease;
-  box-shadow: -8px 0 30px rgba(38, 51, 44, 0.15);
+  box-shadow: -8px 0 30px rgba(43, 34, 48, 0.15);
 }
 
 .cart-drawer.open { transform: translateX(0); }
@@ -660,7 +660,7 @@ h1, h2, h3, h4 { line-height: 1.2; }
 .checkout-form input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(62, 124, 89, 0.15);
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.15);
 }
 
 .form-row {
