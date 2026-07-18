@@ -1,0 +1,288 @@
+{% comment %}
+  ============================================================
+  ONE-PASTE SHOPIFY BLOCK — paste this ENTIRE file into a
+  "Custom Liquid" section on your home page.
+
+  SETUP (one thing to do):
+  Replace YOUR-PRODUCT-HANDLE-HERE below with your product's
+  handle — that's the last part of its URL. Example: if your
+  product page is  yourstore.com/products/red-hoodie
+  the handle is   red-hoodie
+
+  Once set, the product name, price, image and Add to Cart
+  button all come from your real Shopify product automatically.
+  Until then, placeholders are shown.
+
+  All other placeholder text (headlines, benefits, reviews,
+  FAQ) is edited right here in this code.
+  ============================================================
+{% endcomment %}
+
+{% assign ms_handle = 'YOUR-PRODUCT-HANDLE-HERE' %}
+{% assign ms_product = all_products[ms_handle] %}
+
+<style>
+  .ms-wrap {
+    --ms-bg: #faf7f2;
+    --ms-surface: #ffffff;
+    --ms-primary: #3e7c59;
+    --ms-primary-dark: #315f45;
+    --ms-tint: #eef4ef;
+    --ms-text: #26332c;
+    --ms-muted: #6b7a70;
+    --ms-border: #e4e0d8;
+    --ms-placeholder: #e9e6df;
+    --ms-star: #e8b93c;
+    --ms-radius: 16px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: var(--ms-bg);
+    color: var(--ms-text);
+    line-height: 1.6;
+  }
+  .ms-wrap *, .ms-wrap *::before, .ms-wrap *::after { box-sizing: border-box; }
+  .ms-container { width: min(1100px, 92%); margin: 0 auto; }
+  .ms-wrap h1, .ms-wrap h2, .ms-wrap h3 { line-height: 1.2; margin: 0; color: var(--ms-text); }
+  .ms-wrap p { margin: 0; }
+  .ms-section-title { text-align: center; font-size: 2rem; margin-bottom: 2.5rem; }
+
+  .ms-placeholder-box {
+    background: var(--ms-placeholder);
+    border: 2px dashed #c9c4b9;
+    border-radius: var(--ms-radius);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; color: var(--ms-muted); font-weight: 600;
+  }
+  .ms-img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--ms-radius); display: block; }
+
+  .ms-btn {
+    display: inline-block; border: none; cursor: pointer;
+    font-size: 1rem; font-weight: 600; border-radius: 999px;
+    padding: 1rem 2.6rem; text-decoration: none; text-align: center;
+    background: var(--ms-primary); color: #fff;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .ms-btn:hover { background: var(--ms-primary-dark); transform: translateY(-2px); color: #fff; }
+
+  /* Hero */
+  .ms-hero { padding: 4.5rem 0; }
+  .ms-hero-inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+  .ms-hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin-bottom: 1rem; }
+  .ms-subheadline { color: var(--ms-muted); font-size: 1.15rem; margin-bottom: 2rem; max-width: 34rem; }
+  .ms-hero-image { aspect-ratio: 4 / 3; overflow: hidden; }
+
+  /* Benefits */
+  .ms-benefits { background: var(--ms-tint); padding: 4.5rem 0; }
+  .ms-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .ms-benefit-card {
+    background: var(--ms-surface); border-radius: var(--ms-radius);
+    padding: 2rem 1.5rem; text-align: center;
+    box-shadow: 0 6px 24px rgba(38,51,44,0.08); transition: transform 0.2s ease;
+  }
+  .ms-benefit-card:hover { transform: translateY(-6px); }
+  .ms-benefit-icon {
+    width: 52px; height: 52px; margin: 0 auto 1rem; border-radius: 999px;
+    background: var(--ms-tint); color: var(--ms-primary); font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ms-benefit-card h3 { margin-bottom: 0.5rem; font-size: 1.05rem; }
+  .ms-benefit-card p { color: var(--ms-muted); font-size: 0.95rem; }
+
+  /* Product */
+  .ms-product { padding: 4.5rem 0; }
+  .ms-product-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+  .ms-product-image { aspect-ratio: 1 / 1; overflow: hidden; }
+  .ms-product-name { font-size: 2rem; margin-bottom: 0.6rem; }
+  .ms-stars { color: var(--ms-star); margin-bottom: 0.8rem; letter-spacing: 2px; }
+  .ms-rating-note { color: var(--ms-muted); font-size: 0.85rem; letter-spacing: normal; }
+  .ms-price { font-size: 1.6rem; font-weight: 700; color: var(--ms-primary); margin-bottom: 1rem; }
+  .ms-description { color: var(--ms-muted); margin-bottom: 1.8rem; }
+  .ms-qty-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; }
+  .ms-qty-label { font-weight: 600; }
+  .ms-qty-selector {
+    display: flex; align-items: center; border: 1px solid var(--ms-border);
+    border-radius: 999px; background: var(--ms-surface); overflow: hidden;
+  }
+  .ms-qty-btn {
+    background: none; border: none; cursor: pointer; font-size: 1.2rem;
+    width: 42px; height: 42px; color: var(--ms-text);
+  }
+  .ms-qty-btn:hover { background: var(--ms-tint); }
+  .ms-qty-value { min-width: 36px; text-align: center; font-weight: 600; }
+
+  /* Reviews */
+  .ms-reviews { background: var(--ms-tint); padding: 4.5rem 0; }
+  .ms-reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .ms-review-card {
+    background: var(--ms-surface); border-radius: var(--ms-radius);
+    padding: 2rem 1.6rem; box-shadow: 0 6px 24px rgba(38,51,44,0.08);
+  }
+  .ms-review-stars { color: var(--ms-star); letter-spacing: 3px; margin-bottom: 0.8rem; }
+  .ms-review-text { margin-bottom: 1rem; font-style: italic; }
+  .ms-review-author { color: var(--ms-muted); font-weight: 600; font-size: 0.9rem; }
+
+  /* FAQ */
+  .ms-faq { padding: 4.5rem 0; }
+  .ms-faq-container { max-width: 760px; }
+  .ms-faq-item {
+    background: var(--ms-surface); border: 1px solid var(--ms-border);
+    border-radius: var(--ms-radius); margin-bottom: 0.9rem; overflow: hidden;
+  }
+  .ms-faq-question {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    text-align: left; font-size: 1rem; font-weight: 600; color: var(--ms-text);
+    padding: 1.1rem 1.4rem; font-family: inherit;
+  }
+  .ms-faq-question:hover { color: var(--ms-primary); }
+  .ms-chevron { transition: transform 0.25s ease; }
+  .ms-faq-item.ms-open .ms-chevron { transform: rotate(180deg); }
+  .ms-faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .ms-faq-answer p { padding: 0 1.4rem 1.2rem; color: var(--ms-muted); }
+
+  @media (max-width: 900px) {
+    .ms-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .ms-reviews-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .ms-hero { padding: 3rem 0; }
+    .ms-hero-inner, .ms-product-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 520px) {
+    .ms-benefits-grid { grid-template-columns: 1fr; }
+    .ms-section-title { font-size: 1.6rem; }
+  }
+</style>
+
+<div class="ms-wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="ms-hero">
+    <div class="ms-container ms-hero-inner">
+      <div>
+        <h1>BIG HEADLINE HERE</h1>
+        <p class="ms-subheadline">Subheadline placeholder — one or two sentences about why this product is great.</p>
+        <a href="#ms-product" class="ms-btn">Shop Now</a>
+      </div>
+      <div class="ms-hero-image ms-placeholder-box">
+        {% if ms_product.featured_image %}
+          <img class="ms-img" src="{{ ms_product.featured_image | image_url: width: 900 }}" alt="{{ ms_product.title | escape }}">
+        {% else %}
+          <span>HERO PRODUCT IMAGE HERE</span>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BENEFITS ============ -->
+  <section class="ms-benefits">
+    <div class="ms-container">
+      <h2 class="ms-section-title">SECTION TITLE HERE (e.g. Why You'll Love It)</h2>
+      <div class="ms-benefits-grid">
+        <div class="ms-benefit-card"><div class="ms-benefit-icon">✦</div><h3>Benefit title here</h3><p>Short benefit text here. One or two sentences max.</p></div>
+        <div class="ms-benefit-card"><div class="ms-benefit-icon">✦</div><h3>Benefit title here</h3><p>Short benefit text here. One or two sentences max.</p></div>
+        <div class="ms-benefit-card"><div class="ms-benefit-icon">✦</div><h3>Benefit title here</h3><p>Short benefit text here. One or two sentences max.</p></div>
+        <div class="ms-benefit-card"><div class="ms-benefit-icon">✦</div><h3>Benefit title here</h3><p>Short benefit text here. One or two sentences max.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT ============ -->
+  <section class="ms-product" id="ms-product">
+    <div class="ms-container ms-product-inner">
+      <div class="ms-product-image ms-placeholder-box">
+        {% if ms_product.featured_image %}
+          <img class="ms-img" src="{{ ms_product.featured_image | image_url: width: 900 }}" alt="{{ ms_product.title | escape }}">
+        {% else %}
+          <span>PRODUCT IMAGE HERE<br>(set your product handle at the top of this code)</span>
+        {% endif %}
+      </div>
+      <div>
+        {% if ms_product.title %}
+          <h2 class="ms-product-name">{{ ms_product.title }}</h2>
+          <div class="ms-stars">★★★★★ <span class="ms-rating-note">(RATING / REVIEW COUNT HERE)</span></div>
+          <p class="ms-price">{{ ms_product.selected_or_first_available_variant.price | money }}</p>
+          <div class="ms-description">{{ ms_product.description }}</div>
+
+          <form method="post" action="/cart/add">
+            <input type="hidden" name="id" value="{{ ms_product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="quantity" id="ms-qty-input" value="1">
+            <div class="ms-qty-row">
+              <span class="ms-qty-label">Quantity</span>
+              <div class="ms-qty-selector">
+                <button type="button" class="ms-qty-btn" id="ms-qty-minus" aria-label="Decrease quantity">−</button>
+                <span class="ms-qty-value" id="ms-qty-value">1</span>
+                <button type="button" class="ms-qty-btn" id="ms-qty-plus" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            <button type="submit" class="ms-btn">Add to Cart</button>
+          </form>
+        {% else %}
+          <h2 class="ms-product-name">PRODUCT NAME HERE</h2>
+          <div class="ms-stars">★★★★★ <span class="ms-rating-note">(RATING / REVIEW COUNT HERE)</span></div>
+          <p class="ms-price">$0.00</p>
+          <p class="ms-description">Your real product will appear here automatically once you set your product handle at the top of this code.</p>
+          <button type="button" class="ms-btn" onclick="alert('Almost there! Edit the Custom Liquid code and replace YOUR-PRODUCT-HANDLE-HERE with your Shopify product handle.')">Add to Cart</button>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="ms-reviews">
+    <div class="ms-container">
+      <h2 class="ms-section-title">SECTION TITLE HERE (e.g. What Customers Say)</h2>
+      <div class="ms-reviews-grid">
+        <div class="ms-review-card"><div class="ms-review-stars">★★★★★</div><p class="ms-review-text">"Review text placeholder — a short customer quote goes here."</p><p class="ms-review-author">— REVIEWER NAME HERE</p></div>
+        <div class="ms-review-card"><div class="ms-review-stars">★★★★★</div><p class="ms-review-text">"Review text placeholder — a short customer quote goes here."</p><p class="ms-review-author">— REVIEWER NAME HERE</p></div>
+        <div class="ms-review-card"><div class="ms-review-stars">★★★★☆</div><p class="ms-review-text">"Review text placeholder — a short customer quote goes here."</p><p class="ms-review-author">— REVIEWER NAME HERE</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="ms-faq">
+    <div class="ms-container ms-faq-container">
+      <h2 class="ms-section-title">Frequently Asked Questions</h2>
+      <div class="ms-faq-item"><button type="button" class="ms-faq-question">QUESTION 1 PLACEHOLDER HERE?<span class="ms-chevron">▾</span></button><div class="ms-faq-answer"><p>Answer placeholder text here. Replace with the real answer.</p></div></div>
+      <div class="ms-faq-item"><button type="button" class="ms-faq-question">QUESTION 2 PLACEHOLDER HERE?<span class="ms-chevron">▾</span></button><div class="ms-faq-answer"><p>Answer placeholder text here. Replace with the real answer.</p></div></div>
+      <div class="ms-faq-item"><button type="button" class="ms-faq-question">QUESTION 3 PLACEHOLDER HERE?<span class="ms-chevron">▾</span></button><div class="ms-faq-answer"><p>Answer placeholder text here. Replace with the real answer.</p></div></div>
+      <div class="ms-faq-item"><button type="button" class="ms-faq-question">QUESTION 4 PLACEHOLDER HERE?<span class="ms-chevron">▾</span></button><div class="ms-faq-answer"><p>Answer placeholder text here. Replace with the real answer.</p></div></div>
+      <div class="ms-faq-item"><button type="button" class="ms-faq-question">QUESTION 5 PLACEHOLDER HERE?<span class="ms-chevron">▾</span></button><div class="ms-faq-answer"><p>Answer placeholder text here. Replace with the real answer.</p></div></div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    // Quantity selector — updates the hidden input the cart form submits
+    var qty = 1;
+    var qtyValue = document.getElementById("ms-qty-value");
+    var qtyInput = document.getElementById("ms-qty-input");
+    var minus = document.getElementById("ms-qty-minus");
+    var plus = document.getElementById("ms-qty-plus");
+    function setQty(n) {
+      qty = Math.max(1, n);
+      if (qtyValue) qtyValue.textContent = qty;
+      if (qtyInput) qtyInput.value = qty;
+    }
+    if (minus) minus.addEventListener("click", function () { setQty(qty - 1); });
+    if (plus) plus.addEventListener("click", function () { setQty(qty + 1); });
+
+    // FAQ accordion
+    document.querySelectorAll(".ms-faq-item").forEach(function (item) {
+      item.querySelector(".ms-faq-question").addEventListener("click", function () {
+        var isOpen = item.classList.contains("ms-open");
+        document.querySelectorAll(".ms-faq-item.ms-open").forEach(function (other) {
+          other.classList.remove("ms-open");
+          other.querySelector(".ms-faq-answer").style.maxHeight = null;
+        });
+        if (!isOpen) {
+          item.classList.add("ms-open");
+          var answer = item.querySelector(".ms-faq-answer");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    });
+  })();
+</script>
