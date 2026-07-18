@@ -1,0 +1,457 @@
+{% comment %}
+  ============================================================
+  ONE-PRODUCT LANDING SECTION — fully editable in the theme
+  editor sidebar (no code editing needed once installed).
+
+  INSTALL (one time):
+  1. Shopify admin -> Online Store -> Themes -> (...) -> Edit code
+  2. Under "Sections", click "Add a new section", pick "liquid",
+     name it: one-product-landing
+  3. Delete the starter code it gives you, paste ALL of this
+     file, hit Save.
+  4. Back in the theme editor (Customize), on your home page
+     click "Add section" and choose "One-Product Landing".
+  5. Click the section — every headline, benefit, review and
+     FAQ is now an editable text box in the sidebar, and the
+     product is chosen with a product picker.
+  ============================================================
+{% endcomment %}
+
+{% assign ms_product = section.settings.product %}
+{% assign ms_variant = ms_product.selected_or_first_available_variant | default: ms_product.variants.first %}
+
+<style>
+  .ms-wrap {
+    --ms-bg: #fff9f7;
+    --ms-surface: #ffffff;
+    --ms-primary: #d6336c;
+    --ms-primary-dark: #b02458;
+    --ms-tint: #fdeef4;
+    --ms-text: #2b2230;
+    --ms-muted: #7a6b77;
+    --ms-border: #f0dfe6;
+    --ms-placeholder: #f3e9ed;
+    --ms-star: #e8b93c;
+    --ms-radius: 16px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: var(--ms-bg);
+    color: var(--ms-text);
+    line-height: 1.6;
+  }
+  .ms-wrap *, .ms-wrap *::before, .ms-wrap *::after { box-sizing: border-box; }
+  .ms-container { width: min(1100px, 92%); margin: 0 auto; }
+  .ms-wrap h1, .ms-wrap h2, .ms-wrap h3, .ms-wrap h4 { line-height: 1.2; margin: 0; color: var(--ms-text); }
+  .ms-wrap p { margin: 0; }
+  .ms-section-title { text-align: center; font-size: 2rem; margin-bottom: 2.5rem; }
+  .ms-placeholder-box {
+    background: var(--ms-placeholder);
+    border: 2px dashed #d9bfcc;
+    border-radius: var(--ms-radius);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; color: var(--ms-muted); font-weight: 600;
+  }
+  .ms-img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--ms-radius); display: block; }
+  .ms-btn {
+    display: inline-block; border: none; cursor: pointer;
+    font-size: 1rem; font-weight: 600; border-radius: 999px;
+    padding: 1rem 2.6rem; text-decoration: none; text-align: center;
+    background: var(--ms-primary); color: #fff;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .ms-btn:hover { background: var(--ms-primary-dark); transform: translateY(-2px); color: #fff; }
+  .ms-navbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 249, 247, 0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ms-border);
+  }
+  .ms-navbar-inner { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .ms-logo { font-weight: 800; font-size: 1.15rem; letter-spacing: 0.06em; color: var(--ms-text); text-decoration: none; }
+  .ms-nav-links { display: flex; gap: 1.6rem; }
+  .ms-nav-links a { color: var(--ms-text); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+  .ms-nav-links a:hover { color: var(--ms-primary); }
+  .ms-cart-link { position: relative; display: flex; color: var(--ms-text); padding: 6px; text-decoration: none; }
+  .ms-cart-link:hover { color: var(--ms-primary); }
+  .ms-cart-count {
+    position: absolute; top: -4px; right: -6px;
+    background: var(--ms-primary); color: #fff;
+    font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px;
+    border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 4px;
+  }
+  .ms-hero { padding: 4.5rem 0; }
+  .ms-hero-inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+  .ms-hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin-bottom: 1rem; }
+  .ms-subheadline { color: var(--ms-muted); font-size: 1.15rem; margin-bottom: 2rem; max-width: 34rem; }
+  .ms-hero-image { aspect-ratio: 4 / 3; overflow: hidden; }
+  .ms-benefits { background: var(--ms-tint); padding: 4.5rem 0; }
+  .ms-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .ms-benefit-card {
+    background: var(--ms-surface); border-radius: var(--ms-radius);
+    padding: 2rem 1.5rem; text-align: center;
+    box-shadow: 0 6px 24px rgba(43, 34, 48, 0.08); transition: transform 0.2s ease;
+  }
+  .ms-benefit-card:hover { transform: translateY(-6px); }
+  .ms-benefit-icon {
+    width: 52px; height: 52px; margin: 0 auto 1rem; border-radius: 999px;
+    background: var(--ms-tint); color: var(--ms-primary); font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ms-benefit-card h3 { margin-bottom: 0.5rem; font-size: 1.05rem; }
+  .ms-benefit-card p { color: var(--ms-muted); font-size: 0.95rem; }
+  .ms-product { padding: 4.5rem 0; }
+  .ms-product-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+  .ms-product-image { aspect-ratio: 1 / 1; overflow: hidden; }
+  .ms-product-name { font-size: 2rem; margin-bottom: 0.6rem; }
+  .ms-stars { color: var(--ms-star); margin-bottom: 0.8rem; letter-spacing: 2px; }
+  .ms-rating-note { color: var(--ms-muted); font-size: 0.85rem; letter-spacing: normal; }
+  .ms-price { font-size: 1.6rem; font-weight: 700; color: var(--ms-primary); margin-bottom: 1rem; }
+  .ms-description { color: var(--ms-muted); margin-bottom: 1.8rem; }
+  .ms-qty-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; }
+  .ms-qty-label { font-weight: 600; }
+  .ms-qty-selector {
+    display: flex; align-items: center; border: 1px solid var(--ms-border);
+    border-radius: 999px; background: var(--ms-surface); overflow: hidden;
+  }
+  .ms-qty-btn {
+    background: none; border: none; cursor: pointer; font-size: 1.2rem;
+    width: 42px; height: 42px; color: var(--ms-text);
+  }
+  .ms-qty-btn:hover { background: var(--ms-tint); }
+  .ms-qty-value { min-width: 36px; text-align: center; font-weight: 600; }
+  .ms-reviews { background: var(--ms-tint); padding: 4.5rem 0; }
+  .ms-reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .ms-review-card {
+    background: var(--ms-surface); border-radius: var(--ms-radius);
+    padding: 2rem 1.6rem; box-shadow: 0 6px 24px rgba(43, 34, 48, 0.08);
+  }
+  .ms-review-stars { color: var(--ms-star); letter-spacing: 3px; margin-bottom: 0.8rem; }
+  .ms-review-text { margin-bottom: 1rem; font-style: italic; }
+  .ms-review-author { color: var(--ms-muted); font-weight: 600; font-size: 0.9rem; }
+  .ms-faq { padding: 4.5rem 0; }
+  .ms-faq-container { max-width: 760px; }
+  .ms-faq-item {
+    background: var(--ms-surface); border: 1px solid var(--ms-border);
+    border-radius: var(--ms-radius); margin-bottom: 0.9rem; overflow: hidden;
+  }
+  .ms-faq-question {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    text-align: left; font-size: 1rem; font-weight: 600; color: var(--ms-text);
+    padding: 1.1rem 1.4rem; font-family: inherit;
+  }
+  .ms-faq-question:hover { color: var(--ms-primary); }
+  .ms-chevron { transition: transform 0.25s ease; }
+  .ms-faq-item.ms-open .ms-chevron { transform: rotate(180deg); }
+  .ms-faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .ms-faq-answer p { padding: 0 1.4rem 1.2rem; color: var(--ms-muted); }
+  .ms-footer { background: var(--ms-text); color: #f2ebef; padding-top: 3.5rem; }
+  .ms-footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
+  .ms-footer-logo { font-weight: 800; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
+  .ms-footer-tagline, .ms-footer-contact { color: #c8bac4; font-size: 0.95rem; margin-bottom: 0.6rem; }
+  .ms-footer-contact a { color: #f2ebef; }
+  .ms-footer h4 { margin-bottom: 0.9rem; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; color: #c8bac4; }
+  .ms-footer-col a { display: block; color: #f2ebef; text-decoration: none; margin-bottom: 0.55rem; transition: color 0.2s ease; }
+  .ms-footer-col a:hover { color: #f4a3c0; }
+  .ms-social { display: flex; gap: 0.9rem; }
+  .ms-social a { display: inline-flex; margin-bottom: 0; }
+  .ms-footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding: 1.2rem 0; text-align: center; font-size: 0.85rem; color: #c8bac4; }
+  @media (max-width: 900px) {
+    .ms-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .ms-reviews-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .ms-hero { padding: 3rem 0; }
+    .ms-hero-inner, .ms-product-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .ms-footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .ms-nav-links { display: none; }
+  }
+  @media (max-width: 520px) {
+    .ms-benefits-grid { grid-template-columns: 1fr; }
+    .ms-section-title { font-size: 1.6rem; }
+  }
+</style>
+
+<div class="ms-wrap" id="ms-top">
+
+  <header class="ms-navbar">
+    <div class="ms-container ms-navbar-inner">
+      <a href="#ms-top" class="ms-logo">{{ section.settings.store_name }}</a>
+      <nav class="ms-nav-links">
+        <a href="#ms-top">Home</a>
+        <a href="#ms-product">Shop</a>
+        <a href="#ms-about">About</a>
+        <a href="#ms-faq">FAQ</a>
+        <a href="#ms-contact">Contact</a>
+      </nav>
+      <a href="/cart" class="ms-cart-link" aria-label="View cart">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="ms-cart-count">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="ms-hero">
+    <div class="ms-container ms-hero-inner">
+      <div>
+        <h1>{{ section.settings.headline }}</h1>
+        <p class="ms-subheadline">{{ section.settings.subheadline }}</p>
+        <a href="#ms-product" class="ms-btn">{{ section.settings.hero_button_label }}</a>
+      </div>
+      <div class="ms-hero-image ms-placeholder-box">
+        {% if ms_product.featured_image %}
+          <img class="ms-img" src="{{ ms_product.featured_image | image_url: width: 900 }}" alt="{{ ms_product.title | escape }}">
+        {% else %}
+          <span>Pick your product in the sidebar and its photo appears here</span>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="ms-benefits" id="ms-about">
+    <div class="ms-container">
+      <h2 class="ms-section-title">{{ section.settings.benefits_title }}</h2>
+      <div class="ms-benefits-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'benefit' %}
+            <div class="ms-benefit-card" {{ block.shopify_attributes }}>
+              <div class="ms-benefit-icon">{{ block.settings.icon }}</div>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="ms-product" id="ms-product">
+    <div class="ms-container ms-product-inner">
+      <div class="ms-product-image ms-placeholder-box">
+        {% if ms_product.featured_image %}
+          <img class="ms-img" src="{{ ms_product.featured_image | image_url: width: 900 }}" alt="{{ ms_product.title | escape }}">
+        {% else %}
+          <span>Pick your product in the sidebar</span>
+        {% endif %}
+      </div>
+      <div>
+        {% if ms_product != blank %}
+          <h2 class="ms-product-name">{{ ms_product.title }}</h2>
+          <div class="ms-stars">★★★★★ <span class="ms-rating-note">{{ section.settings.rating_note }}</span></div>
+          <p class="ms-price">{{ ms_variant.price | money }}</p>
+          <div class="ms-description">{{ ms_product.description }}</div>
+          <form method="post" action="{{ routes.cart_add_url }}">
+            <input type="hidden" name="id" value="{{ ms_variant.id }}">
+            <input type="hidden" name="quantity" id="ms-qty-input" value="1">
+            <div class="ms-qty-row">
+              <span class="ms-qty-label">Quantity</span>
+              <div class="ms-qty-selector">
+                <button type="button" class="ms-qty-btn" id="ms-qty-minus" aria-label="Decrease quantity">−</button>
+                <span class="ms-qty-value" id="ms-qty-value">1</span>
+                <button type="button" class="ms-qty-btn" id="ms-qty-plus" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            {% if ms_variant.available %}
+              <button type="submit" class="ms-btn">Add to Cart</button>
+            {% else %}
+              <button type="button" class="ms-btn" onclick="alert('This product is showing as sold out in Shopify. In your admin, open the product and either add stock or untick inventory tracking, and make sure the product is Active.')">Sold Out</button>
+            {% endif %}
+          </form>
+        {% else %}
+          <h2 class="ms-product-name">No product selected yet</h2>
+          <p class="ms-description">Click this section in the theme editor and use the "Product" picker in the sidebar to choose what you're selling.</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="ms-reviews">
+    <div class="ms-container">
+      <h2 class="ms-section-title">{{ section.settings.reviews_title }}</h2>
+      <div class="ms-reviews-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'review' %}
+            <div class="ms-review-card" {{ block.shopify_attributes }}>
+              <div class="ms-review-stars">{% for i in (1..block.settings.stars) %}★{% endfor %}{% assign ms_empty = 5 | minus: block.settings.stars %}{% for i in (1..ms_empty) %}☆{% endfor %}</div>
+              <p class="ms-review-text">"{{ block.settings.text }}"</p>
+              <p class="ms-review-author">— {{ block.settings.author }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="ms-faq" id="ms-faq">
+    <div class="ms-container ms-faq-container">
+      <h2 class="ms-section-title">{{ section.settings.faq_title }}</h2>
+      {% for block in section.blocks %}
+        {% if block.type == 'faq' %}
+          <div class="ms-faq-item" {{ block.shopify_attributes }}>
+            <button type="button" class="ms-faq-question">{{ block.settings.question }}<span class="ms-chevron">▾</span></button>
+            <div class="ms-faq-answer"><p>{{ block.settings.answer }}</p></div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <footer class="ms-footer" id="ms-contact">
+    <div class="ms-container ms-footer-inner">
+      <div class="ms-footer-col">
+        <p class="ms-footer-logo">{{ section.settings.store_name }}</p>
+        <p class="ms-footer-tagline">{{ section.settings.footer_tagline }}</p>
+        <p class="ms-footer-contact">Contact: <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a></p>
+      </div>
+      <div class="ms-footer-col">
+        <h4>Policies</h4>
+        <a href="/policies/shipping-policy">Shipping</a>
+        <a href="/policies/refund-policy">Returns</a>
+        <a href="/policies/privacy-policy">Privacy</a>
+        <a href="/policies/terms-of-service">Terms</a>
+      </div>
+      <div class="ms-footer-col">
+        <h4>Follow Us</h4>
+        <div class="ms-social">
+          {% if section.settings.instagram_url != blank %}
+          <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
+          </a>
+          {% endif %}
+          {% if section.settings.tiktok_url != blank %}
+          <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path></svg>
+          </a>
+          {% endif %}
+          {% if section.settings.facebook_url != blank %}
+          <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="ms-footer-bottom">
+      <p>© {{ 'now' | date: '%Y' }} {{ section.settings.store_name }}. All rights reserved.</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var qty = 1;
+    var qtyValue = document.getElementById("ms-qty-value");
+    var qtyInput = document.getElementById("ms-qty-input");
+    var minus = document.getElementById("ms-qty-minus");
+    var plus = document.getElementById("ms-qty-plus");
+    function setQty(n) {
+      qty = Math.max(1, n);
+      if (qtyValue) qtyValue.textContent = qty;
+      if (qtyInput) qtyInput.value = qty;
+    }
+    if (minus) minus.addEventListener("click", function () { setQty(qty - 1); });
+    if (plus) plus.addEventListener("click", function () { setQty(qty + 1); });
+
+    document.querySelectorAll(".ms-faq-item").forEach(function (item) {
+      item.querySelector(".ms-faq-question").addEventListener("click", function () {
+        var isOpen = item.classList.contains("ms-open");
+        document.querySelectorAll(".ms-faq-item.ms-open").forEach(function (other) {
+          other.classList.remove("ms-open");
+          other.querySelector(".ms-faq-answer").style.maxHeight = null;
+        });
+        if (!isOpen) {
+          item.classList.add("ms-open");
+          var answer = item.querySelector(".ms-faq-answer");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    });
+
+    document.querySelectorAll('.ms-wrap a[href^="#ms-"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var target = document.getElementById(link.getAttribute("href").slice(1));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "One-Product Landing",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product to sell" },
+    { "type": "header", "content": "Store details" },
+    { "type": "text", "id": "store_name", "label": "Store name", "default": "STORE NAME HERE" },
+    { "type": "text", "id": "contact_email", "label": "Contact email", "default": "hello@example.com" },
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "headline", "label": "Big headline", "default": "Big headline here" },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "One or two sentences about why this product is great." },
+    { "type": "text", "id": "hero_button_label", "label": "Hero button text", "default": "Shop Now" },
+    { "type": "header", "content": "Section titles" },
+    { "type": "text", "id": "benefits_title", "label": "Benefits section title", "default": "Why You'll Love It" },
+    { "type": "text", "id": "reviews_title", "label": "Reviews section title", "default": "What Customers Say" },
+    { "type": "text", "id": "faq_title", "label": "FAQ section title", "default": "Frequently Asked Questions" },
+    { "type": "text", "id": "rating_note", "label": "Rating note (next to product stars)", "default": "(500+ happy customers)" },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "footer_tagline", "label": "Footer tagline", "default": "Your tagline here." },
+    { "type": "url", "id": "instagram_url", "label": "Instagram link" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok link" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook link" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (an emoji works great)", "default": "✦" },
+        { "type": "text", "id": "title", "label": "Benefit title", "default": "Benefit title here" },
+        { "type": "textarea", "id": "text", "label": "Benefit text", "default": "Short benefit text here. One or two sentences max." }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "Review text placeholder — a short customer quote goes here." },
+        { "type": "text", "id": "author", "label": "Reviewer name", "default": "Reviewer name here" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question placeholder here?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Answer placeholder text here." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "One-Product Landing",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "faq" },
+        { "type": "faq" },
+        { "type": "faq" },
+        { "type": "faq" },
+        { "type": "faq" }
+      ]
+    }
+  ]
+}
+{% endschema %}
