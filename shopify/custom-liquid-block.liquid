@@ -20,6 +20,7 @@
 
 {% assign ms_handle = 'YOUR-PRODUCT-HANDLE-HERE' %}
 {% assign ms_product = all_products[ms_handle] %}
+{% assign ms_variant = ms_product.selected_or_first_available_variant | default: ms_product.variants.first %}
 
 <style>
   .ms-wrap {
@@ -258,11 +259,11 @@
         {% if ms_product.title %}
           <h2 class="ms-product-name">{{ ms_product.title }}</h2>
           <div class="ms-stars">★★★★★ <span class="ms-rating-note">(RATING / REVIEW COUNT HERE)</span></div>
-          <p class="ms-price">{{ ms_product.selected_or_first_available_variant.price | money }}</p>
+          <p class="ms-price">{{ ms_variant.price | money }}</p>
           <div class="ms-description">{{ ms_product.description }}</div>
 
-          <form method="post" action="/cart/add">
-            <input type="hidden" name="id" value="{{ ms_product.selected_or_first_available_variant.id }}">
+          <form method="post" action="{{ routes.cart_add_url }}">
+            <input type="hidden" name="id" value="{{ ms_variant.id }}">
             <input type="hidden" name="quantity" id="ms-qty-input" value="1">
             <div class="ms-qty-row">
               <span class="ms-qty-label">Quantity</span>
@@ -272,7 +273,11 @@
                 <button type="button" class="ms-qty-btn" id="ms-qty-plus" aria-label="Increase quantity">+</button>
               </div>
             </div>
-            <button type="submit" class="ms-btn">Add to Cart</button>
+            {% if ms_variant.available %}
+              <button type="submit" class="ms-btn">Add to Cart</button>
+            {% else %}
+              <button type="button" class="ms-btn" onclick="alert('This product is showing as sold out in Shopify. In your admin, open the product and either add stock or untick inventory tracking, and make sure the product is Active.')">Sold Out</button>
+            {% endif %}
           </form>
         {% else %}
           <h2 class="ms-product-name">PRODUCT NAME HERE</h2>
