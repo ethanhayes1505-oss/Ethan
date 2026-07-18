@@ -3,7 +3,19 @@
   Your theme already has its own header, announcement bar and footer —
   so those parts of the design are OPTIONAL below and marked with comments.
   Delete them if you don't want doubles.
+
+  TO MAKE THE BUY BUTTON WORK:
+  1. In Shopify admin go to Products -> Add product, and create your product
+     (name, price, photos), then click Save.
+  2. Open the product in your store and look at its web address — the last part
+     is the "handle", e.g. yourstore.com/products/shock-alarm-bracelet
+                                                  ^^^^^^^^^^^^^^^^^^^^
+  3. On the line just below this comment, replace CHANGE-ME-product-handle
+     with your handle (keep the quotes). The ADD TO CART button then becomes a
+     real working button showing the live price, and the fake [£XX.XX] prices
+     update automatically too.
 {% endcomment %}
+{% assign dl_product = all_products['CHANGE-ME-product-handle'] %}
 
 <style>
   :root{
@@ -473,20 +485,38 @@
     </div>
     <div>
       <div class="rating-line" style="color:var(--muted)"><span class="stars">★★★★★</span> [X,XXX] reviews</div>
-      <h2 style="margin-bottom:4px">[PRODUCT NAME]</h2>
+      <h2 style="margin-bottom:4px">{% if dl_product %}{{ dl_product.title }}{% else %}[PRODUCT NAME]{% endif %}</h2>
       <p class="sub">[One-line product tagline goes here]</p>
+      {% if dl_product %}
+      <div class="price-row">
+        <span class="price">{{ dl_product.price | money }}</span>
+        {% if dl_product.compare_at_price > dl_product.price %}
+        <span class="was">{{ dl_product.compare_at_price | money }}</span>
+        {% assign dl_saving = dl_product.compare_at_price | minus: dl_product.price | times: 100 | divided_by: dl_product.compare_at_price %}
+        <span class="save">SAVE {{ dl_saving }}%</span>
+        {% endif %}
+      </div>
+      {% else %}
       <div class="price-row">
         <span class="price">[£XX.XX]</span>
         <span class="was">[£XX.XX]</span>
         <span class="save">SAVE [XX]%</span>
       </div>
+      {% endif %}
       <ul class="buy-ticks">
         <li>[Key selling point #1]</li>
         <li>[Key selling point #2]</li>
         <li>[Key selling point #3]</li>
         <li>Free shipping + [XX]-day risk-free trial</li>
       </ul>
+      {% if dl_product and dl_product.available %}
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ dl_product.selected_or_first_available_variant.id }}">
+        <button class="btn btn-block" type="submit">ADD TO CART — {{ dl_product.price | money }}</button>
+      </form>
+      {% else %}
       <button class="btn btn-block">ADD TO CART — [£XX.XX]</button>
+      {% endif %}
       <div class="payments"><div class="ph">💳 Payment method icons (Visa · Mastercard · PayPal · Apple Pay · Klarna)</div></div>
     </div>
   </div>
