@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero — Landing preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #ffffff; }
+
+  .hero { background: #ffffff; padding: clamp(2.5rem, 6vw, 5rem) 1.25rem clamp(2rem, 4vw, 3.5rem); }
+  .hero-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+  .hero-eyebrow {
+    display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #2563eb; background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.25);
+    border-radius: 999px; padding: 0.45rem 1.1rem; margin-bottom: 1.25rem;
+  }
+  .hero-heading { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; color: #111827; margin-bottom: 1rem; }
+  .hero-subheading { font-size: clamp(1rem, 1.8vw, 1.25rem); line-height: 1.55; color: rgba(17, 24, 39, 0.65); max-width: 40rem; margin: 0 auto; }
+
+  .hero-media { position: relative; width: 100%; max-width: 980px; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+  .hero-media .placeholder {
+    width: 100%; aspect-ratio: 3 / 2; border-radius: 1.25rem;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    display: flex; align-items: center; justify-content: center;
+    color: #9ca3af; font-size: 1.1rem; font-weight: 500;
+  }
+
+  .hero-cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; }
+  .hero-button {
+    display: inline-block; background: #111827; color: #ffffff; font-size: 1.05rem; font-weight: 600;
+    letter-spacing: 0.02em; text-decoration: none; padding: 1rem 2.75rem; border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .hero-button:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.24); }
+
+  .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(1.25rem, 4vw, 3rem); margin-top: clamp(1.75rem, 3.5vw, 2.75rem); }
+  .hero-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 500; color: rgba(17, 24, 39, 0.7); }
+  .hero-badge svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; color: #2563eb; }
+
+  @media (max-width: 600px) {
+    .hero-button { padding: 0.85rem 2.1rem; font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Free shipping on all orders</span>
+      <h1 class="hero-heading">Time, Simplified.</h1>
+      <p class="hero-subheading">Minimal LED watches designed for everyday wear. Lightweight, water-resistant and built to keep up with you.</p>
+
+      <div class="hero-media">
+        <div class="placeholder">Your product photo goes here (the 4 watches image)</div>
+        <div class="hero-cta">
+          <a href="#" class="hero-button">Shop Now</a>
+        </div>
+      </div>
+
+      <div class="hero-badges">
+        <span class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 9h4l3 3v5h-7z"/><circle cx="6" cy="19" r="1.8"/><circle cx="18.5" cy="19" r="1.8"/></svg>
+          Free tracked shipping
+        </span>
+        <span class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          12-month warranty
+        </span>
+        <span class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          30-day easy returns
+        </span>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
