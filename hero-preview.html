@@ -22,14 +22,15 @@
   .hero-media { position: relative; width: 100%; max-width: 980px; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
   .hero-media .placeholder {
     width: 100%; aspect-ratio: 3 / 2; border-radius: 1.25rem;
-    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    background: radial-gradient(120% 120% at 30% 20%, #1e2a4a 0%, #10182e 60%, #0b1122 100%);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
     display: flex; align-items: center; justify-content: center;
-    color: #9ca3af; font-size: 1.1rem; font-weight: 500;
+    color: rgba(255, 255, 255, 0.45); font-size: 1.1rem; font-weight: 500;
   }
 
   .hero-cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; }
   .hero-button {
-    display: inline-block; background: #111827; color: #ffffff; font-size: 1.05rem; font-weight: 600;
+    display: inline-block; background: #ffffff; color: #111827; font-size: 1.05rem; font-weight: 600;
     letter-spacing: 0.02em; text-decoration: none; padding: 1rem 2.75rem; border-radius: 999px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
@@ -52,7 +53,7 @@
       <p class="hero-subheading">Minimal LED watches designed for everyday wear. Lightweight, water-resistant and built to keep up with you.</p>
 
       <div class="hero-media">
-        <div class="placeholder">Your product photo goes here (the 4 watches image)</div>
+        <div class="placeholder">Your 4-watches photo goes here (dark navy image)</div>
         <div class="hero-cta">
           <a href="#" class="hero-button">Shop Now</a>
         </div>
