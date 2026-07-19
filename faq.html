@@ -1,0 +1,300 @@
+<!-- ============================================================
+     DreamLabs — Shock Watch FAQ Section
+     Self-contained: paste this whole block into any page
+     (Shopify custom HTML section, landing page, etc.)
+     ============================================================ -->
+<section class="dl-faq">
+  <style>
+    .dl-faq {
+      --dl-bg: #0b0e14;
+      --dl-card: #141926;
+      --dl-border: #232b3d;
+      --dl-text: #eef1f8;
+      --dl-muted: #9aa4b8;
+      --dl-accent: #6c5ce7;
+      --dl-accent-soft: rgba(108, 92, 231, 0.15);
+      background: var(--dl-bg);
+      color: var(--dl-text);
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      padding: 72px 20px;
+    }
+    .dl-faq * { box-sizing: border-box; margin: 0; padding: 0; }
+    .dl-faq__inner { max-width: 760px; margin: 0 auto; }
+    .dl-faq__kicker {
+      display: inline-block;
+      background: var(--dl-accent-soft);
+      color: var(--dl-accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .dl-faq__title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .dl-faq__subtitle {
+      color: var(--dl-muted);
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .dl-faq__item {
+      background: var(--dl-card);
+      border: 1px solid var(--dl-border);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+    .dl-faq__item[open] { border-color: var(--dl-accent); }
+    .dl-faq__question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    .dl-faq__question::-webkit-details-marker { display: none; }
+    .dl-faq__icon {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--dl-accent-soft);
+      color: var(--dl-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      transition: transform 0.25s ease;
+    }
+    .dl-faq__item[open] .dl-faq__icon { transform: rotate(45deg); }
+    .dl-faq__answer {
+      padding: 0 22px 20px;
+      color: var(--dl-muted);
+      font-size: 15.5px;
+      line-height: 1.7;
+    }
+    .dl-faq__answer strong { color: var(--dl-text); }
+    .dl-faq__cta {
+      margin-top: 36px;
+      text-align: center;
+      color: var(--dl-muted);
+      font-size: 15px;
+    }
+    .dl-faq__cta a {
+      color: var(--dl-accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .dl-faq__cta a:hover { text-decoration: underline; }
+  </style>
+
+  <div class="dl-faq__inner">
+    <span class="dl-faq__kicker">FAQ</span>
+    <h2 class="dl-faq__title">Frequently Asked Questions</h2>
+    <p class="dl-faq__subtitle">
+      Everything you need to know about the DreamLabs Shock Watch —
+      the alarm that actually gets you out of bed.
+    </p>
+
+    <details class="dl-faq__item" open>
+      <summary class="dl-faq__question">
+        How does the DreamLabs Shock Watch wake me up?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        When your alarm goes off, the watch delivers a gentle
+        <strong>electric pulse to your wrist</strong> combined with strong
+        vibration. Unlike sound alarms that your brain learns to ignore, the
+        pulse triggers an instant wake response — you're alert in seconds,
+        not snoozing for another hour.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        Does the shock hurt?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        No — it's a startle, not pain. Think of it like the static zap you get
+        from a doorknob, but controlled and safe. You can
+        <strong>adjust the intensity across multiple levels</strong>, from a
+        light tingle to a jolt strong enough to wake the deepest sleeper. Most
+        users start low and find their perfect setting within a few nights.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        Is it safe to use every day?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        Yes. The pulse is a <strong>low-voltage, low-current stimulus</strong>
+        similar to TENS devices used in physiotherapy, and it only lasts a
+        fraction of a second. It's safe for daily use on healthy adults.
+        <strong>Note:</strong> if you have a pacemaker, implanted medical
+        device, epilepsy, or heart condition, or if you are pregnant, consult
+        your doctor before use.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        I'm a really heavy sleeper. Will this actually work for me?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        Heavy sleepers are exactly who we built this for. Sound alarms fail
+        because your brain filters out familiar noise — but it
+        <strong>can't ignore a physical stimulus on your skin</strong>. On the
+        highest intensity setting, combined with vibration, the Shock Watch has
+        woken users who sleep through multiple phone alarms, sirens, and even
+        fire drills.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        Will it wake up my partner?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        No — that's one of the best parts. The alarm is
+        <strong>completely silent</strong>. Only you feel the pulse and
+        vibration on your wrist, so you can wake up at 5 AM while your partner
+        sleeps peacefully. Perfect for couples with different schedules, shift
+        workers, and early-morning gym sessions.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        Can I turn off the snooze, so I can't cheat?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        Yes. You can disable snooze entirely, or enable
+        <strong>escalation mode</strong> — every time you snooze, the next
+        pulse gets stronger. There's no "just five more minutes" when your
+        wrist disagrees.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        How long does the battery last?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        A full charge lasts <strong>up to 7 days</strong> of normal use, and
+        charging takes about 90 minutes via the included magnetic USB charger.
+        The watch warns you well in advance when the battery is low, so it
+        never dies the night before an important morning.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        Is it waterproof?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        The Shock Watch is <strong>IP67 water-resistant</strong> — sweat,
+        rain, and hand-washing are no problem. We recommend taking it off for
+        swimming and showers to maximize its lifespan.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        Will it fit my wrist? Is it comfortable to sleep in?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        The adjustable strap fits wrists from <strong>140mm to 210mm</strong>
+        (about 5.5" to 8.3"). The body is lightweight and low-profile with a
+        soft silicone band designed specifically for overnight wear — most
+        users forget they have it on.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        How do I set alarms? Do I need an app?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        You can set alarms directly on the watch, or use the free
+        <strong>DreamLabs app</strong> (iOS &amp; Android) to schedule multiple
+        alarms, customize intensity, set different alarms for different days,
+        and track your wake-up streaks. The watch works fully offline once
+        your alarms are set — no phone needed at night.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        How long does shipping take?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        Orders are processed within <strong>24–48 hours</strong>. Standard
+        shipping takes <strong>7–12 business days</strong> depending on your
+        location, and you'll receive a tracking number by email as soon as
+        your order ships.
+      </p>
+    </details>
+
+    <details class="dl-faq__item">
+      <summary class="dl-faq__question">
+        What if it doesn't work for me? Do you offer refunds?
+        <span class="dl-faq__icon">+</span>
+      </summary>
+      <p class="dl-faq__answer">
+        We stand behind the Shock Watch with a
+        <strong>30-day money-back guarantee</strong>. If it doesn't transform
+        your mornings, return it for a full refund — no interrogation, no
+        hoops. Every watch also comes with a
+        <strong>12-month warranty</strong> covering manufacturing defects.
+      </p>
+    </details>
+
+    <p class="dl-faq__cta">
+      Still have questions? Reach out at
+      <a href="mailto:support@dreamlabs.com">support@dreamlabs.com</a> —
+      we reply within 24 hours.
+    </p>
+  </div>
+
+  <script>
+    /* Optional: closes other items when one opens (accordion behavior).
+       Delete this script tag if you want multiple items open at once. */
+    (function () {
+      var items = document.querySelectorAll(".dl-faq__item");
+      items.forEach(function (item) {
+        item.addEventListener("toggle", function () {
+          if (item.open) {
+            items.forEach(function (other) {
+              if (other !== item) other.removeAttribute("open");
+            });
+          }
+        });
+      });
+    })();
+  </script>
+</section>
