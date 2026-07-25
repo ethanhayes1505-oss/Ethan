@@ -1,0 +1,326 @@
+/* ==========================================================================
+   PULSE Band — site styles
+   Colours live in the ":root" block below. Change a colour once there and
+   it updates everywhere on the site.
+   ========================================================================== */
+
+:root {
+  --bg: #0c0d10;          /* page background — near black */
+  --bg-raised: #16181d;   /* slightly lighter panels */
+  --text: #f2f3f5;        /* main text — off-white */
+  --text-dim: #9aa0a8;    /* secondary text — grey */
+  --accent: #4dd0ff;      /* accent — electric cyan, like an LED glow */
+  --accent-dark: #1ba7dd; /* accent for hover states */
+  --border: #262a31;      /* subtle lines */
+}
+
+/* ---- Basics ---- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  /* System font stack: modern, fast, no download needed */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; }
+
+h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 1.5rem; text-align: center; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+.container.narrow { max-width: 760px; }
+.center { text-align: center; }
+
+.accent { color: var(--accent); }
+
+.lead { color: var(--text-dim); font-size: 1.125rem; }
+
+.tiny-note { color: var(--text-dim); font-size: 0.8rem; margin-top: 0.75rem; }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #04121a;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn:hover { background: var(--accent-dark); text-decoration: none; transform: translateY(-1px); }
+.btn-big { padding: 0.9rem 2.2rem; font-size: 1.1rem; }
+.btn-small { padding: 0.45rem 1.2rem; font-size: 0.95rem; }
+
+/* ---- Header / navigation ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(12, 13, 16, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.logo:hover { text-decoration: none; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
+}
+.nav-links a:not(.btn) { color: var(--text); font-size: 0.95rem; }
+.nav-links a:not(.btn):hover { color: var(--accent); text-decoration: none; }
+
+/* The three-line menu button — hidden on laptops, shown on phones */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+/* Turns the three lines into an X when the menu is open */
+.menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---- Hero ---- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.eyebrow {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+}
+
+.hero .lead { margin-bottom: 1.75rem; }
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.price { font-size: 2rem; font-weight: 800; }
+.price-note { color: var(--text-dim); font-size: 0.95rem; }
+
+.hero-photo img {
+  border-radius: 20px;
+  box-shadow: 0 0 60px rgba(77, 208, 255, 0.12);
+}
+
+/* ---- Features ---- */
+.features {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 4.5rem 0;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.feature {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.feature:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+.feature-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+.feature h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.feature p { color: var(--text-dim); font-size: 0.95rem; }
+
+/* ---- Specs table ---- */
+.specs { padding: 4.5rem 0; }
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.spec-table th,
+.spec-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.spec-table tr:last-child th,
+.spec-table tr:last-child td { border-bottom: none; }
+.spec-table th { color: var(--text-dim); font-weight: 600; width: 45%; }
+
+/* ---- Sizing ---- */
+.sizing {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 4.5rem 0;
+}
+.sizing .lead { margin-bottom: 2rem; }
+.sizing-photo { border-radius: 16px; margin: 0 auto; }
+
+/* ---- Final call to action ---- */
+.cta { padding: 5rem 0; }
+.cta .lead { margin-bottom: 2rem; }
+
+/* ---- FAQ page ---- */
+.faq-page { padding: 3.5rem 1.25rem 5rem; }
+.faq-page h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+.faq-page > .lead { margin-bottom: 2.5rem; }
+.faq-page h2 { text-align: left; font-size: 1.4rem; margin: 2.5rem 0 1rem; }
+
+details {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+summary {
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  list-style: none;           /* hides the default triangle */
+  position: relative;
+  padding-right: 3rem;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {               /* our own +/− indicator */
+  content: "+";
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+details[open] summary::after { content: "−"; }
+details p { padding: 0 1.25rem 1.25rem; color: var(--text-dim); }
+details a { word-break: break-all; }
+
+.faq-page .btn { margin-top: 1.5rem; }
+
+/* ---- Footer ---- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+/* ==========================================================================
+   PHONE LAYOUT — everything below applies on screens 768px wide or less
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* Show the three-line button, hide the links until it's tapped */
+  .menu-toggle { display: flex; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--bg-raised);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0 1rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { text-align: center; }
+  .nav-links a:not(.btn) { display: block; padding: 0.9rem 1.25rem; }
+  .nav-links .btn { margin: 0.75rem auto 0; }
+
+  /* Stack the hero: text on top, photo underneath */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+    text-align: center;
+  }
+  .price-row { justify-content: center; }
+
+  .feature-grid { grid-template-columns: 1fr; }
+
+  .spec-table th, .spec-table td { padding: 0.8rem 1rem; }
+
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+
+/* Middle-sized screens (small tablets): two feature columns */
+@media (min-width: 769px) and (max-width: 1000px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
