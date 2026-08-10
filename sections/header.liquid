@@ -1,0 +1,82 @@
+<header class="site-header">
+  <div class="page-width">
+    <div class="site-header__inner">
+      <button
+        class="menu-toggle site-header__icon"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="MobileMenu"
+        aria-label="Menu"
+      >
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+          <path d="M2 5h16M2 10h16M2 15h16"/>
+        </svg>
+      </button>
+
+      <a href="{{ routes.root_url }}" class="site-header__logo">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 300 | image_tag: alt: shop.name }}
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+
+      <div class="site-header__actions">
+        <a href="{{ routes.search_url }}" class="site-header__icon" aria-label="{{ 'general.search.search' | t }}">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+            <circle cx="9" cy="9" r="6"/>
+            <path d="M13.5 13.5 18 18"/>
+          </svg>
+        </a>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}" class="site-header__icon" aria-label="{{ 'customer.account.title' | t }}">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+              <circle cx="10" cy="6.5" r="3.5"/>
+              <path d="M3 18c0-3.9 3.1-6 7-6s7 2.1 7 6"/>
+            </svg>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="site-header__icon" aria-label="{{ 'cart.general.title' | t }}">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
+            <path d="M4 6h12l-1 11H5L4 6Z"/>
+            <path d="M7 6a3 3 0 0 1 6 0"/>
+          </svg>
+          {%- if cart.item_count > 0 -%}
+            <span class="cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+    </div>
+
+    <nav id="MobileMenu" class="mobile-menu" data-mobile-menu role="navigation" aria-label="Mobile navigation">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,26 @@
+<article class="page-width section">
+  <div class="article-body">
+    <span class="article-card__date">{{ article.published_at | date: format: 'on_date' }}</span>
+    <h1>{{ article.title }}</h1>
+    {%- if article.author != blank -%}
+      <p class="product-card__price">{{ 'blogs.article.written_by' | t: author: article.author }}</p>
+    {%- endif -%}
+
+    {%- if article.image -%}
+      {{ article.image | image_url: width: 1400 | image_tag: loading: 'eager', alt: article.image.alt | escape }}
+    {%- endif -%}
+
+    <div style="margin-top: 3.2rem;">{{ article.content }}</div>
+
+    <p style="margin-top: 4.8rem;">
+      <a href="{{ blog.url }}" class="text-link">{{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
+    </p>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article page",
+  "settings": []
+}
+{% endschema %}

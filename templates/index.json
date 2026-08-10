@@ -1,0 +1,51 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "height": "tall",
+        "eyebrow": "New season",
+        "heading": "Considered pieces, built to last",
+        "text": "A short line about your shop. Swap this image and text in the theme editor.",
+        "button_label": "Shop now"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "New arrivals",
+        "products_to_show": 4,
+        "columns": 4
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "cat-1": { "type": "collection", "settings": {} },
+        "cat-2": { "type": "collection", "settings": {} },
+        "cat-3": { "type": "collection", "settings": {} }
+      },
+      "block_order": ["cat-1", "cat-2", "cat-3"],
+      "settings": {
+        "heading": "Shop by category"
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "Why we started",
+        "text": "<p>Use this space to tell customers what makes your shop different — where your pieces come from, how you choose them, and why it matters.</p>",
+        "button_label": "Learn more"
+      }
+    },
+    "signup": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join the list",
+        "text": "Be first to hear about new drops, restocks and offers."
+      }
+    }
+  },
+  "order": ["hero", "featured", "categories", "story", "signup"]
+}

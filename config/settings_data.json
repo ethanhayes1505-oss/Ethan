@@ -1,0 +1,10 @@
+{
+  "current": {
+    "color_background": "#fbfaf8",
+    "color_text": "#1c1b1a",
+    "color_accent": "#3f5748",
+    "color_accent_text": "#ffffff",
+    "page_width": 1300,
+    "corner_radius": 2
+  }
+}

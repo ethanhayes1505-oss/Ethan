@@ -1,0 +1,37 @@
+<div class="page-width">
+  <div class="page-hero">
+    <h1>{{ section.settings.title | escape }}</h1>
+  </div>
+
+  {%- paginate collections by 12 -%}
+    <div class="collection-grid" style="--grid-cols: 3;">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="collection-card">
+          {%- if collection.featured_image -%}
+            {{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: collection.title | escape }}
+          {%- else -%}
+            {%- assign ph = forloop.index | modulo: 2 | plus: 1 -%}
+            {{ 'collection-' | append: ph | placeholder_svg_tag }}
+          {%- endif -%}
+          <span class="collection-card__label">{{ collection.title }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collections list page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collections"
+    }
+  ]
+}
+{% endschema %}

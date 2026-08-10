@@ -1,0 +1,15 @@
+{%- comment -%}
+  Renders a product price.
+  Accepts: product (product object)
+{%- endcomment -%}
+{%- if product.compare_at_price > product.price -%}
+  <span class="price price--sale">
+    <span class="visually-hidden">{{ 'products.product.on_sale' | t }}</span>
+    <s class="price__regular">{{ product.compare_at_price | money }}</s>
+    <span class="price__sale">{{ product.price | money }}</span>
+  </span>
+{%- elsif product.price_varies -%}
+  <span class="price">{{ 'products.product.from_price_html' | t: price: product.price_min | money }}</span>
+{%- else -%}
+  <span class="price">{{ product.price | money }}</span>
+{%- endif -%}

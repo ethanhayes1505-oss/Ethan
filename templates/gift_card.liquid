@@ -1,0 +1,45 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros -%}
+  <title>{{ 'gift_cards.issued.title' | t: value: formatted_initial_value, shop: shop.name }}</title>
+  <meta name="robots" content="noindex">
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  <style>
+    body { text-align: center; padding: 6rem 2rem; }
+    .gift-card__code {
+      display: inline-block;
+      font-size: 2rem;
+      letter-spacing: 0.2em;
+      border: 1px dashed currentColor;
+      padding: 1.6rem 2.4rem;
+      margin: 2.4rem 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ shop.name }}</h1>
+  <p>{{ 'gift_cards.issued.subtext' | t }}</p>
+  <h2>{{ gift_card.initial_value | money }}</h2>
+
+  {%- assign expiry_date = gift_card.expires_on | date: format: 'abbreviated_date' -%}
+  {%- if gift_card.enabled == false -%}
+    <p>{{ 'gift_cards.issued.disabled' | t }}</p>
+  {%- elsif gift_card.expired -%}
+    <p>{{ 'gift_cards.issued.expired' | t: expiry: expiry_date }}</p>
+  {%- elsif gift_card.expires_on -%}
+    <p>{{ 'gift_cards.issued.active' | t: expiry: expiry_date }}</p>
+  {%- endif -%}
+
+  <div class="gift-card__code">{{ gift_card.code | format_code }}</div>
+  <p>{{ 'gift_cards.issued.redeem' | t }}</p>
+
+  <p>
+    <a href="{{ shop.url }}" class="button">{{ 'gift_cards.issued.shop_link' | t }}</a>
+  </p>
+  <p><button class="button button--secondary" onclick="window.print()">{{ 'gift_cards.issued.print' | t }}</button></p>
+</body>
+</html>

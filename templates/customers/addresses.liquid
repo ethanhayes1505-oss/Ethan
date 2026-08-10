@@ -1,0 +1,50 @@
+<div class="page-width section">
+  <div class="page-hero" style="padding-top: 0;">
+    <h1>{{ 'customer.addresses.title' | t }}</h1>
+    <p><a href="{{ routes.account_url }}" class="text-link">{{ 'customer.account.return' | t }}</a></p>
+  </div>
+
+  {%- paginate customer.addresses by 10 -%}
+    <div class="article-grid">
+      {%- for address in customer.addresses -%}
+        <div>
+          {%- if address == customer.default_address -%}
+            <span class="eyebrow">{{ 'customer.addresses.default' | t }}</span>
+          {%- endif -%}
+          {{ address | format_address }}
+          <p>
+            <a href="#" class="text-link" onclick="document.getElementById('EditAddress_{{ address.id }}').toggleAttribute('hidden'); return false;">{{ 'customer.addresses.edit' | t }}</a>
+            &nbsp;
+            {% form 'customer_address', address, style: 'display:inline' %}
+              <button
+                type="submit"
+                class="text-link"
+                style="background:none;border:none;cursor:pointer;padding:0;"
+                name="_method"
+                value="delete"
+                onclick="return confirm('{{ 'customer.addresses.delete_confirm' | t }}')"
+              >{{ 'customer.addresses.delete' | t }}</button>
+            {% endform %}
+          </p>
+
+          <div id="EditAddress_{{ address.id }}" hidden>
+            <h4>{{ 'customer.addresses.edit_address' | t }}</h4>
+            {% form 'customer_address', address %}
+              {% render 'address-fields', form: form %}
+              <button type="submit" class="button">{{ 'customer.addresses.update' | t }}</button>
+            {% endform %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+
+  <div style="margin-top: 4.8rem; max-width: 52rem;">
+    <h3>{{ 'customer.addresses.add_new' | t }}</h3>
+    {% form 'customer_address', customer.new_address %}
+      {% render 'address-fields', form: form %}
+      <button type="submit" class="button">{{ 'customer.addresses.add' | t }}</button>
+    {% endform %}
+  </div>
+</div>

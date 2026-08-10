@@ -1,0 +1,126 @@
+<div class="section">
+  <div class="page-width">
+    <div class="product">
+      <div class="product__gallery">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            {%- liquid
+              if forloop.first
+                assign loading = 'eager'
+              else
+                assign loading = 'lazy'
+              endif
+            -%}
+            <div class="product__image">
+              {{ media.preview_image | image_url: width: 1400 | image_tag: loading: loading, widths: '550, 800, 1100, 1400', alt: media.alt | escape }}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="product__image">{{ 'product-apparel-1' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="product__info">
+        {%- if section.settings.show_vendor and product.vendor != blank -%}
+          <span class="eyebrow product__vendor">{{ product.vendor }}</span>
+        {%- endif -%}
+        <h1>{{ product.title | default: 'Example product' }}</h1>
+        <div class="product__price" data-product-price>
+          {%- if product != blank -%}
+            {% render 'price', product: product %}
+          {%- else -%}
+            {{ 4500 | money }}
+          {%- endif -%}
+        </div>
+
+        {%- if product != blank -%}
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+          {% form 'product', product, data-product-form: '' %}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+            {%- unless product.has_only_default_variant -%}
+              <div class="variant-selects">
+                {%- for option in product.options_with_values -%}
+                  <div class="field">
+                    <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                    <select
+                      id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                      data-variant-select
+                    >
+                      {%- for value in option.values -%}
+                        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>
+                          {{ value }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                {%- endfor -%}
+              </div>
+
+              <script type="application/json" data-variants-json>
+                [
+                  {%- for variant in product.variants -%}
+                    {
+                      "id": {{ variant.id }},
+                      "available": {{ variant.available }},
+                      "options": {{ variant.options | json }},
+                      "price_formatted": {{ variant.price | money | json }}
+                    }{% unless forloop.last %},{% endunless %}
+                  {%- endfor -%}
+                ]
+              </script>
+            {%- endunless -%}
+
+            <div class="quantity-row">
+              <div class="quantity">
+                <button type="button" data-quantity-change="-1" aria-label="Decrease quantity">&minus;</button>
+                <input
+                  type="number"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  aria-label="{{ 'products.product.quantity' | t }}"
+                >
+                <button type="button" data-quantity-change="1" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="button button--full"
+              data-add-to-cart
+              data-label-add="{{ 'products.product.add_to_cart' | t }}"
+              data-label-soldout="{{ 'products.product.sold_out' | t }}"
+              data-label-unavailable="{{ 'products.product.unavailable' | t }}"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          {% endform %}
+        {%- endif -%}
+
+        {%- if product.description != blank -%}
+          <div class="product__description">{{ product.description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    }
+  ]
+}
+{% endschema %}
