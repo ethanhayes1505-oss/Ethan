@@ -1,0 +1,105 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Lesson diagrams</title>
+<style>
+@page{ size:170mm 105mm; margin:0; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Verdana","DejaVu Sans",Arial,sans-serif;}
+.d{width:170mm;height:105mm;padding:5mm 6mm;page-break-after:always;background:#fff;display:flex;flex-direction:column}
+.d h4{font-size:4.6mm;font-weight:900;color:#7B0F3B;text-transform:uppercase;margin-bottom:1mm}
+.d .sub{font-size:3.2mm;color:#555;font-weight:600;margin-bottom:2mm}
+.wrap{flex:1;display:flex;gap:4mm}
+svg{flex:1;height:100%}
+.key{width:46mm;font-size:3mm;line-height:1.5}
+.key div{display:flex;align-items:center;gap:2mm;margin-bottom:1.4mm;font-weight:600}
+.sw{width:4mm;height:4mm;flex:0 0 4mm;border-radius:50%}
+</style></head><body>
+
+<div class="d">
+ <h4>Diagram 1 — Warm-up: Traffic Lights Dribble</h4>
+ <div class="sub">20 × 20 m grid · every player has a ball · 6 minutes</div>
+ <div class="wrap">
+ <svg viewBox="0 0 300 180">
+  <rect x="10" y="10" width="280" height="160" fill="#EAF6F0" stroke="#2E7D32" stroke-width="2"/>
+  <g fill="#FFC107" stroke="#7A5C00"><polygon points="10,10 18,22 2,22"/><polygon points="290,10 298,22 282,22"/><polygon points="10,170 18,158 2,158"/><polygon points="290,170 298,158 282,158"/></g>
+  <g>
+   <circle cx="70" cy="55" r="7" fill="#5FBFA0"/><circle cx="82" cy="62" r="4" fill="#122019"/>
+   <circle cx="150" cy="40" r="7" fill="#5FBFA0"/><circle cx="162" cy="47" r="4" fill="#122019"/>
+   <circle cx="220" cy="70" r="7" fill="#5FBFA0"/><circle cx="232" cy="77" r="4" fill="#122019"/>
+   <circle cx="100" cy="125" r="7" fill="#5FBFA0"/><circle cx="112" cy="132" r="4" fill="#122019"/>
+   <circle cx="190" cy="135" r="7" fill="#5FBFA0"/><circle cx="202" cy="142" r="4" fill="#122019"/>
+   <circle cx="255" cy="120" r="7" fill="#5FBFA0"/><circle cx="267" cy="127" r="4" fill="#122019"/>
+  </g>
+  <path d="M70 55 q20 -18 45 -6" stroke="#7B0F3B" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#a)"/>
+  <path d="M220 70 q-18 24 -40 34" stroke="#7B0F3B" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#a)"/>
+  <path d="M100 125 q28 -14 52 -4" stroke="#7B0F3B" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#a)"/>
+  <defs><marker id="a" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6z" fill="#7B0F3B"/></marker></defs>
+  <circle cx="150" cy="92" r="8" fill="#7B0F3B"/><text x="150" y="95" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">C</text>
+ </svg>
+ <div class="key">
+  <div><span class="sw" style="background:#5FBFA0"></span>Player</div>
+  <div><span class="sw" style="background:#122019"></span>Ball</div>
+  <div><span class="sw" style="background:#7B0F3B"></span>Coach (C)</div>
+  <div><span class="sw" style="background:#FFC107;border-radius:0"></span>Corner cone</div>
+  <div style="display:block;margin-top:3mm;font-weight:400">Dribble in the grid. Coach calls:<br><b>GREEN</b> = speed dribble<br><b>AMBER</b> = slow, close control<br><b>RED</b> = stop the ball with the sole<br><b>ROUNDABOUT</b> = turn and change direction</div>
+ </div>
+ </div>
+</div>
+
+<div class="d">
+ <h4>Diagram 2 — Skill: Passing Gates</h4>
+ <div class="sub">Pairs · 8 gates spread over the area · 6 minutes</div>
+ <div class="wrap">
+ <svg viewBox="0 0 300 180">
+  <rect x="10" y="10" width="280" height="160" fill="#EAF6F0" stroke="#2E7D32" stroke-width="2"/>
+  <g fill="#FFC107" stroke="#7A5C00" stroke-width="1">
+   <circle cx="70" cy="45" r="4"/><circle cx="70" cy="70" r="4"/>
+   <circle cx="150" cy="35" r="4"/><circle cx="150" cy="60" r="4"/>
+   <circle cx="230" cy="55" r="4"/><circle cx="230" cy="80" r="4"/>
+   <circle cx="95" cy="130" r="4"/><circle cx="95" cy="155" r="4"/>
+   <circle cx="180" cy="120" r="4"/><circle cx="180" cy="145" r="4"/>
+   <circle cx="250" cy="130" r="4"/><circle cx="250" cy="155" r="4"/>
+  </g>
+  <circle cx="40" cy="58" r="7" fill="#5FBFA0"/><circle cx="110" cy="58" r="7" fill="#D32F2F"/>
+  <circle cx="50" cy="58" r="4" fill="#122019"/>
+  <path d="M56 58 H102" stroke="#122019" stroke-width="2" marker-end="url(#b)"/>
+  <circle cx="200" cy="132" r="7" fill="#5FBFA0"/><circle cx="150" cy="132" r="7" fill="#D32F2F"/>
+  <path d="M194 132 H158" stroke="#122019" stroke-width="2" marker-end="url(#b)"/>
+  <defs><marker id="b" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6z" fill="#122019"/></marker></defs>
+  <text x="150" y="48" font-size="7" fill="#2E7D32" text-anchor="middle" font-weight="bold">gate</text>
+ </svg>
+ <div class="key">
+  <div><span class="sw" style="background:#5FBFA0"></span>Passer</div>
+  <div><span class="sw" style="background:#D32F2F"></span>Receiver</div>
+  <div><span class="sw" style="background:#FFC107"></span>Cone (2 cones = 1 gate, 2 m wide)</div>
+  <div style="display:block;margin-top:3mm;font-weight:400"><b>Challenge:</b> how many different gates can your pair pass through in 90 seconds? You cannot use the same gate twice in a row.<br><br><b>Progress it:</b> one touch only · weaker foot only · gate must be scored while moving.</div>
+ </div>
+ </div>
+</div>
+
+<div class="d">
+ <h4>Diagram 3 — Conditioned Game: 4 v 4 to Target Zones</h4>
+ <div class="sub">30 × 20 m · 3 pitches running at once · 15 minutes</div>
+ <div class="wrap">
+ <svg viewBox="0 0 300 180">
+  <rect x="10" y="10" width="280" height="160" fill="#EAF6F0" stroke="#2E7D32" stroke-width="2"/>
+  <rect x="10" y="10" width="34" height="160" fill="#5FBFA0" opacity=".35"/>
+  <rect x="256" y="10" width="34" height="160" fill="#D32F2F" opacity=".25"/>
+  <line x1="150" y1="10" x2="150" y2="170" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="27" y="95" font-size="7" fill="#0F5C46" text-anchor="middle" font-weight="bold" transform="rotate(-90 27 95)">TARGET ZONE</text>
+  <text x="273" y="95" font-size="7" fill="#8E1414" text-anchor="middle" font-weight="bold" transform="rotate(-90 273 95)">TARGET ZONE</text>
+  <g fill="#5FBFA0"><circle cx="80" cy="45" r="7"/><circle cx="120" cy="90" r="7"/><circle cx="75" cy="135" r="7"/><circle cx="170" cy="70" r="7"/></g>
+  <g fill="#D32F2F"><circle cx="110" cy="60" r="7"/><circle cx="160" cy="120" r="7"/><circle cx="200" cy="50" r="7"/><circle cx="215" cy="120" r="7"/></g>
+  <circle cx="128" cy="96" r="4" fill="#122019"/>
+  <path d="M126 90 q10 -22 40 -20" stroke="#122019" stroke-width="2" fill="none" marker-end="url(#c)"/>
+  <path d="M170 78 q-4 26 -20 40" stroke="#7B0F3B" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#c)"/>
+  <defs><marker id="c" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6z" fill="#122019"/></marker></defs>
+ </svg>
+ <div class="key">
+  <div><span class="sw" style="background:#5FBFA0"></span>Green team (attacking left zone)</div>
+  <div><span class="sw" style="background:#D32F2F"></span>Red team (attacking right zone)</div>
+  <div><span class="sw" style="background:#122019"></span>Ball &nbsp;— solid = pass, dashed = run</div>
+  <div style="display:block;margin-top:3mm;font-weight:400"><b>Score:</b> 1 point for dribbling the ball under control into the target zone and stopping it.<br><b>Condition:</b> your team must complete <b>3 passes</b> before you can score.<br><b>Bonus:</b> 2 points if the ball reaches the zone without the other team touching it.</div>
+ </div>
+ </div>
+</div>
+
+</body></html>
