@@ -1,0 +1,140 @@
+<!-- Review carousel: paste this whole thing into a Custom Liquid section -->
+<style>
+  #rc { --rc-bg:#fdf8f5; --rc-card:#f5eae8; --rc-text:#3a2a2a; --rc-star:#00b67a; --rc-star-off:#dcdce6;
+    background:var(--rc-bg); color:var(--rc-text); padding:36px 0; text-align:center; }
+  #rc .rc__title { margin:0 0 .4rem; font-weight:400; }
+  #rc .rc__summary { display:flex; align-items:center; justify-content:center; gap:.6rem; flex-wrap:wrap; margin-bottom:1.6rem; font-size:1.05rem; }
+  #rc .rc__score { font-weight:700; font-size:1.5rem; }
+  #rc .rc__count { opacity:.7; font-size:.9rem; }
+  #rc .rc__stars { display:inline-flex; gap:2px; }
+  #rc .rc__star { width:22px; height:22px; background:var(--rc-star-off); display:inline-flex; align-items:center; justify-content:center; }
+  #rc .rc__star--on { background:var(--rc-star); }
+  #rc .rc__star svg { width:15px; height:15px; fill:#fff; }
+  #rc .rc__summary .rc__star { width:18px; height:18px; }
+  #rc .rc__summary .rc__star svg { width:12px; height:12px; }
+  #rc .rc__track { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth;
+    padding:4px 16px 8px; scroll-padding:0 16px; scrollbar-width:none; max-width:1200px; margin:0 auto; }
+  #rc .rc__track::-webkit-scrollbar { display:none; }
+  #rc .rc__card { flex:0 0 calc(100% - 8px); scroll-snap-align:start; background:var(--rc-card); border-radius:4px;
+    padding:1.4rem 1.2rem; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; gap:.8rem; }
+  @media (min-width:750px) { #rc .rc__card { flex-basis:calc((100% - 16px) / 2); } }
+  @media (min-width:1100px) { #rc .rc__card { flex-basis:calc((100% - 32px) / 3); } }
+  #rc .rc__heading { margin:0; font-size:1.05rem; font-weight:600; }
+  #rc .rc__body { margin:0; line-height:1.6; flex:1; }
+  #rc .rc__author { width:100%; margin:0; padding-top:.8rem; border-top:1px solid rgba(0,0,0,.08); font-style:italic; font-weight:700; }
+  #rc .rc__nav { display:flex; justify-content:center; gap:1.5rem; margin-top:1rem; }
+  #rc .rc__arrow { background:none; border:0; padding:6px; cursor:pointer; color:var(--rc-text); line-height:0; transition:opacity .2s; }
+  #rc .rc__arrow svg { width:26px; height:26px; }
+  #rc .rc__arrow:disabled { opacity:.3; cursor:default; }
+</style>
+
+<section id="rc" aria-label="Customer reviews">
+  <h2 class="rc__title h2">Customer reviews</h2>
+  <div class="rc__summary" data-rc-summary></div>
+  <div class="rc__track" data-rc-track tabindex="0"></div>
+  <div class="rc__nav">
+    <button type="button" class="rc__arrow" data-rc-prev aria-label="Previous reviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l-8 8 8 8"/></svg>
+    </button>
+    <button type="button" class="rc__arrow" data-rc-next aria-label="Next reviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg>
+    </button>
+  </div>
+</section>
+
+<script>
+(function () {
+  // Edit reviews here: [stars, "Heading", "Review text", "Author"]
+  var reviews = [
+    [5, "Exactly as described", "Jacket arrived in perfect condition, even better than the photos. Well packaged and quick to arrive.", "Sophie M."],
+    [5, "Super fast delivery", "Ordered on Monday, had it by Wednesday. Item was clean and folded nicely. Will be ordering again.", "James T."],
+    [4, "Really happy", "Great quality for the price. Fit was slightly bigger than I expected but I still love it.", "Chloe R."],
+    [5, "Brilliant seller", "Had a question about sizing and got a reply within the hour. Really helpful and friendly.", "Liam K."],
+    [3, "Good item, slow post", "The item itself was good, but delivery took a bit longer than I'd hoped. Got there in the end.", "Hannah P."],
+    [5, "Hidden gem", "Found a vintage piece I'd been hunting for ages. Genuine and in great nick. Thank you!", "Ryan D."],
+    [5, "Lovely packaging", "Came with a little thank-you note, such a nice touch. Trainers looked practically new.", "Amelia W."],
+    [4, "Good value", "Good condition with only very minor wear, which was mentioned in the listing. Fair price.", "Tom H."],
+    [5, "Would recommend", "Third order now and never had a problem. Always accurate descriptions and quick postage.", "Megan L."],
+    [4, "Nice hoodie", "Comfy and warm. Colour was a touch darker in person but I'm happy with it.", "Josh B."],
+    [5, "Perfect gift", "Bought this for my brother's birthday and he loved it. Arrived well before the date.", "Ellie S."],
+    [3, "Okay overall", "Small mark on the sleeve that wasn't in the photos. Seller offered a partial refund straight away, which I appreciated.", "Daniel F."],
+    [5, "10/10", "Smooth from start to finish. Item was exactly what I wanted. Will be back!", "Grace N."],
+    [4, "Pleased", "Quality is great and shipping was quick. Would've given 5 but the box was a bit squashed.", "Nathan C."],
+    [5, "Amazing quality", "Barely worn and smelled fresh out of the bag. Couldn't be happier with it.", "Olivia J."],
+    [5, "Fast and friendly", "Posted the same day I ordered. Lovely seller to deal with.", "Harry W."],
+    [4, "Nice find", "Really nice shirt, just needed a quick iron after arriving.", "Isla M."],
+    [5, "Spot on sizing", "Seller gave me exact measurements so I knew it would fit. It fits perfectly.", "Charlie B."],
+    [5, "Love it", "Wore it out the day after it arrived and got loads of compliments.", "Freya T."],
+    [5, "Great communication", "Kept me updated the whole way and sent tracking straight away.", "Oscar P."],
+    [5, "Better than expected", "Photos didn't do it justice. The colour is gorgeous in person.", "Lily H."],
+    [4, "Solid purchase", "Exactly what I was after. Postage was a day slower than quoted but no big deal.", "Jack R."],
+    [5, "Genuine item", "Was a bit nervous buying branded secondhand but it's 100% genuine. Thanks!", "Ava C."],
+    [5, "Repeat customer", "Always my first stop now. Never disappointed.", "George L."],
+    [5, "Mint condition", "Trainers look box fresh. Packaged really carefully too.", "Poppy K."],
+    [5, "Quick reply", "Asked for extra photos and got them within minutes. Bought straight after.", "Alfie N."],
+    [3, "Fine", "Item was as described but it didn't really suit me. Nothing wrong with the seller.", "Jessica D."],
+    [5, "So pleased", "Brilliant jumper, really warm and in great condition. Will shop again.", "Noah G."],
+    [5, "Bargain", "Paid a fraction of the shop price for something that looks brand new.", "Evie S."],
+    [5, "Top seller", "Honest descriptions and well-priced items. Highly recommend.", "Leo F."],
+    [5, "Really nice", "Lovely coat, just a tiny loose thread which I fixed in a minute.", "Mia A."],
+    [5, "Arrived next day", "Didn't expect it so fast! Item was perfect.", "Thomas E."],
+    [5, "Thoughtful packaging", "Wrapped in tissue paper with a handwritten note. Felt like a proper gift.", "Ruby V."],
+    [5, "Exactly what I wanted", "Been looking for this exact jacket for months. So glad I found it here.", "Henry O."],
+    [5, "Five stars", "Smooth transaction from start to finish. No complaints at all.", "Sienna Y."],
+    [5, "Great for the price", "Quality is miles better than buying new fast fashion.", "Archie Z."],
+    [4, "Happy customer", "Good condition and fair price. Sleeves a little long on me but that's my fault.", "Phoebe I."],
+    [5, "Great seller", "Answered all my questions and posted quickly. Item is lovely.", "Max U."],
+    [5, "Couldn't fault it", "Clean, well folded and exactly as pictured.", "Daisy Q."],
+    [5, "Brilliant", "Third jacket I've bought here and every one has been spot on.", "Ethan X."],
+    [5, "Super happy", "Fits like a glove and looks great. Thank you!", "Florence B."],
+    [5, "Highly recommend", "Quick postage, great price and a really nice seller.", "Isaac M."],
+    [5, "Gorgeous", "Lovely vintage piece in amazing condition for its age.", "Matilda R."],
+    [5, "Spot on", "Everything was exactly as described. Would buy again without hesitation.", "Samuel T."]
+  ];
+
+  var root = document.getElementById('rc');
+  var track = root.querySelector('[data-rc-track]');
+  var prev = root.querySelector('[data-rc-prev]');
+  var next = root.querySelector('[data-rc-next]');
+  var starSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg>';
+
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  function stars(n) {
+    var out = '<span class="rc__stars">';
+    for (var i = 1; i <= 5; i++) out += '<span class="rc__star' + (i <= n ? ' rc__star--on' : '') + '">' + starSvg + '</span>';
+    return out + '</span>';
+  }
+
+  var total = 0;
+  track.innerHTML = reviews.map(function (r) {
+    total += r[0];
+    return '<article class="rc__card" aria-label="' + r[0] + ' out of 5 stars">' + stars(r[0]) +
+      '<h3 class="rc__heading">' + esc(r[1]) + '</h3>' +
+      '<p class="rc__body">' + esc(r[2]) + '</p>' +
+      '<p class="rc__author">' + esc(r[3]) + '</p></article>';
+  }).join('');
+
+  var avg = Math.round(total / reviews.length * 10) / 10;
+  root.querySelector('[data-rc-summary]').innerHTML =
+    '<span>Excellent</span><span class="rc__score">' + avg.toFixed(1) + ' / 5</span>' +
+    stars(Math.round(avg)) + '<span class="rc__count">(' + reviews.length + ' reviews)</span>';
+
+  function step() {
+    var card = track.querySelector('.rc__card');
+    return card ? card.getBoundingClientRect().width + 16 : track.clientWidth;
+  }
+  function update() {
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+  }
+  prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+  next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+  });
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
