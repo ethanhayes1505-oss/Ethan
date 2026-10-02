@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Review Carousel Preview</title>
+<style>body{margin:0;font-family:Jost,system-ui,sans-serif;background:#fdf8f5} .rc__title{font-family:Georgia,serif;font-size:1.8rem}
+  #rc {
+    --rc-bg: #fdf8f5;
+    --rc-card: #f5eae8;
+    --rc-text: #3a2a2a;
+    --rc-star: #00b67a;
+    --rc-star-off: #dcdce6;
+    background: var(--rc-bg);
+    color: var(--rc-text);
+    padding: 36px 0 36px;
+    text-align: center;
+  }
+  #rc .rc__title { margin: 0 0 .4rem; font-weight: 400; }
+  #rc .rc__summary {
+    display: flex; align-items: center; justify-content: center; gap: .6rem;
+    flex-wrap: wrap; margin-bottom: 1.6rem; font-size: 1.05rem;
+  }
+  #rc .rc__score { font-weight: 700; font-size: 1.5rem; }
+  #rc .rc__count { opacity: .7; font-size: .9rem; }
+
+  #rc .rc__stars { display: inline-flex; gap: 2px; }
+  #rc .rc__star {
+    width: 22px; height: 22px; background: var(--rc-star-off);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  #rc .rc__star--on { background: var(--rc-star); }
+  #rc .rc__star svg { width: 15px; height: 15px; fill: #fff; }
+  #rc .rc__summary .rc__star { width: 18px; height: 18px; }
+  #rc .rc__summary .rc__star svg { width: 12px; height: 12px; }
+
+  #rc .rc__track {
+    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+    padding: 4px 16px 8px; scroll-padding: 0 16px; scrollbar-width: none;
+    max-width: 1200px; margin: 0 auto;
+  }
+  #rc .rc__track::-webkit-scrollbar { display: none; }
+
+  #rc .rc__card {
+    flex: 0 0 calc(100% - 8px); scroll-snap-align: start;
+    background: var(--rc-card); border-radius: 4px;
+    padding: 1.4rem 1.2rem; box-sizing: border-box;
+    display: flex; flex-direction: column; align-items: center; gap: .8rem;
+  }
+  @media (min-width: 750px) {
+    #rc .rc__card { flex-basis: calc((100% - 16px) / 2); }
+  }
+  @media (min-width: 1100px) {
+    #rc .rc__card { flex-basis: calc((100% - 32px) / 3); }
+  }
+  #rc .rc__heading { margin: 0; font-size: 1.05rem; font-weight: 600; }
+  #rc .rc__body { margin: 0; line-height: 1.6; flex: 1; }
+  #rc .rc__author {
+    width: 100%; margin: 0; padding-top: .8rem;
+    border-top: 1px solid rgba(0,0,0,.08); font-style: italic; font-weight: 700;
+  }
+
+  #rc .rc__nav { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+  #rc .rc__arrow {
+    background: none; border: 0; padding: 6px; cursor: pointer; color: var(--rc-text);
+    line-height: 0; transition: opacity .2s;
+  }
+  #rc .rc__arrow svg { width: 26px; height: 26px; }
+  #rc .rc__arrow:disabled { opacity: .3; cursor: default; }
+</style></head>
+<body>
+<section id="rc" class="rc">
+  <h2 class="rc__title">Customer reviews</h2>
+  <div class="rc__summary"><span>Excellent</span><span class="rc__score">4.4 / 5</span><span class="rc__stars" aria-hidden="true"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span><span class="rc__count">(14 reviews)</span></div>
+  <div class="rc__track" data-rc-track tabindex="0">
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Exactly as described</h3>
+      <p class="rc__body">Jacket arrived in perfect condition, even better than the photos. Well packaged and quick to arrive.</p>
+      <p class="rc__author">Sophie M.</p>
+    </article>
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Super fast delivery</h3>
+      <p class="rc__body">Ordered on Monday, had it by Wednesday. Item was clean and folded nicely. Will be ordering again.</p>
+      <p class="rc__author">James T.</p>
+    </article>
+    <article class="rc__card" aria-label="4 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Really happy</h3>
+      <p class="rc__body">Great quality for the price. Fit was slightly bigger than I expected but I still love it.</p>
+      <p class="rc__author">Chloe R.</p>
+    </article>
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Brilliant seller</h3>
+      <p class="rc__body">Had a question about sizing and got a reply within the hour. Really helpful and friendly.</p>
+      <p class="rc__author">Liam K.</p>
+    </article>
+    <article class="rc__card" aria-label="3 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Good item, slow post</h3>
+      <p class="rc__body">The item itself was good, but delivery took a bit longer than I&#x27;d hoped. Got there in the end.</p>
+      <p class="rc__author">Hannah P.</p>
+    </article>
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Hidden gem</h3>
+      <p class="rc__body">Found a vintage piece I&#x27;d been hunting for ages. Genuine and in great nick. Thank you!</p>
+      <p class="rc__author">Ryan D.</p>
+    </article>
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Lovely packaging</h3>
+      <p class="rc__body">Came with a little thank-you note, such a nice touch. Trainers looked practically new.</p>
+      <p class="rc__author">Amelia W.</p>
+    </article>
+    <article class="rc__card" aria-label="4 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Good value</h3>
+      <p class="rc__body">Good condition with only very minor wear, which was mentioned in the listing. Fair price.</p>
+      <p class="rc__author">Tom H.</p>
+    </article>
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Would recommend</h3>
+      <p class="rc__body">Third order now and never had a problem. Always accurate descriptions and quick postage.</p>
+      <p class="rc__author">Megan L.</p>
+    </article>
+    <article class="rc__card" aria-label="4 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Nice hoodie</h3>
+      <p class="rc__body">Comfy and warm. Colour was a touch darker in person but I&#x27;m happy with it.</p>
+      <p class="rc__author">Josh B.</p>
+    </article>
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Perfect gift</h3>
+      <p class="rc__body">Bought this for my brother&#x27;s birthday and he loved it. Arrived well before the date.</p>
+      <p class="rc__author">Ellie S.</p>
+    </article>
+    <article class="rc__card" aria-label="3 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Okay overall</h3>
+      <p class="rc__body">Small mark on the sleeve that wasn&#x27;t in the photos. Seller offered a partial refund straight away, which I appreciated.</p>
+      <p class="rc__author">Daniel F.</p>
+    </article>
+    <article class="rc__card" aria-label="5 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">10/10</h3>
+      <p class="rc__body">Smooth from start to finish. Item was exactly what I wanted. Will be back!</p>
+      <p class="rc__author">Grace N.</p>
+    </article>
+    <article class="rc__card" aria-label="4 out of 5 stars"><span class="rc__stars"><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star rc__star--on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span><span class="rc__star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.3L12 17.8 5.8 21.5l1.6-7.3L2 9.5l7.1-.6z"/></svg></span></span>
+      <h3 class="rc__heading">Pleased</h3>
+      <p class="rc__body">Quality is great and shipping was quick. Would&#x27;ve given 5 but the box was a bit squashed.</p>
+      <p class="rc__author">Nathan C.</p>
+    </article>
+  </div>
+  <div class="rc__nav">
+    <button type="button" class="rc__arrow" data-rc-prev aria-label="Previous reviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l-8 8 8 8"/></svg>
+    </button>
+    <button type="button" class="rc__arrow" data-rc-next aria-label="Next reviews">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l8 8-8 8"/></svg>
+    </button>
+  </div>
+
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('rc');
+    if (!root) return;
+    var track = root.querySelector('[data-rc-track]');
+    var prev = root.querySelector('[data-rc-prev]');
+    var next = root.querySelector('[data-rc-next]');
+
+    function step() {
+      var card = track.querySelector('.rc__card');
+      return card ? card.getBoundingClientRect().width + 16 : track.clientWidth;
+    }
+    function update() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    }
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+    });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
+</body></html>
