@@ -1,0 +1,376 @@
+{%- comment -%}
+  Lumira add to cart — paste into a "Custom Liquid" block on the product page.
+  Variant IDs are fixed below. Prices are read live from the store when available,
+  with the listed prices as a fallback.
+{%- endcomment -%}
+{%- liquid
+  assign v1_id = 58612505936216
+  assign v2_id = 58612505968984
+  assign sp_id = 58623974834520
+
+  assign v1_price = 4499
+  assign v1_compare = 5499
+  assign v1_available = true
+  assign v2_price = 7499
+  assign v2_compare = 8999
+  assign v2_available = true
+  assign sp_price = 299
+
+  if product
+    for v in product.variants
+      if v.id == v1_id
+        assign v1_price = v.price
+        assign v1_compare = v.compare_at_price | default: 0
+        assign v1_available = v.available
+      elsif v.id == v2_id
+        assign v2_price = v.price
+        assign v2_compare = v.compare_at_price | default: 0
+        assign v2_available = v.available
+      endif
+    endfor
+  endif
+
+  assign sp_product = all_products['shipping-protection']
+  if sp_product
+    for v in sp_product.variants
+      if v.id == sp_id
+        assign sp_price = v.price
+      endif
+    endfor
+  endif
+
+  assign v2_base = v1_price | times: 2
+  if v2_compare > v2_base
+    assign v2_base = v2_compare
+  endif
+  assign v2_save = 0
+  if v2_base > v2_price
+    assign v2_save = v2_base | minus: v2_price | times: 100.0 | divided_by: v2_base | round
+  endif
+  assign v2_per_pair = v2_price | divided_by: 2.0 | round
+
+  if v1_available
+    assign selected_id = v1_id
+    assign selected_price = v1_price
+  else
+    assign selected_id = v2_id
+    assign selected_price = v2_price
+  endif
+  assign start_total = selected_price | plus: sp_price
+-%}
+
+<div class="lumira-atc" data-lumira-atc>
+  <script type="application/json" data-lumira-config>
+    {
+      "variants": { "{{ v1_id }}": {{ v1_price }}, "{{ v2_id }}": {{ v2_price }} },
+      "protectionId": {{ sp_id }},
+      "protectionPrice": {{ sp_price }},
+      "selected": {{ selected_id }},
+      "moneyFormat": {{ shop.money_format | json }},
+      "root": {{ routes.root_url | json }}
+    }
+  </script>
+
+  <div class="lumira-atc__label">Choose your pack</div>
+  <div class="lumira-atc__bundles" role="radiogroup" aria-label="Pack">
+    <button type="button" class="lumira-atc__card{% if selected_id == v1_id %} is-selected{% endif %}"
+      role="radio" aria-checked="{% if selected_id == v1_id %}true{% else %}false{% endif %}"
+      data-variant="{{ v1_id }}" {% unless v1_available %}disabled{% endunless %}>
+      <span class="lumira-atc__title">1 Pair</span>
+      <span class="lumira-atc__price">{{ v1_price | money }}</span>
+      {%- if v1_compare > v1_price -%}
+        <s class="lumira-atc__compare">{{ v1_compare | money }}</s>
+      {%- endif -%}
+      {%- unless v1_available -%}<span class="lumira-atc__sub">Sold out</span>{%- endunless -%}
+    </button>
+
+    <button type="button" class="lumira-atc__card{% if selected_id == v2_id %} is-selected{% endif %}"
+      role="radio" aria-checked="{% if selected_id == v2_id %}true{% else %}false{% endif %}"
+      data-variant="{{ v2_id }}" {% unless v2_available %}disabled{% endunless %}>
+      <span class="lumira-atc__badge">Most popular</span>
+      <span class="lumira-atc__title">2 Pairs</span>
+      <span class="lumira-atc__price">{{ v2_price | money }}</span>
+      {%- if v2_compare > v2_price -%}
+        <s class="lumira-atc__compare">{{ v2_compare | money }}</s>
+      {%- endif -%}
+      <span class="lumira-atc__sub">{{ v2_per_pair | money }} / pair</span>
+      {%- if v2_save > 0 -%}<span class="lumira-atc__save">Save {{ v2_save }}%</span>{%- endif -%}
+      {%- unless v2_available -%}<span class="lumira-atc__sub">Sold out</span>{%- endunless -%}
+    </button>
+  </div>
+
+  <label class="lumira-atc__protect">
+    <input type="checkbox" checked data-lumira-protect>
+    <span class="lumira-atc__protect-text">
+      <strong>Shipping protection &middot; {{ sp_price | money }}</strong>
+      <span data-lumira-protect-note>Covers loss, theft or damage in transit.</span>
+    </span>
+  </label>
+
+  <button type="button" class="lumira-atc__button" data-lumira-add>
+    Add to cart &middot; <span data-lumira-total>{{ start_total | money }}</span>
+  </button>
+  <p class="lumira-atc__error" role="alert" data-lumira-error hidden></p>
+
+  <ul class="lumira-atc__trust">
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Z"/></svg>Secure checkout</li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19a2 2 0 1 0 0-.01M17 19a2 2 0 1 0 0-.01"/></svg>Fast shipping</li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></svg>Easy returns</li>
+  </ul>
+</div>
+
+<style>
+  .lumira-atc { --l-dark:#231f20; --l-accent:#7c9a8b; --l-accent-hover:#6b8a7b; --l-border:#cfcfd4; --l-muted:#6b6b72; --l-tag:#5f7d6e;
+    display:grid; gap:14px; margin:8px 0 16px; font-family:inherit; color:inherit; }
+  .lumira-atc__label { font-weight:600; font-size:14px; }
+  .lumira-atc__bundles { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .lumira-atc__card { position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:2px;
+    padding:18px 12px 12px; border:1.5px solid var(--l-border); border-radius:12px; background:#fff; color:var(--l-dark);
+    font:inherit; text-align:left; cursor:pointer; transition:border-color .15s, box-shadow .15s; min-width:0; }
+  .lumira-atc__card.is-selected { border-color:var(--l-dark); box-shadow:0 0 0 1.5px var(--l-dark); }
+  .lumira-atc__card:disabled { opacity:.5; cursor:not-allowed; }
+  .lumira-atc__card:focus-visible { outline:2px solid var(--l-accent); outline-offset:2px; }
+  .lumira-atc__title { font-weight:700; font-size:16px; }
+  .lumira-atc__price { font-weight:700; font-size:17px; }
+  .lumira-atc__compare { color:var(--l-muted); font-size:13px; }
+  .lumira-atc__sub { color:var(--l-muted); font-size:13px; }
+  .lumira-atc__badge { position:absolute; top:-10px; left:10px; padding:2px 8px; border-radius:999px;
+    background:var(--l-dark); color:#fff; font-size:11px; font-weight:700; letter-spacing:.02em; white-space:nowrap; }
+  .lumira-atc__save { margin-top:4px; padding:2px 8px; border-radius:6px; background:var(--l-tag); color:#fff; font-size:12px; font-weight:700; }
+  .lumira-atc__protect { display:flex; gap:10px; align-items:flex-start; padding:12px; border:1px solid var(--l-border);
+    border-radius:10px; background:#fff; cursor:pointer; font-size:14px; line-height:1.35; }
+  .lumira-atc__protect input { width:18px; height:18px; margin:1px 0 0; accent-color:var(--l-dark); flex:none; }
+  .lumira-atc__protect-text { display:grid; gap:2px; }
+  .lumira-atc__protect-text span { color:var(--l-muted); font-size:13px; }
+  .lumira-atc__button { width:100%; min-height:54px; padding:12px 16px; border:0; border-radius:8px; background:var(--l-accent);
+    color:#fff; font:inherit; font-size:17px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; transition:background .15s; }
+  .lumira-atc__button:hover { background:var(--l-accent-hover); }
+  .lumira-atc__button[aria-busy="true"] { opacity:.7; cursor:wait; }
+  .lumira-atc__error { margin:-4px 0 0; color:#b42318; font-size:14px; }
+  .lumira-atc__trust { display:flex; justify-content:space-between; gap:8px; margin:0; padding:0; list-style:none; font-size:12px; color:var(--l-muted); }
+  .lumira-atc__trust li { display:flex; align-items:center; gap:6px; }
+  .lumira-atc__trust svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+  @media (max-width: 400px) {
+    .lumira-atc__card { padding:16px 10px 10px; }
+    .lumira-atc__button { font-size:15px; letter-spacing:.02em; }
+    .lumira-atc__trust { font-size:11px; }
+  }
+</style>
+
+<script>
+(function () {
+  document.querySelectorAll('[data-lumira-atc]:not([data-lumira-ready])').forEach(function (root) {
+    root.setAttribute('data-lumira-ready', '');
+    var cfg = JSON.parse(root.querySelector('[data-lumira-config]').textContent);
+    var base = (cfg.root || '/').replace(/\/?$/, '/');
+    var cards = root.querySelectorAll('[data-variant]');
+    var protect = root.querySelector('[data-lumira-protect]');
+    var note = root.querySelector('[data-lumira-protect-note]');
+    var btn = root.querySelector('[data-lumira-add]');
+    var totalEl = root.querySelector('[data-lumira-total]');
+    var errorEl = root.querySelector('[data-lumira-error]');
+    var selected = String(cfg.selected);
+    var protectionInCart = false;
+    var busy = false;
+
+    function money(cents) {
+      var fmt = (cfg.moneyFormat || '$' + '{' + '{amount}}').replace(/<[^>]*>/g, '');
+      function num(n, d, t, s) {
+        var parts = (n / 100).toFixed(d).split('.');
+        return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, t) + (parts[1] ? s + parts[1] : '');
+      }
+      return fmt.replace(/\{\{\s*(\w+)\s*\}\}/, function (_, key) {
+        switch (key) {
+          case 'amount_no_decimals': return num(cents, 0, ',', '.');
+          case 'amount_with_comma_separator': return num(cents, 2, '.', ',');
+          case 'amount_no_decimals_with_comma_separator': return num(cents, 0, '.', ',');
+          case 'amount_with_apostrophe_separator': return num(cents, 2, "'", '.');
+          default: return num(cents, 2, ',', '.');
+        }
+      });
+    }
+
+    function updateTotal() {
+      var total = cfg.variants[selected] + (protect.checked && !protectionInCart ? cfg.protectionPrice : 0);
+      totalEl.textContent = money(total);
+    }
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+    }
+
+    function getCart() {
+      return fetch(base + 'cart.js', { headers: { Accept: 'application/json' } }).then(function (r) { return r.json(); });
+    }
+
+    function hasProtection(cart) {
+      return cart.items.some(function (i) { return i.variant_id === cfg.protectionId; });
+    }
+
+    function syncProtectionState(cart) {
+      protectionInCart = hasProtection(cart);
+      if (note) note.textContent = protectionInCart ? 'Already in your cart.' : 'Covers loss, theft or damage in transit.';
+      updateTotal();
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        if (card.disabled) return;
+        selected = card.getAttribute('data-variant');
+        cards.forEach(function (c) {
+          var on = c === card;
+          c.classList.toggle('is-selected', on);
+          c.setAttribute('aria-checked', on ? 'true' : 'false');
+        });
+        updateTotal();
+      });
+    });
+    protect.addEventListener('change', updateTotal);
+
+    function drawerSectionIds(drawer) {
+      if (!drawer || typeof drawer.getSectionsToRender !== 'function') return [];
+      try {
+        return drawer.getSectionsToRender().map(function (s) { return s.id; });
+      } catch (e) { return []; }
+    }
+
+    function refreshCount(cart) {
+      document.querySelectorAll('[data-cart-count], .cart-count, .cart-count-bubble span[aria-hidden="true"]').forEach(function (el) {
+        el.textContent = cart.item_count;
+      });
+    }
+
+    function openDrawer(drawer, data, variantId) {
+      if (window.publish && window.PUB_SUB_EVENTS && window.PUB_SUB_EVENTS.cartUpdate) {
+        try { window.publish(window.PUB_SUB_EVENTS.cartUpdate, { source: 'lumira-atc', productVariantId: variantId, cartData: data }); } catch (e) {}
+      }
+      if (drawer && typeof drawer.renderContents === 'function' && data.sections) {
+        try {
+          drawer.classList.remove('is-empty');
+          data.id = variantId;
+          drawer.renderContents(data);
+          return true;
+        } catch (e) { console.warn('[lumira] renderContents failed', e); }
+      }
+      if (drawer) {
+        document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+        document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
+        getCart().then(refreshCount);
+        var method = ['open', 'show', 'openDrawer'].find(function (m) { return typeof drawer[m] === 'function'; });
+        if (method) { drawer[method](); return true; }
+      }
+      return false;
+    }
+
+    btn.addEventListener('click', function () {
+      if (busy) return;
+      busy = true;
+      btn.setAttribute('aria-busy', 'true');
+      errorEl.hidden = true;
+      var variantId = Number(selected);
+      var drawer = document.querySelector('cart-drawer');
+      var sectionIds = drawerSectionIds(drawer);
+
+      getCart()
+        .then(function (cart) {
+          var items = [{ id: variantId, quantity: 1 }];
+          if (protect.checked && !hasProtection(cart)) items.push({ id: cfg.protectionId, quantity: 1 });
+          var body = { items: items };
+          if (sectionIds.length) {
+            body.sections = sectionIds;
+            body.sections_url = window.location.pathname;
+          }
+          return fetch(base + 'cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(body)
+          });
+        })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            if (!res.ok || data.status) throw new Error(data.description || data.message || 'Could not add to cart.');
+            return data;
+          });
+        })
+        .then(function (data) {
+          if (!openDrawer(drawer, data, variantId)) {
+            window.location.href = base + 'cart';
+            return;
+          }
+          getCart().then(syncProtectionState);
+        })
+        .catch(function (err) {
+          showError(err && err.message ? err.message : 'Something went wrong. Please try again.');
+        })
+        .finally(function () {
+          busy = false;
+          btn.removeAttribute('aria-busy');
+        });
+    });
+
+    getCart().then(syncProtectionState).catch(updateTotal);
+  });
+
+  /* Remove shipping protection when no Lumira glasses are left in the cart. */
+  if (window.__lumiraCartWatch) return;
+  window.__lumiraCartWatch = true;
+  var LUMIRA = [58612505936216, 58612505968984];
+  var PROTECTION = 58623974834520;
+  var nativeFetch = window.fetch.bind(window);
+  var cleaning = false;
+
+  function cleanup() {
+    if (cleaning) return;
+    cleaning = true;
+    var base = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+    nativeFetch(base + 'cart.js', { headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (cart) {
+        var hasGlasses = cart.items.some(function (i) { return LUMIRA.indexOf(i.variant_id) > -1; });
+        var line = cart.items.find(function (i) { return i.variant_id === PROTECTION; });
+        if (hasGlasses || !line) return;
+        var drawer = document.querySelector('cart-drawer');
+        var secs = [];
+        if (drawer && typeof drawer.getSectionsToRender === 'function') {
+          try { secs = drawer.getSectionsToRender(); } catch (e) {}
+        }
+        var body = { id: line.key, quantity: 0 };
+        if (secs.length) {
+          body.sections = secs.map(function (s) { return s.id; });
+          body.sections_url = window.location.pathname;
+        }
+        return nativeFetch(base + 'cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body)
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (/\/cart\/?$/.test(window.location.pathname)) { window.location.reload(); return; }
+            if (!data.sections) return;
+            secs.forEach(function (sec) {
+              var html = data.sections[sec.id];
+              var target = sec.selector ? document.querySelector(sec.selector) : document.getElementById(sec.id);
+              if (!html || !target) return;
+              var source = new DOMParser().parseFromString(html, 'text/html').querySelector(sec.selector || '.shopify-section');
+              if (source) target.innerHTML = source.innerHTML;
+            });
+            if (drawer) drawer.classList.toggle('is-empty', data.item_count === 0);
+            document.querySelectorAll('[data-cart-count], .cart-count').forEach(function (el) { el.textContent = data.item_count; });
+          });
+      })
+      .catch(function () {})
+      .finally(function () { cleaning = false; });
+  }
+
+  window.fetch = function (input, init) {
+    var url = typeof input === 'string' ? input : (input && input.url) || '';
+    var p = nativeFetch(input, init);
+    if (/\/cart\/(change|update|clear)/.test(url)) {
+      p.then(function () { setTimeout(cleanup, 300); }).catch(function () {});
+    }
+    return p;
+  };
+})();
+</script>
