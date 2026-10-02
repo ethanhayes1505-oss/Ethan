@@ -1,0 +1,159 @@
+<!-- FAQ: paste this whole thing into a Custom Liquid section -->
+<style>
+  #sp-faq { --faq-bg:#f7f8fc; --faq-text:#1f1f1f; --faq-muted:#555; --faq-line:#e2e4ec; --faq-accent:#c8102e;
+    background:var(--faq-bg); color:var(--faq-text); padding:48px 16px; }
+  #sp-faq .sp-faq__inner { max-width:760px; margin:0 auto; }
+  #sp-faq .sp-faq__title { margin:0 0 10px; text-align:center; font-size:34px; line-height:1.2; font-weight:400; }
+  #sp-faq .sp-faq__sub { margin:0 0 32px; text-align:center; font-size:17px; color:var(--faq-muted); }
+  #sp-faq .sp-faq__item { border-bottom:1px solid var(--faq-line); }
+  #sp-faq .sp-faq__item:first-of-type { border-top:1px solid var(--faq-line); }
+  #sp-faq .sp-faq__q { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:20px 0; font-size:19px; line-height:1.4; font-weight:600; }
+  #sp-faq .sp-faq__q::-webkit-details-marker { display:none; }
+  #sp-faq .sp-faq__q:focus-visible { outline:2px solid var(--faq-accent); outline-offset:4px; }
+  #sp-faq .sp-faq__icon { position:relative; flex:0 0 28px; height:28px; border:1.5px solid currentColor; border-radius:50%; opacity:.7; }
+  #sp-faq .sp-faq__icon::before, #sp-faq .sp-faq__icon::after { content:""; position:absolute; top:50%; left:50%;
+    width:12px; height:1.5px; background:currentColor; transform:translate(-50%,-50%); transition:transform .25s ease; }
+  #sp-faq .sp-faq__icon::after { transform:translate(-50%,-50%) rotate(90deg); }
+  #sp-faq .sp-faq__item[open] .sp-faq__icon::after { transform:translate(-50%,-50%) rotate(0deg); }
+  #sp-faq .sp-faq__item[open] .sp-faq__icon { opacity:1; color:var(--faq-accent); }
+  #sp-faq .sp-faq__a { padding:0 44px 22px 0; font-size:16px; line-height:1.65; color:var(--faq-muted); }
+  #sp-faq .sp-faq__item[open] .sp-faq__a { animation:spFaqIn .3s ease; }
+  #sp-faq .sp-faq__a p { margin:0 0 12px; }
+  #sp-faq .sp-faq__a p:last-child { margin-bottom:0; }
+  @keyframes spFaqIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+  @media (max-width:600px) {
+    #sp-faq { padding:36px 16px; }
+    #sp-faq .sp-faq__title { font-size:28px; }
+    #sp-faq .sp-faq__q { font-size:17px; padding:18px 0; }
+    #sp-faq .sp-faq__a { padding-right:0; font-size:15px; }
+  }
+</style>
+
+<section id="sp-faq" aria-labelledby="sp-faq-title">
+  <div class="sp-faq__inner">
+    <h2 id="sp-faq-title" class="sp-faq__title h2">Your questions, answered</h2>
+    <p class="sp-faq__sub">Everything you need to know before you start.</p>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>Does red light therapy actually work for eye bags and dark circles?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>Red light therapy is one of the most researched at-home skincare treatments. Red light (around 630–660nm) is absorbed by your skin cells, where it helps them produce more energy and more collagen, the protein that keeps skin firm and smooth.</p><p>In a 2023 clinical trial of 137 women, 10 sessions of red light over 4 weeks reduced wrinkle volume around the eyes by around 30%. In a separate study, people using LED light under the eyes reported less puffiness and lighter-looking dark circles after 6 weeks.</p><p>It works best on puffiness, thin or crepey skin, fine lines and tired-looking dark circles. If your bags are caused by fat pushing forward under the eye (often genetic and still there after a full night’s sleep), red light can improve the skin over them but won’t remove them completely.</p>
+      </div>
+    </details>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>Is it safe for my eyes?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>Yes, when used as directed. Red and near-infrared light contain no UV, so they don’t carry the risks of sunlight or sunbeds, and the light doesn’t burn or heat the skin.</p><p>The LEDs are bright, so keep your eyes closed during each session and never stare directly into the light. If you have an eye condition, have had recent eye surgery or take medication that makes you sensitive to light, check with your doctor or optician first.</p>
+      </div>
+    </details>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>When will I see results?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>Red light works gradually as your skin builds new collagen, so using it regularly matters more than long sessions.</p><p>Some people notice less puffiness and fresher-looking eyes within the first 2 weeks. Smoother skin and softer fine lines usually show from around 4 weeks, with the best results after 8–12 weeks of regular use.</p><p>Tip: take a photo in the same lighting before you start, so you can compare.</p>
+      </div>
+    </details>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>How do I use it?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>1. Start with clean, dry skin and remove any eye makeup.</p><p>2. Position the device under your eyes and close your eyes.</p><p>3. Switch it on for one 10-minute session. It turns off automatically.</p><p>4. Apply your eye cream or serum afterwards.</p><p>Use it 3–5 times a week for the first 8–12 weeks, then 2–3 times a week to keep your results.</p>
+      </div>
+    </details>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>Does it hurt?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>Not at all. Most people feel nothing or a gentle warmth. It’s needle-free with no downtime, so you can apply makeup and get on with your day straight after.</p>
+      </div>
+    </details>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>Can I use it with my skincare?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>Yes. Use it on clean skin first, then apply your skincare afterwards so nothing blocks the light. It pairs well with a hydrating eye cream or caffeine serum.</p>
+      </div>
+    </details>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>Will my results last?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>Your skin keeps building collagen while you use it regularly. Once you’re happy with your results, most people drop to 2–3 sessions a week to maintain them. If you stop completely, your skin will gradually return to its natural ageing over time.</p>
+      </div>
+    </details>
+    <details class="sp-faq__item">
+      <summary class="sp-faq__q"><span>Who shouldn’t use it?</span><span class="sp-faq__icon" aria-hidden="true"></span></summary>
+      <div class="sp-faq__a">
+        <p>Speak to your doctor before using it if you are pregnant, have light-triggered epilepsy, have a light-sensitive skin condition such as lupus, have an eye condition or recent eye surgery, or take medication that makes you sensitive to light (such as some antibiotics or the acne medication isotretinoin).</p><p>Don’t use it over any unexplained lumps, moles or marks around the eyes.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does red light therapy actually work for eye bags and dark circles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Red light therapy is one of the most researched at-home skincare treatments. Red light (around 630–660nm) is absorbed by your skin cells, where it helps them produce more energy and more collagen, the protein that keeps skin firm and smooth. In a 2023 clinical trial of 137 women, 10 sessions of red light over 4 weeks reduced wrinkle volume around the eyes by around 30%. In a separate study, people using LED light under the eyes reported less puffiness and lighter-looking dark circles after 6 weeks. It works best on puffiness, thin or crepey skin, fine lines and tired-looking dark circles. If your bags are caused by fat pushing forward under the eye (often genetic and still there after a full night’s sleep), red light can improve the skin over them but won’t remove them completely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe for my eyes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, when used as directed. Red and near-infrared light contain no UV, so they don’t carry the risks of sunlight or sunbeds, and the light doesn’t burn or heat the skin. The LEDs are bright, so keep your eyes closed during each session and never stare directly into the light. If you have an eye condition, have had recent eye surgery or take medication that makes you sensitive to light, check with your doctor or optician first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Red light works gradually as your skin builds new collagen, so using it regularly matters more than long sessions. Some people notice less puffiness and fresher-looking eyes within the first 2 weeks. Smoother skin and softer fine lines usually show from around 4 weeks, with the best results after 8–12 weeks of regular use. Tip: take a photo in the same lighting before you start, so you can compare."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1. Start with clean, dry skin and remove any eye makeup. 2. Position the device under your eyes and close your eyes. 3. Switch it on for one 10-minute session. It turns off automatically. 4. Apply your eye cream or serum afterwards. Use it 3–5 times a week for the first 8–12 weeks, then 2–3 times a week to keep your results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it hurt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not at all. Most people feel nothing or a gentle warmth. It’s needle-free with no downtime, so you can apply makeup and get on with your day straight after."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use it with my skincare?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Use it on clean skin first, then apply your skincare afterwards so nothing blocks the light. It pairs well with a hydrating eye cream or caffeine serum."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will my results last?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your skin keeps building collagen while you use it regularly. Once you’re happy with your results, most people drop to 2–3 sessions a week to maintain them. If you stop completely, your skin will gradually return to its natural ageing over time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who shouldn’t use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Speak to your doctor before using it if you are pregnant, have light-triggered epilepsy, have a light-sensitive skin condition such as lupus, have an eye condition or recent eye surgery, or take medication that makes you sensitive to light (such as some antibiotics or the acne medication isotretinoin). Don’t use it over any unexplained lumps, moles or marks around the eyes."
+      }
+    }
+  ]
+}
+</script>
