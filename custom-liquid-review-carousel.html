@@ -2,10 +2,10 @@
 <style>
   #rc { --rc-bg:#fdf8f5; --rc-card:#f5eae8; --rc-text:#3a2a2a; --rc-star:#00b67a; --rc-star-off:#dcdce6;
     background:var(--rc-bg); color:var(--rc-text); padding:36px 0; text-align:center; }
-  #rc .rc__title { margin:0 0 .4rem; font-weight:400; }
-  #rc .rc__summary { display:flex; align-items:center; justify-content:center; gap:.6rem; flex-wrap:wrap; margin-bottom:1.6rem; font-size:1.05rem; }
-  #rc .rc__score { font-weight:700; font-size:1.5rem; }
-  #rc .rc__count { opacity:.7; font-size:.9rem; }
+  #rc .rc__title { margin:0 0 8px; font-weight:400; font-size:30px; }
+  #rc .rc__summary { display:flex; align-items:center; justify-content:center; gap:.6rem; flex-wrap:wrap; margin-bottom:24px; font-size:18px; }
+  #rc .rc__score { font-weight:700; font-size:26px; }
+  #rc .rc__count { opacity:.7; font-size:15px; }
   #rc .rc__stars { display:inline-flex; gap:2px; }
   #rc .rc__star { width:22px; height:22px; background:var(--rc-star-off); display:inline-flex; align-items:center; justify-content:center; }
   #rc .rc__star--on { background:var(--rc-star); }
@@ -16,13 +16,13 @@
     padding:4px 16px 8px; scroll-padding:0 16px; scrollbar-width:none; max-width:1200px; margin:0 auto; }
   #rc .rc__track::-webkit-scrollbar { display:none; }
   #rc .rc__card { flex:0 0 calc(100% - 8px); scroll-snap-align:start; background:var(--rc-card); border-radius:4px;
-    padding:1.4rem 1.2rem; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; gap:.8rem; }
+    padding:24px 20px; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; gap:12px; }
   @media (min-width:750px) { #rc .rc__card { flex-basis:calc((100% - 16px) / 2); } }
   @media (min-width:1100px) { #rc .rc__card { flex-basis:calc((100% - 32px) / 3); } }
-  #rc .rc__heading { margin:0; font-size:1.05rem; font-weight:600; }
-  #rc .rc__body { margin:0; line-height:1.6; flex:1; }
-  #rc .rc__author { width:100%; margin:0; padding-top:.8rem; border-top:1px solid rgba(0,0,0,.08); font-style:italic; font-weight:700; }
-  #rc .rc__nav { display:flex; justify-content:center; gap:1.5rem; margin-top:1rem; }
+  #rc .rc__heading { margin:0; font-size:20px; font-weight:600; }
+  #rc .rc__body { margin:0; font-size:17px; line-height:1.6; flex:1; }
+  #rc .rc__author { width:100%; margin:0; padding-top:12px; font-size:18px; border-top:1px solid rgba(0,0,0,.08); font-style:italic; font-weight:700; }
+  #rc .rc__nav { display:flex; justify-content:center; gap:1.5rem; margin-top:16px; }
   #rc .rc__arrow { background:none; border:0; padding:6px; cursor:pointer; color:var(--rc-text); line-height:0; transition:opacity .2s; }
   #rc .rc__arrow svg { width:26px; height:26px; }
   #rc .rc__arrow:disabled { opacity:.3; cursor:default; }
