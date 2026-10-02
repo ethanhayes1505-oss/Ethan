@@ -171,25 +171,101 @@
   "class": "section",
   "max_blocks": 50,
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Customer reviews" },
-    { "type": "checkbox", "id": "show_summary", "label": "Show average rating", "default": true },
-    { "type": "text", "id": "summary_label", "label": "Rating label", "default": "Excellent" },
-    { "type": "color", "id": "background", "label": "Background", "default": "#fdf8f5" },
-    { "type": "color", "id": "card_background", "label": "Card background", "default": "#f5eae8" },
-    { "type": "color", "id": "text_color", "label": "Text", "default": "#3a2a2a" },
-    { "type": "color", "id": "star_color", "label": "Stars", "default": "#00b67a" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 36 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 36 }
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Customer reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Show average rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "summary_label",
+      "label": "Rating label",
+      "default": "Excellent"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#fdf8f5"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#f5eae8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#3a2a2a"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Stars",
+      "default": "#00b67a"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
   ],
   "blocks": [
     {
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Heading" },
-        { "type": "textarea", "id": "text", "label": "Review", "default": "Share positive thoughts and feedback from your customer." },
-        { "type": "text", "id": "author", "label": "Author", "default": "Author" }
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review",
+          "default": "Share positive thoughts and feedback from your customer."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Author"
+        }
       ]
     }
   ],
@@ -197,20 +273,50 @@
     {
       "name": "Review carousel",
       "blocks": [
-        { "type": "review", "settings": { "rating": 5, "heading": "Exactly as described", "text": "Jacket arrived in perfect condition, even better than the photos. Well packaged and quick to arrive.", "author": "Sophie M." } },
-        { "type": "review", "settings": { "rating": 5, "heading": "Super fast delivery", "text": "Ordered on Monday, had it by Wednesday. Item was clean and folded nicely. Will be ordering again.", "author": "James T." } },
-        { "type": "review", "settings": { "rating": 4, "heading": "Really happy", "text": "Great quality for the price. Fit was slightly bigger than I expected but I still love it.", "author": "Chloe R." } },
-        { "type": "review", "settings": { "rating": 5, "heading": "Brilliant seller", "text": "Had a question about sizing and got a reply within the hour. Really helpful and friendly.", "author": "Liam K." } },
-        { "type": "review", "settings": { "rating": 3, "heading": "Good item, slow post", "text": "The item itself was good, but delivery took a bit longer than I'd hoped. Got there in the end.", "author": "Hannah P." } },
-        { "type": "review", "settings": { "rating": 5, "heading": "Hidden gem", "text": "Found a vintage piece I'd been hunting for ages. Genuine and in great nick. Thank you!", "author": "Ryan D." } },
-        { "type": "review", "settings": { "rating": 5, "heading": "Lovely packaging", "text": "Came with a little thank-you note, such a nice touch. Trainers looked practically new.", "author": "Amelia W." } },
-        { "type": "review", "settings": { "rating": 4, "heading": "Good value", "text": "Good condition with only very minor wear, which was mentioned in the listing. Fair price.", "author": "Tom H." } },
-        { "type": "review", "settings": { "rating": 5, "heading": "Would recommend", "text": "Third order now and never had a problem. Always accurate descriptions and quick postage.", "author": "Megan L." } },
-        { "type": "review", "settings": { "rating": 4, "heading": "Nice hoodie", "text": "Comfy and warm. Colour was a touch darker in person but I'm happy with it.", "author": "Josh B." } },
-        { "type": "review", "settings": { "rating": 5, "heading": "Perfect gift", "text": "Bought this for my brother's birthday and he loved it. Arrived well before the date.", "author": "Ellie S." } },
-        { "type": "review", "settings": { "rating": 3, "heading": "Okay overall", "text": "Small mark on the sleeve that wasn't in the photos. Seller offered a partial refund straight away, which I appreciated.", "author": "Daniel F." } },
-        { "type": "review", "settings": { "rating": 5, "heading": "10/10", "text": "Smooth from start to finish. Item was exactly what I wanted. Will be back!", "author": "Grace N." } },
-        { "type": "review", "settings": { "rating": 4, "heading": "Pleased", "text": "Quality is great and shipping was quick. Would've given 5 but the box was a bit squashed.", "author": "Nathan C." } }
+        {"type": "review", "settings": {"rating": 5, "heading": "Exactly as described", "text": "Jacket arrived in perfect condition, even better than the photos. Well packaged and quick to arrive.", "author": "Sophie M."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Super fast delivery", "text": "Ordered on Monday, had it by Wednesday. Item was clean and folded nicely. Will be ordering again.", "author": "James T."}},
+        {"type": "review", "settings": {"rating": 4, "heading": "Really happy", "text": "Great quality for the price. Fit was slightly bigger than I expected but I still love it.", "author": "Chloe R."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Brilliant seller", "text": "Had a question about sizing and got a reply within the hour. Really helpful and friendly.", "author": "Liam K."}},
+        {"type": "review", "settings": {"rating": 3, "heading": "Good item, slow post", "text": "The item itself was good, but delivery took a bit longer than I'd hoped. Got there in the end.", "author": "Hannah P."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Hidden gem", "text": "Found a vintage piece I'd been hunting for ages. Genuine and in great nick. Thank you!", "author": "Ryan D."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Lovely packaging", "text": "Came with a little thank-you note, such a nice touch. Trainers looked practically new.", "author": "Amelia W."}},
+        {"type": "review", "settings": {"rating": 4, "heading": "Good value", "text": "Good condition with only very minor wear, which was mentioned in the listing. Fair price.", "author": "Tom H."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Would recommend", "text": "Third order now and never had a problem. Always accurate descriptions and quick postage.", "author": "Megan L."}},
+        {"type": "review", "settings": {"rating": 4, "heading": "Nice hoodie", "text": "Comfy and warm. Colour was a touch darker in person but I'm happy with it.", "author": "Josh B."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Perfect gift", "text": "Bought this for my brother's birthday and he loved it. Arrived well before the date.", "author": "Ellie S."}},
+        {"type": "review", "settings": {"rating": 3, "heading": "Okay overall", "text": "Small mark on the sleeve that wasn't in the photos. Seller offered a partial refund straight away, which I appreciated.", "author": "Daniel F."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "10/10", "text": "Smooth from start to finish. Item was exactly what I wanted. Will be back!", "author": "Grace N."}},
+        {"type": "review", "settings": {"rating": 4, "heading": "Pleased", "text": "Quality is great and shipping was quick. Would've given 5 but the box was a bit squashed.", "author": "Nathan C."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Amazing quality", "text": "Barely worn and smelled fresh out of the bag. Couldn't be happier with it.", "author": "Olivia J."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Fast and friendly", "text": "Posted the same day I ordered. Lovely seller to deal with.", "author": "Harry W."}},
+        {"type": "review", "settings": {"rating": 4, "heading": "Nice find", "text": "Really nice shirt, just needed a quick iron after arriving.", "author": "Isla M."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Spot on sizing", "text": "Seller gave me exact measurements so I knew it would fit. It fits perfectly.", "author": "Charlie B."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Love it", "text": "Wore it out the day after it arrived and got loads of compliments.", "author": "Freya T."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Great communication", "text": "Kept me updated the whole way and sent tracking straight away.", "author": "Oscar P."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Better than expected", "text": "Photos didn't do it justice. The colour is gorgeous in person.", "author": "Lily H."}},
+        {"type": "review", "settings": {"rating": 4, "heading": "Solid purchase", "text": "Exactly what I was after. Postage was a day slower than quoted but no big deal.", "author": "Jack R."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Genuine item", "text": "Was a bit nervous buying branded secondhand but it's 100% genuine. Thanks!", "author": "Ava C."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Repeat customer", "text": "Always my first stop now. Never disappointed.", "author": "George L."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Mint condition", "text": "Trainers look box fresh. Packaged really carefully too.", "author": "Poppy K."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Quick reply", "text": "Asked for extra photos and got them within minutes. Bought straight after.", "author": "Alfie N."}},
+        {"type": "review", "settings": {"rating": 3, "heading": "Fine", "text": "Item was as described but it didn't really suit me. Nothing wrong with the seller.", "author": "Jessica D."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "So pleased", "text": "Brilliant jumper, really warm and in great condition. Will shop again.", "author": "Noah G."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Bargain", "text": "Paid a fraction of the shop price for something that looks brand new.", "author": "Evie S."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Top seller", "text": "Honest descriptions and well-priced items. Highly recommend.", "author": "Leo F."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Really nice", "text": "Lovely coat, just a tiny loose thread which I fixed in a minute.", "author": "Mia A."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Arrived next day", "text": "Didn't expect it so fast! Item was perfect.", "author": "Thomas E."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Thoughtful packaging", "text": "Wrapped in tissue paper with a handwritten note. Felt like a proper gift.", "author": "Ruby V."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Exactly what I wanted", "text": "Been looking for this exact jacket for months. So glad I found it here.", "author": "Henry O."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Five stars", "text": "Smooth transaction from start to finish. No complaints at all.", "author": "Sienna Y."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Great for the price", "text": "Quality is miles better than buying new fast fashion.", "author": "Archie Z."}},
+        {"type": "review", "settings": {"rating": 4, "heading": "Happy customer", "text": "Good condition and fair price. Sleeves a little long on me but that's my fault.", "author": "Phoebe I."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Great seller", "text": "Answered all my questions and posted quickly. Item is lovely.", "author": "Max U."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Couldn't fault it", "text": "Clean, well folded and exactly as pictured.", "author": "Daisy Q."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Brilliant", "text": "Third jacket I've bought here and every one has been spot on.", "author": "Ethan X."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Super happy", "text": "Fits like a glove and looks great. Thank you!", "author": "Florence B."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Highly recommend", "text": "Quick postage, great price and a really nice seller.", "author": "Isaac M."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Gorgeous", "text": "Lovely vintage piece in amazing condition for its age.", "author": "Matilda R."}},
+        {"type": "review", "settings": {"rating": 5, "heading": "Spot on", "text": "Everything was exactly as described. Would buy again without hesitation.", "author": "Samuel T."}}
       ]
     }
   ]
