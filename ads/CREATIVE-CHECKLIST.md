@@ -18,4 +18,5 @@ Every ad gets checked against this list **before** it is shown. If any item fail
 7. **AI artifact check at full size.** Crop and inspect the hands, faces, the product, any text or digits, and objects. No warped fingers, fake writing or garbled numbers.
 8. **Honest claims only.** Nothing implying the buzz is silent to others until the motor has been tested in a quiet room. No fake prices, no health claims, and no "you have [condition]" lines.
 9. **Story still reads.** The partner/couple angle should still come across, but secondary to the product.
-10. **Sizes.** 4:5 (1080x1350) for feed. Plan safe zones for 9:16 (keep text out of the top ~14% and bottom ~20%).
+10. **Every new ad must look different.** A second ad needs a different concept or format (e.g. photo vs text-led vs comparison vs product still life), not the same shot with a new headline. Meta treats near-identical images as one creative. (Lesson from Angle 1 Ad 2, binned for looking like Ad 1.)
+11. **Sizes.** 4:5 (1080x1350) for feed. Plan safe zones for 9:16 (keep text out of the top ~14% and bottom ~20%).
