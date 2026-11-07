@@ -6,6 +6,7 @@
 | Feed (Facebook + Instagram) | SleepLabs-A1-feed-4x5-1080x1350.png | 1080 x 1350 (4:5) |
 | Stories + Reels | SleepLabs-A1-stories-reels-9x16-1080x1920.png | 1080 x 1920 (9:16) |
 | Square (right column, Marketplace, search) | SleepLabs-A1-square-1x1-1080x1080.png | 1080 x 1080 (1:1) |
+| Horizontal (search, some Audience Network) | SleepLabs-A1-horizontal-1.91x1-1200x628.png | 1200 x 628 (1.91:1) |
 
 In Ads Manager, upload all three to the same ad and use "Customize asset per placement", so each placement gets its own size.
 
