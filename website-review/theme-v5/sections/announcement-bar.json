@@ -1,0 +1,63 @@
+{
+  "note": "Announcement section of sections/header-group.json as uploaded to theme 'SleepLabs – Premium v5 (new top bar)'. The header_section part is unchanged from v4.",
+  "header_announcements_9jGBFp": {
+    "type": "header-announcements",
+    "blocks": {
+      "announcement_BxgCk9": {
+        "type": "_announcement",
+        "settings": {
+          "text": "Free US shipping on every order",
+          "link": "",
+          "font": "var(--font-body--family)",
+          "font_size": "0.75rem",
+          "weight": "500",
+          "letter_spacing": "normal",
+          "case": "none",
+          "text_color": "#f5f1ea"
+        },
+        "blocks": {}
+      },
+      "announcement_gift": {
+        "type": "_announcement",
+        "settings": {
+          "text": "Gift-ready: 2 bands $64.99 · 3 bands $89.99",
+          "link": "shopify://products/sleeplabs-silent-wake-band",
+          "font": "var(--font-body--family)",
+          "font_size": "0.75rem",
+          "weight": "500",
+          "letter_spacing": "normal",
+          "case": "none",
+          "text_color": "#f5f1ea"
+        },
+        "blocks": {}
+      },
+      "announcement_returns": {
+        "type": "_announcement",
+        "settings": {
+          "text": "30-day returns. Not for you? Send it back.",
+          "link": "",
+          "font": "var(--font-body--family)",
+          "font_size": "0.75rem",
+          "weight": "500",
+          "letter_spacing": "normal",
+          "case": "none",
+          "text_color": "#f5f1ea"
+        },
+        "blocks": {}
+      }
+    },
+    "block_order": [
+      "announcement_BxgCk9",
+      "announcement_gift",
+      "announcement_returns"
+    ],
+    "settings": {
+      "speed": 4,
+      "section_width": "page-width",
+      "background_color": "#1e2a44",
+      "divider_width": 0,
+      "padding-block-start": 11,
+      "padding-block-end": 11
+    }
+  }
+}
