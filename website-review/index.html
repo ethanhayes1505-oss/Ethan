@@ -1,0 +1,397 @@
+<title>SleepLabs Store Upgrades</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a review board. Each idea = competitor evidence on the left, a SleepLabs mock-up on the right, a Pick toggle. */
+:root {
+  --bg: #f4f5f6; --surface: #ffffff; --ink: #14171c; --muted: #5d6570; --line: #dfe3e8;
+  --accent: #23408f; --accent-ink: #ffffff; --good: #1d7a52; --good-soft: #e3f3ea; --warn: #9a5b00; --warn-soft: #fbf0dc; --bad: #a3262e; --bad-soft: #f9e4e5;
+  --f-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* SleepLabs store palette, used only inside the mock-ups (they show the store as it looks, in either theme) */
+  --sl-cream: #f4efe7; --sl-cream-2: #ebe4d8; --sl-navy: #1c2438; --sl-ink: #232838; --sl-soft: #6b6f7a; --sl-line: #ddd5c8; --sl-white: #fffdf9;
+  --f-sl-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --f-sl-sans: "DM Sans", "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111317; --surface: #1a1d23; --ink: #eceef1; --muted: #a2a9b3; --line: #2c3139;
+  --accent: #8ea6ff; --accent-ink: #0e1220; --good: #6fd3a2; --good-soft: #17322a; --warn: #f0b862; --warn-soft: #33270f; --bad: #ff8f95; --bad-soft: #3a1c1f; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111317; --surface: #1a1d23; --ink: #eceef1; --muted: #a2a9b3; --line: #2c3139;
+  --accent: #8ea6ff; --accent-ink: #0e1220; --good: #6fd3a2; --good-soft: #17322a; --warn: #f0b862; --warn-soft: #33270f; --bad: #ff8f95; --bad-soft: #3a1c1f; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--f-body); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 120px; display: grid; gap: 56px }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.08 }
+h2 { font-size: 24px }
+h3 { font-size: 18px; line-height: 1.3 }
+p { margin: 0 }
+.lede { color: var(--muted); max-width: 66ch; font-size: 16px }
+.eyebrow { font: 600 11px/1 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+header { display: grid; gap: 14px }
+.sources { display: flex; flex-wrap: wrap; gap: 8px }
+.chip { font-size: 12px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted) }
+
+section { display: grid; gap: 20px }
+.sec-head { display: grid; gap: 6px }
+.sec-head p { color: var(--muted); max-width: 70ch }
+
+/* Your page today */
+.today { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px }
+.shot { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; max-height: 560px; overflow-y: auto }
+.shot img { display: block; width: 100% }
+.lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; align-content: start }
+.lists ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 7px }
+.lists h3 { font-size: 15px }
+.tag-good { color: var(--good) } .tag-bad { color: var(--bad) }
+
+/* Idea cards */
+.idea { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 18px }
+.idea[data-picked="true"] { border-color: var(--good); box-shadow: 0 0 0 2px var(--good-soft) }
+.idea-top { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap }
+.idea-top > div { min-width: 0; display: grid; gap: 6px; flex: 1 1 380px }
+.meta { display: flex; flex-wrap: wrap; gap: 6px }
+.pill { font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--bg); color: var(--muted); border: 1px solid var(--line) }
+.pill.high { background: var(--good-soft); color: var(--good); border-color: transparent }
+.pill.check { background: var(--warn-soft); color: var(--warn); border-color: transparent }
+.why { color: var(--muted); max-width: 72ch }
+.pick { font: 600 13px var(--f-body); border: 1.5px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; padding: 8px 16px; cursor: pointer; white-space: nowrap }
+.pick[aria-pressed="true"] { background: var(--good); border-color: var(--good); color: var(--surface) }
+.pick:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 18px; align-items: start }
+.col { display: grid; gap: 8px; min-width: 0 }
+.col .eyebrow { display: flex; justify-content: space-between; gap: 8px }
+.evidence { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; max-height: 430px; overflow-y: auto }
+.evidence img { display: block; width: 100%; max-width: 390px; margin: 0 auto }
+.note { font-size: 13px; color: var(--muted) }
+
+/* SleepLabs mock-ups: fixed store palette in both themes */
+.mock { background: var(--sl-cream); color: var(--sl-ink); border-radius: 10px; padding: 18px; font: 14px/1.45 var(--f-sl-sans); border: 1px solid var(--sl-line); display: grid; gap: 12px }
+.mock .serif { font-family: var(--f-sl-serif); font-weight: 400 }
+.mock .soft { color: var(--sl-soft) }
+.m-title { font: 26px/1.1 var(--f-sl-serif); color: var(--sl-ink) }
+.m-label { font-size: 13px; font-weight: 600; display: flex; justify-content: space-between }
+.opt { display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; align-items: center; background: var(--sl-white); border: 1px solid var(--sl-line); border-radius: 10px; padding: 12px 14px; position: relative }
+.opt.on { border: 1.5px solid var(--sl-navy) }
+.radio { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--sl-navy) }
+.opt.on .radio { box-shadow: inset 0 0 0 3.5px var(--sl-white); background: var(--sl-navy) }
+.opt b { font-weight: 600; display: block } .opt small { color: var(--sl-soft); font-size: 12px }
+.price { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums } .price s { display: block; color: var(--sl-soft); font-weight: 400; font-size: 12px }
+.badge { position: absolute; top: -9px; right: 12px; background: var(--sl-navy); color: var(--sl-white); font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px }
+.badge.light { background: var(--sl-cream-2); color: var(--sl-ink) }
+.cta { background: var(--sl-navy); color: var(--sl-white); text-align: center; border-radius: 999px; padding: 12px; font-weight: 600 }
+.box-check { display: grid; grid-template-columns: 18px 1fr; gap: 10px; border: 1px dashed var(--sl-line); border-radius: 10px; padding: 12px 14px; background: var(--sl-white) }
+.sq { width: 16px; height: 16px; border: 1.5px solid var(--sl-navy); border-radius: 3px; margin-top: 2px }
+.sq.on { background: var(--sl-navy); box-shadow: inset 0 0 0 3px var(--sl-white) }
+.addon { display: grid; grid-template-columns: 52px 1fr auto; gap: 12px; align-items: center; background: var(--sl-white); border: 1px solid var(--sl-line); border-radius: 10px; padding: 10px 12px }
+.thumb { width: 52px; height: 52px; border-radius: 8px; background: var(--sl-cream-2); display: grid; place-items: center }
+.thumb svg { width: 30px; height: 30px; stroke: var(--sl-navy); fill: none; stroke-width: 1.5 }
+.add { border: 1px solid var(--sl-navy); color: var(--sl-navy); border-radius: 999px; font-size: 12px; font-weight: 600; padding: 5px 12px }
+.feat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px }
+.feat div { display: flex; gap: 9px; align-items: center; font-size: 13px }
+.feat svg { width: 26px; height: 26px; flex: none; stroke: var(--sl-navy); fill: none; stroke-width: 1.5; padding: 4px; border: 1px solid var(--sl-line); border-radius: 50% }
+.trust { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px }
+.trust div { border: 1px solid var(--sl-line); background: var(--sl-white); border-radius: 999px; padding: 8px 12px; display: flex; gap: 8px; align-items: center; font-size: 12.5px; font-weight: 500 }
+.trust svg { width: 18px; height: 18px; flex: none; stroke: var(--sl-navy); fill: none; stroke-width: 1.6 }
+.annc { background: var(--sl-navy); color: var(--sl-white); text-align: center; font-size: 12.5px; padding: 9px 12px; border-radius: 8px; letter-spacing: .02em }
+.annc.old { background: var(--sl-white); color: var(--sl-ink); border: 1px solid var(--sl-line) }
+.gift { background: var(--sl-navy); color: var(--sl-white); border-radius: 12px; padding: 18px; display: grid; gap: 6px }
+.gift .serif { font-size: 24px; line-height: 1.1 }
+.gift small { opacity: .8 }
+.callout-stage { position: relative; background: var(--sl-cream-2); border-radius: 12px; aspect-ratio: 1 / 1; max-width: 100%; display: grid; place-items: center; overflow: hidden }
+.band-art { width: 46%; aspect-ratio: 1 / 1.15; border-radius: 46%; border: 15px solid #3d3346; display: grid; place-items: center; position: relative; transform: rotate(-8deg) }
+.band-art span { position: absolute; left: -15px; right: -15px; top: 42%; margin: 0 auto; width: 72%; background: #3d3346; color: #fff; font: 600 15px/1 "DM Sans", sans-serif; letter-spacing: .08em; padding: 7px 0; text-align: center; border-radius: 6px }
+.co { position: absolute; display: grid; justify-items: center; gap: 4px; width: 32%; text-align: center; font-size: 11.5px; line-height: 1.25; color: var(--sl-ink) }
+.co svg { width: 30px; height: 30px; stroke: var(--sl-navy); fill: var(--sl-white); stroke-width: 1.4; border-radius: 50% }
+.cutoff { display: flex; gap: 10px; align-items: center; font-size: 13px; background: var(--sl-white); border: 1px solid var(--sl-line); border-radius: 10px; padding: 10px 12px }
+.faq { border-top: 1px solid var(--sl-line) } .faq div { border-bottom: 1px solid var(--sl-line); padding: 11px 0; display: grid; gap: 4px } .faq b { font-weight: 600 }
+.stars { color: var(--sl-navy); letter-spacing: 2px; font-size: 13px }
+
+/* Don't copy */
+.nope { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px }
+.nope article { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 10px; align-content: start }
+.nope img { width: 100%; border-radius: 8px; border: 1px solid var(--line) }
+.nope h3 { font-size: 15px; color: var(--bad) }
+.nope p { font-size: 13.5px; color: var(--muted) }
+
+/* Picks tray */
+.tray { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); padding-block: 12px calc(12px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); z-index: 5 }
+.tray-in { max-width: 1120px; margin: 0 auto; display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap }
+.tray-in p { min-width: 0; flex: 1 1 300px; font-size: 13.5px; color: var(--muted) }
+.tray-in strong { color: var(--ink) }
+.copy { font: 600 13px var(--f-body); background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 999px; padding: 10px 18px; cursor: pointer }
+textarea#picks-text { width: 100%; min-height: 90px; font: 13px/1.4 var(--f-body); border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: var(--bg); color: var(--ink) }
+
+@media (max-width: 760px) {
+  .today, .pair { grid-template-columns: minmax(0, 1fr) }
+  .shot { max-height: 380px }
+}
+@media (prefers-reduced-motion: no-preference) { .idea { transition: border-color .2s, box-shadow .2s } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">sleeplabs.shop · reviewed 9 Nov 2026</span>
+    <h1>SleepLabs Store Upgrades</h1>
+    <p class="lede">I went through 6 sleep-brand websites on a phone screen, the way your Meta traffic will see them, and took screenshots of what they do to get people to buy and to spend more. Each idea below shows the competitor next to how it would look on your store. Tap <b>Pick</b> on the ones you want, then copy the list at the bottom and send it to me.</p>
+    <div class="sources"><span class="chip">FitSleeps</span><span class="chip">HiStrips</span><span class="chip">Manta Sleep</span><span class="chip">Ozlo</span><span class="chip">Hatch</span><span class="chip">Eight Sleep</span><span class="chip">Loftie (site wouldn't load)</span></div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Starting point</span><h2>Your product page today</h2>
+      <p>It already looks more premium than FitSleeps or HiStrips. The work is filling the gaps, not a redesign.</p></div>
+    <div class="today">
+      <div class="shot"><img src="img/you-buybox.jpg" alt="Current SleepLabs product page on a phone: product photo, title, bundle choice, shipping protection, add to cart"></div>
+      <div class="lists">
+        <div><h3 class="tag-good">Already good</h3>
+          <ul><li>1 band / 2 bands bundle picker, with an honest "Save $14.99"</li><li>Comparison table against phone alarms and smartwatches</li><li>"Three steps. No app." section</li><li>FAQ answers "Will it wake my partner?"</li><li>Clean, calm design that matches the ads</li></ul></div>
+        <div><h3 class="tag-bad">Gaps</h3>
+          <ul><li>Top bar says "Welcome to our store", which is wasted space</li><li>No star rating or review count under the title</li><li>No add-ons, so every order stops at $39.99 or $64.99</li><li>Nothing for gifting, even though Angle 3 ads send gift buyers here</li><li>Shipping cost is hidden until checkout. Ozlo, Hatch and Eight Sleep all say "Free shipping" up front</li><li>No warranty mentioned</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Group 1</span><h2>Fix these first</h2><p>Quick changes that protect you before you spend on ads.</p></div>
+
+    <article class="idea" data-id="reviews">
+      <div class="idea-top"><div><h3>Only show real reviews</h3>
+        <div class="meta"><span class="pill high">Do first</span><span class="pill">10 minutes</span></div>
+        <p class="why">Your page shows reviews like "Very comfortable to sleep and wake up in… Paul F, Verified buyer". The store opened on 29 Oct. If those didn't come from real buyers, take them down now: the US FTC rule on fake reviews (2024) allows fines per review. Install Judge.me (free), let it email buyers for reviews automatically, and turn the section back on once real ones come in. The same goes for the "Real mornings" videos: keep them only if those are customers or creators you paid and can disclose.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Your store now</span><div class="evidence"><img src="img/you-reviews.jpg" alt="SleepLabs review cards with five stars, Paul F, Verified buyer"></div></div>
+        <div class="col"><span class="eyebrow">Once real reviews arrive</span>
+          <div class="mock"><div class="m-title">SleepLabs Silent Wake Band</div><div style="display:flex;gap:8px;align-items:center"><span class="stars">★★★★★</span><span class="soft" style="font-size:12.5px">4.8 · 37 reviews</span></div><div class="soft" style="font-size:12px">Stars and count under the title, like Manta and FitSleeps. These figures are placeholders: show your real ones only.</div></div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="announcement">
+      <div class="idea-top"><div><h3>Replace "Welcome to our store" in the top bar</h3>
+        <div class="meta"><span class="pill high">Do first</span><span class="pill">2 minutes</span></div>
+        <p class="why">It's the first line every visitor reads. Every competitor uses it for an offer or a reason to trust them. Use it for gifting plus returns now, and switch to the Christmas cutoff in December.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Now</span><div class="mock"><div class="annc old">Welcome to our store</div></div></div>
+        <div class="col"><span class="eyebrow">Suggested</span><div class="mock" style="gap:8px"><div class="annc">Gift-ready for Christmas · 2 bands for $64.99 · 30-day returns</div><div class="annc">Order by Dec 17 for Christmas delivery</div><div class="soft" style="font-size:12px">Use the second line only once your carrier confirms the date.</div></div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="claims">
+      <div class="idea-top"><div><h3>Check three claims against the real band</h3>
+        <div class="meta"><span class="pill high">Do first</span><span class="pill check">Needs supplier answer</span></div>
+        <p class="why">Your page says <b>"7-day battery"</b> (in the table) and <b>"Zero disruption to anyone else. Your partner, baby or roommate sleeps right through it."</b> All the ads lean on the same promise. Get the battery life in writing from your supplier, and do the quiet-bedroom test with the band buzzing on a pillow. If either doesn't hold, soften the wording before the ads run. It's the cheapest way to avoid refunds and bad reviews.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+    </article>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Group 2</span><h2>Make more per order</h2><p>Right now the most anyone can spend is $64.99. All of these raise that without discounting the band.</p></div>
+
+    <article class="idea" data-id="three-pack">
+      <div class="idea-top"><div><h3>Add a 3-band "gift set" option</h3>
+        <div class="meta"><span class="pill high">High impact</span><span class="pill">Shopify variant, 15 minutes</span></div>
+        <p class="why">FitSleeps and HiStrips both offer 1, 2 or 3 units at stepped prices. For you, a third option works as "one to keep, two to give" at Christmas. $89.99 is $29.99 a band. Check your margin per band first.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow"><span>Seen on HiStrips</span></span><div class="evidence"><img src="img/his-tiers.jpg" alt="HiStrips options: 1 Onyx $42.95, 2x Onyx save 10%, 3x Onyx save 20%"></div></div>
+        <div class="col"><span class="eyebrow">On SleepLabs</span>
+          <div class="mock">
+            <div class="m-label">Choose your bundle <span class="soft" style="font-weight:400">Black</span></div>
+            <div class="opt"><span class="radio"></span><div><b>1 Band</b><small>Just for you</small></div><div class="price">$39.99</div></div>
+            <div class="opt on"><span class="badge">Most popular</span><span class="radio"></span><div><b>2 Bands (Couples)</b><small>$32.50 per band</small></div><div class="price">$64.99<s>$79.98</s></div></div>
+            <div class="opt"><span class="badge light">Gift set</span><span class="radio"></span><div><b>3 Bands</b><small>One to keep, two to give · $30 per band</small></div><div class="price">$89.99<s>$119.97</s></div></div>
+            <div class="cta">Add to cart · $64.99</div>
+          </div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="pairs-well">
+      <div class="idea-top"><div><h3>"Pairs well with" add-ons under the button</h3>
+        <div class="meta"><span class="pill high">High impact</span><span class="pill check">Needs products you can source</span></div>
+        <p class="why">HiStrips lists a travel case, sleep mask and strips with one-tap "Add" buttons. Manta and Ozlo do the same ("Frequently bought together"). The one that fits your story best is a kit <b>for the partner who stays asleep</b>, so the gift works for both people. Only list what you can actually source and ship. The prices below are suggestions.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Seen on HiStrips</span><div class="evidence"><img src="img/his-pairs.jpg" alt="HiStrips Pairs well with: travel case $9.95, sleep mask, nasal strips, each with an Add button"></div></div>
+        <div class="col"><span class="eyebrow">On SleepLabs</span>
+          <div class="mock">
+            <div class="serif" style="font-size:20px">Pairs well with</div>
+            <div class="addon"><div class="thumb"><svg viewBox="0 0 32 32"><path d="M4 14c4-5 20-5 24 0-2 6-8 7-12 4-4 3-10 2-12-4z"/><path d="M4 14l-2-2M28 14l2-2"/></svg></div><div><b style="font-weight:600">The Sleep-In Kit</b><div class="soft" style="font-size:12px">Silk eye mask + soft earplugs, for the one who stays in bed</div></div><div style="display:grid;gap:4px;justify-items:end"><b style="font-weight:600">$14</b><span class="add">Add</span></div></div>
+            <div class="addon"><div class="thumb"><svg viewBox="0 0 32 32"><rect x="5" y="10" width="22" height="12" rx="6"/><path d="M11 16h10"/></svg></div><div><b style="font-weight:600">Spare strap</b><div class="soft" style="font-size:12px">Swap colours, or keep one for travel</div></div><div style="display:grid;gap:4px;justify-items:end"><b style="font-weight:600">$9</b><span class="add">Add</span></div></div>
+            <div class="addon"><div class="thumb"><svg viewBox="0 0 32 32"><rect x="6" y="9" width="20" height="14" rx="4"/><path d="M6 14h20"/></svg></div><div><b style="font-weight:600">Travel case</b><div class="soft" style="font-size:12px">Hard case for the band and cable</div></div><div style="display:grid;gap:4px;justify-items:end"><b style="font-weight:600">$9</b><span class="add">Add</span></div></div>
+          </div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="gift-wrap">
+      <div class="idea-top"><div><h3>Gift wrap and a note, as a tick box</h3>
+        <div class="meta"><span class="pill high">High impact for Angle 3 ads</span><span class="pill">Shopify app, 20 minutes</span></div>
+        <p class="why">It works the same way as your shipping-protection box, which you already have. Gift buyers from the Angle 3 ads land here and see nothing about gifting. A $4.99 wrap with a printed note is pure margin, and it backs up the gift box shown in Angle 3:1.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Seen on Hatch</span><p class="note">Hatch has a "Gift Hatch" option in its main menu. Ozlo pushes a "limited-time gift" (next idea). Nobody in the alarm-band category offers gift wrap.</p></div>
+        <div class="col"><span class="eyebrow">On SleepLabs</span>
+          <div class="mock">
+            <div class="box-check"><span class="sq on"></span><div><b style="font-weight:600">Make it a gift</b> <span class="soft">+$4.99</span><div class="soft" style="font-size:12px">Wrapped in tissue in a cream box, with your note printed on a card. No prices in the parcel.</div></div></div>
+            <div class="box-check"><span class="sq"></span><div><b style="font-weight:600">Shipping protection</b> <span class="soft">+$2.99</span><div class="soft" style="font-size:12px">Covers loss, theft or damage in transit.</div></div></div>
+          </div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="gwp">
+      <div class="idea-top"><div><h3>A free gift with the 2-pack, instead of a discount</h3>
+        <div class="meta"><span class="pill">Medium impact</span><span class="pill check">Needs a cheap real item</span></div>
+        <p class="why">Ozlo's main offer right now is "Limited-time gift with purchase": a free sleep mask worth $29, with the price staying at $279. It feels generous without cutting your price. For you: the Sleep-In Kit free with every 2-pack until Christmas. Only call it "limited time" if it really ends.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Seen on Ozlo</span><div class="evidence"><img src="img/ozlo-offer.jpg" alt="Ozlo limited-time offer card: Sleepbuds $279 plus sleep mask $29, yours today for $279"></div></div>
+        <div class="col"><span class="eyebrow">On SleepLabs</span>
+          <div class="mock"><div class="gift"><span class="eyebrow" style="color:inherit;opacity:.75">Until Dec 24</span><div class="serif">Free Sleep-In Kit with every 2-pack</div><small>Silk eye mask + earplugs ($14 value) for the one who gets to stay asleep.</small></div></div></div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Group 3</span><h2>Answer doubts faster</h2><p>Small design pieces that answer "what is it, will it work, what if it doesn't" before people scroll away.</p></div>
+
+    <article class="idea" data-id="callouts">
+      <div class="idea-top"><div><h3>Feature callouts around the band in the main photo</h3>
+        <div class="meta"><span class="pill high">High impact</span><span class="pill">One image, I can make it</span></div>
+        <p class="why">FitSleeps' first product photo has small icon-and-label callouts placed around the sides of the band. People take in the key features without scrolling. I'd make yours in the same calm style as the ads, with 3–4 callouts at most. (I think these are the "3 things on the sides" you meant earlier.)</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Seen on FitSleeps</span><div class="evidence"><img src="img/fit-hero-tiers.jpg" alt="FitSleeps main product photo with small feature callouts around the band"></div></div>
+        <div class="col"><span class="eyebrow">On SleepLabs (layout sketch)</span>
+          <div class="mock"><div class="callout-stage" role="img" aria-label="Sketch: band in the centre with three feature callouts around it">
+            <div class="band-art"><span>05:30</span></div>
+            <div class="co" style="top:8%;left:4%"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15"/><path d="M10 16c2-4 4 4 6 0s4 4 6 0"/></svg>Vibration only,<br>no ringing</div>
+            <div class="co" style="top:8%;right:4%"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15"/><rect x="12" y="9" width="8" height="14" rx="2"/><path d="M9 9l14 14"/></svg>No app,<br>no phone in bed</div>
+            <div class="co" style="bottom:6%;left:34%"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15"/><rect x="9" y="12" width="13" height="8" rx="2"/><path d="M22 15v2M12 16h5"/></svg>USB charging</div>
+          </div><div class="soft" style="font-size:12px">The real version would use your product photo. Battery life goes in only once confirmed.</div></div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="feature-icons">
+      <div class="idea-top"><div><h3>Icon row under the price</h3>
+        <div class="meta"><span class="pill">Medium impact</span><span class="pill">Theme edit, 15 minutes</span></div>
+        <p class="why">Manta puts four tiny icon-and-label pairs right under the photos ("True 100% blackout", "Soft & breathable"…). It's quicker to read than your current bullet list.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Seen on Manta</span><div class="evidence"><img src="img/manta-top.jpg" alt="Manta product page with four small icon and label pairs under the photo"></div></div>
+        <div class="col"><span class="eyebrow">On SleepLabs</span>
+          <div class="mock"><div class="feat">
+            <div><svg viewBox="0 0 32 32"><path d="M8 16c2-5 4 5 6 0s4 5 6 0 4 5 4 0"/></svg>Felt only by you</div>
+            <div><svg viewBox="0 0 32 32"><rect x="11" y="7" width="10" height="18" rx="2"/><path d="M7 7l18 18"/></svg>No app needed</div>
+            <div><svg viewBox="0 0 32 32"><path d="M9 20c0-6 3-10 7-10s7 4 7 10"/><path d="M7 20h18"/></svg>Soft, made to sleep in</div>
+            <div><svg viewBox="0 0 32 32"><rect x="8" y="11" width="15" height="10" rx="2"/><path d="M23 14v4M12 16h6"/></svg>Charges by USB</div>
+          </div></div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="trust-pills">
+      <div class="idea-top"><div><h3>Trust badges under the Add to cart button</h3>
+        <div class="meta"><span class="pill">Medium impact</span><span class="pill check">Decide shipping and warranty first</span></div>
+        <p class="why">Ozlo stacks four simple outlined badges: Free shipping, 1-year warranty, 30-day money-back, HSA/FSA. Yours would be: free US shipping (on the 2-pack, or bake it into the price), 30-night returns, a 1-year warranty (FitSleeps gives 2 years) and secure checkout. Only list what's true.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Seen on Ozlo</span><div class="evidence"><img src="img/ozlo-pills.jpg" alt="Ozlo badges: Free shipping, 1-year warranty, 30-day money-back, HSA/FSA approved"></div></div>
+        <div class="col"><span class="eyebrow">On SleepLabs</span>
+          <div class="mock"><div class="cta">Add to cart · $64.99</div><div class="trust">
+            <div><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>Free US shipping</div>
+            <div><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg>30-night returns</div>
+            <div><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/></svg>1-year warranty</div>
+            <div><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Secure checkout</div>
+          </div></div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="faq">
+      <div class="idea-top"><div><h3>Two FAQ questions every competitor answers</h3>
+        <div class="meta"><span class="pill">Medium impact</span><span class="pill">10 minutes</span></div>
+        <p class="why">HiStrips' FAQ includes "I always sleep through alarms. Will this work?". It's the biggest worry in this category, and "slept through it" is the top 1-star review. Answer it honestly, and add the baby question for the Angle 4 ads.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+      <div class="pair">
+        <div class="col"><span class="eyebrow">Seen on HiStrips and FitSleeps</span><p class="note">"I always sleep through alarms. Will this work?" (HiStrips) · "Will this actually wake me up?" (FitSleeps, HiStrips)</p></div>
+        <div class="col"><span class="eyebrow">On SleepLabs</span>
+          <div class="mock"><div class="faq">
+            <div><b>I sleep through alarms. Will this wake me?</b><span class="soft" style="font-size:13px">It buzzes on your wrist, so you feel it rather than hear it. Most people find that easier to notice than sound. If it doesn't work for you, send it back within 30 days for a full refund.</span></div>
+            <div><b>Will it wake the baby?</b><span class="soft" style="font-size:13px">There's no ringtone. The buzz is on your wrist, not across the room. [Fill in after your quiet-room test.]</span></div>
+          </div></div></div>
+      </div>
+    </article>
+
+    <article class="idea" data-id="longer-trial">
+      <div class="idea-top"><div><h3>Longer trial: 60 nights instead of 30 days</h3>
+        <div class="meta"><span class="pill">Medium impact</span><span class="pill check">Your call on risk</span></div>
+        <p class="why">FitSleeps offers 100 days, HiStrips 100, Manta 60, Hatch 30. Buyers compare. 60 nights, framed as "nights" like Hatch's "30-night bedside trial", sounds more generous without going as far as 100. The trade-off is a slightly longer refund window.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+    </article>
+
+    <article class="idea" data-id="sticky">
+      <div class="idea-top"><div><h3>Add to cart bar that stays on screen</h3>
+        <div class="meta"><span class="pill">Medium impact</span><span class="pill">Theme setting or small app</span></div>
+        <p class="why">Your page is long (comparison table, steps, FAQ). Once people scroll past the button, there's no way to buy without scrolling back up. A slim bar at the bottom of the phone screen fixes that. Most Shopify themes have it as a setting.</p></div>
+        <button class="pick" type="button" aria-pressed="false">Pick</button></div>
+    </article>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Seen, but skip</span><h2>Don't copy these</h2><p>They work short-term for dropship stores and make a brand look cheap. Some are also legal risks.</p></div>
+    <div class="nope">
+      <article><img src="img/fit-scarcity.jpg" alt="FitSleeps price with SAVE 54% badge and a bar saying 72% of stock sold already"><h3>Fake "72% of stock sold" bars</h3><p>FitSleeps shows this on every visit. It's the classic dropship tell, and fake scarcity counts as a deceptive practice under FTC rules.</p></article>
+      <article><img src="img/his-countdown.jpg" alt="HiStrips black Friday sale banner with a countdown timer"><h3>Countdown timers and "up to 70% off"</h3><p>HiStrips runs a ticking timer and 54–76% off on almost everything. You can't match that at $39.99, and inflated "was" prices are an FTC risk.</p></article>
+      <article><h3>"Clinically studied", "As seen in Forbes"</h3><p>HiStrips claims both. Use lines like these only with a real study or real press. The same goes for "100% wake-up guarantee": don't promise anything the band can't guarantee.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Send to Claude</span><h2>Your picks</h2><p>Tap Pick on the ideas you want. They'll appear here. Copy the list and paste it into the chat, and we'll build them one by one.</p></div>
+    <textarea id="picks-text" readonly aria-label="Your picked ideas">No ideas picked yet.</textarea>
+  </section>
+</div>
+
+<div class="tray" role="region" aria-label="Your picks">
+  <div class="tray-in"><p><strong id="pick-count">0 picked</strong> · <span id="pick-names">Tap Pick on any idea</span></p><button class="copy" id="copy-btn" type="button">Copy my picks</button></div>
+</div>
+
+<script>
+(function () {
+  var KEY = "sleeplabs-upgrade-picks";
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".idea"));
+  var saved = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "[]") || []; } catch (e) { saved = []; }
+  function title(card) { return card.querySelector("h3").textContent.trim(); }
+  function render() {
+    var picked = cards.filter(function (c) { return c.dataset.picked === "true"; });
+    var names = picked.map(title);
+    document.getElementById("pick-count").textContent = picked.length + " picked";
+    document.getElementById("pick-names").textContent = names.length ? names.join(" · ") : "Tap Pick on any idea";
+    document.getElementById("picks-text").value = names.length
+      ? "Website upgrades I want:\n" + names.map(function (n, i) { return (i + 1) + ". " + n; }).join("\n")
+      : "No ideas picked yet.";
+    try { localStorage.setItem(KEY, JSON.stringify(picked.map(function (c) { return c.dataset.id; }))); } catch (e) {}
+  }
+  cards.forEach(function (card) {
+    var btn = card.querySelector(".pick");
+    var on = saved.indexOf(card.dataset.id) !== -1;
+    card.dataset.picked = on ? "true" : "false"; btn.setAttribute("aria-pressed", on ? "true" : "false"); btn.textContent = on ? "Picked" : "Pick";
+    btn.addEventListener("click", function () {
+      var now = card.dataset.picked !== "true";
+      card.dataset.picked = now ? "true" : "false"; btn.setAttribute("aria-pressed", now ? "true" : "false"); btn.textContent = now ? "Picked" : "Pick";
+      render();
+    });
+  });
+  document.getElementById("copy-btn").addEventListener("click", function () {
+    var ta = document.getElementById("picks-text"); var btn = this;
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy my picks"; }, 1600); };
+    try {
+      navigator.clipboard.writeText(ta.value).then(done, function () { ta.focus(); ta.select(); btn.textContent = "Selected, now copy"; });
+    } catch (e) { ta.focus(); ta.select(); btn.textContent = "Selected, now copy"; }
+  });
+  render();
+})();
+</script>
