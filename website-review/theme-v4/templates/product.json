@@ -7,12 +7,28 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "carousel", "media_columns": "one", "image_gap": 8, "large_first_image": true,
-            "icons_style": "arrow", "slideshow_controls_style": "thumbnails", "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "bottom", "thumbnail_width": 64, "thumbnail_radius": 4, "aspect_ratio": "square",
-            "constrain_to_viewport": true, "media_fit": "cover", "media_radius": 4, "extend_media": false, "zoom": true,
-            "video_loop": false, "hide_variants": true,
-            "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 8,
+            "large_first_image": true,
+            "icons_style": "arrow",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 4,
+            "aspect_ratio": "square",
+            "constrain_to_viewport": true,
+            "media_fit": "cover",
+            "media_radius": 4,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -20,20 +36,51 @@
           "type": "_product-details",
           "static": true,
           "settings": {
-            "width": "fill", "custom_width": 100, "width_mobile": "fill", "custom_width_mobile": 100, "height": "fit",
-            "details_position": "flex-start", "gap": 24, "sticky_details_desktop": true, "background_media": "none",
-            "background_color": "", "video_position": "cover", "background_image_position": "cover", "border": "none",
-            "border_width": 1, "border_opacity": 100, "border_color": "", "border_radius": 0,
-            "padding-block-start": 24, "padding-block-end": 24, "padding-inline-start": 0, "padding-inline-end": 0
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 24,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "eyebrow": {
               "type": "text",
               "settings": {
-                "text": "<p>SLEEPLABS</p>", "width": "100%", "max_width": "normal", "alignment": "left", "type_preset": "paragraph",
-                "font": "var(--font-body--family)", "font_size": "1rem", "line_height": "normal", "letter_spacing": "normal",
-                "case": "none", "wrap": "pretty", "text_color": "#5d6273", "background": false, "background_color": "#00000026",
-                "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                "text": "<p>SLEEPLABS</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#5d6273",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -41,65 +88,140 @@
               "type": "group",
               "name": "t:names.header",
               "settings": {
-                "content_direction": "column", "vertical_on_mobile": true, "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center", "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start", "vertical_alignment_flex_direction_column": "center",
-                "gap": 12, "width": "fill", "custom_width": 100, "width_mobile": "fill", "custom_width_mobile": 100,
-                "height": "fit", "custom_height": 100, "background_media": "none", "background_color": "",
-                "video_position": "cover", "background_image_position": "cover", "toggle_overlay": false,
-                "overlay_color": "#00000026", "overlay_style": "solid", "gradient_direction": "to top", "border": "none",
-                "border_width": 1, "border_opacity": 100, "border_color": "", "border_radius": 0, "link": "",
-                "open_in_new_tab": false, "placeholder": "",
-                "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "text_xrnftG": {
                   "type": "text",
                   "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>", "width": "100%", "max_width": "normal", "alignment": "left",
-                    "type_preset": "h2", "font": "var(--font-body--family)", "font_size": "1rem", "line_height": "normal",
-                    "letter_spacing": "normal", "case": "none", "wrap": "pretty", "text_color": "", "background": false,
-                    "background_color": "#00000026", "corner_radius": 0,
-                    "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h2",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
-                    "show_sale_price_first": true, "show_installments": false, "show_tax_info": false, "type_preset": "h4",
-                    "width": "100%", "alignment": "left", "font": "var(--font-body--family)", "font_size": "1rem",
-                    "line_height": "normal", "letter_spacing": "normal", "case": "none", "text_color": "",
-                    "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "h4",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
                 "tagline": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>A vibrating alarm on your wrist that wakes you and no one else.</p>", "width": "100%",
-                    "max_width": "normal", "alignment": "left", "type_preset": "paragraph", "font": "var(--font-body--family)",
-                    "font_size": "1rem", "line_height": "normal", "letter_spacing": "normal", "case": "none", "wrap": "pretty",
-                    "text_color": "#5d6273", "background": false, "background_color": "#00000026", "corner_radius": 0,
-                    "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                    "text": "<p>A vibrating alarm on your wrist that wakes you and no one else.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "paragraph",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "#5d6273",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
               },
-              "block_order": ["text_xrnftG", "price_tVjtKg", "tagline"]
+              "block_order": [
+                "text_xrnftG",
+                "price_tVjtKg",
+                "tagline"
+              ]
             },
             "divider_VJhene": {
               "type": "_divider",
               "settings": {
-                "thickness": 1, "corner_radius": "square", "divider_color": "{{ settings.color_palette.color2 }}",
-                "width_percent": 100, "padding-block-start": 0, "padding-block-end": 0
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "{{ settings.color_palette.color2 }}",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
               },
               "blocks": {}
             },
             "variant_picker_R3rGDr": {
               "type": "variant-picker",
               "settings": {
-                "variant_style": "buttons", "show_swatches": false, "option_label_text_color": "", "variant_style_class": "default",
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
                 "custom_variant_background": "{{ settings.color_palette.background }}",
                 "custom_variant_text": "{{ settings.color_palette.foreground }}",
                 "custom_variant_border": "{{ settings.color_palette.foreground }}",
@@ -108,7 +230,10 @@
                 "custom_selected_variant_text": "{{ settings.color_palette.background }}",
                 "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                 "alignment": "left",
-                "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -130,7 +255,10 @@
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
-                "stacking": true, "text_color": "", "show_pickup_availability": false, "gift_card_form": true,
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": true,
                 "recipient_button_style": "default",
                 "recipient_button_background": "{{ settings.color_palette.background }}",
                 "recipient_button_text": "{{ settings.color_palette.foreground }}",
@@ -143,8 +271,12 @@
                 "input_background_color": "{{ settings.color_palette.background }}",
                 "input_text_color": "{{ settings.color_palette.foreground }}",
                 "input_border_color": "{{ settings.color_palette.foreground }}",
-                "border_width": 1, "border_radius": 0,
-                "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "quantity": {
@@ -156,7 +288,8 @@
                     "input_background_color": "{{ settings.color_palette.background }}",
                     "input_text_color": "{{ settings.color_palette.foreground }}",
                     "input_border_color": "{{ settings.color_palette.foreground }}",
-                    "border_width": 1, "border_radius": 0
+                    "border_width": 1,
+                    "border_radius": 0
                   },
                   "blocks": {}
                 },
@@ -191,10 +324,24 @@
               "type": "text",
               "settings": {
                 "text": "<ul><li>Silent vibration alarm, felt only by you</li><li>Light, adjustable strap made for sleeping in</li><li>Soft LED time display</li><li>Rechargeable, no app needed</li></ul>",
-                "width": "100%", "max_width": "normal", "alignment": "left", "type_preset": "rte",
-                "font": "var(--font-body--family)", "font_size": "1rem", "line_height": "normal", "letter_spacing": "normal",
-                "case": "none", "wrap": "pretty", "text_color": "", "background": false, "background_color": "#00000026",
-                "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -202,10 +349,24 @@
               "type": "text",
               "settings": {
                 "text": "<p><strong>30-day returns.</strong> Change your mind, send it back.</p>",
-                "width": "100%", "max_width": "normal", "alignment": "left", "type_preset": "paragraph",
-                "font": "var(--font-body--family)", "font_size": "1rem", "line_height": "normal", "letter_spacing": "normal",
-                "case": "none", "wrap": "pretty", "text_color": "#5d6273", "background": false, "background_color": "#00000026",
-                "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#5d6273",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -213,145 +374,545 @@
               "type": "text",
               "settings": {
                 "text": "{{ closest.product.description }}",
-                "width": "100%", "max_width": "normal", "alignment": "left", "type_preset": "rte",
-                "font": "var(--font-body--family)", "font_size": "1rem", "line_height": "normal", "letter_spacing": "normal",
-                "case": "none", "wrap": "pretty", "text_color": "", "background": false, "background_color": "#00000026",
-                "corner_radius": 0, "padding-block-start": 0, "padding-block-end": 0, "padding-inline-start": 0, "padding-inline-end": 0
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
           },
           "block_order": [
-            "eyebrow", "group_icgrde", "divider_VJhene", "variant_picker_R3rGDr", "sl_protection",
-            "buy_buttons_eYQEYi", "sl_badges", "bullets", "assure", "text_aEtTtq"
+            "eyebrow",
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "sl_protection",
+            "buy_buttons_eYQEYi",
+            "sl_badges",
+            "bullets",
+            "assure",
+            "text_aEtTtq"
           ]
         }
       },
       "settings": {
-        "content_width": "content-center-aligned", "desktop_media_position": "left", "equal_columns": false,
-        "limit_details_width": true, "gap": 48, "enable_sticky_add_to_cart": true,
-        "background_color": "{{ settings.color_palette.background }}", "padding-block-start": 16, "padding-block-end": 40
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": true,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 16,
+        "padding-block-end": 40
       }
     },
     "sl_videos_HbPPm9": {
       "type": "sl-videos",
       "blocks": {
-        "clip_8rUGqb": { "type": "clip", "settings": { "video": "shopify://files/videos/Recording 2026-11-02 190147.mp4", "caption": "", "name": "" } },
-        "clip_aAG3wU": { "type": "clip", "settings": { "video": "shopify://files/videos/Recording 2026-11-02 190351.mp4", "caption": "", "name": "" } },
-        "clip_QT8BiV": { "type": "clip", "settings": { "video": "shopify://files/videos/Recording 2026-11-02 190928.mp4", "caption": "", "name": "" } },
-        "clip_NXgC7V": { "type": "clip", "settings": { "video": "shopify://files/videos/Recording 2026-11-02 190840.mp4", "caption": "", "name": "" } },
-        "clip_GCfFQd": { "type": "clip", "settings": { "video": "shopify://files/videos/Recording 2026-11-02 190755.mp4", "caption": "", "name": "" } },
-        "clip_WtrMPz": { "type": "clip", "settings": { "video": "shopify://files/videos/Recording 2026-11-02 190554.mp4", "caption": "", "name": "" } }
+        "clip_8rUGqb": {
+          "type": "clip",
+          "settings": {
+            "video": "shopify://files/videos/Recording 2026-11-02 190147.mp4",
+            "caption": "",
+            "name": ""
+          }
+        },
+        "clip_aAG3wU": {
+          "type": "clip",
+          "settings": {
+            "video": "shopify://files/videos/Recording 2026-11-02 190351.mp4",
+            "caption": "",
+            "name": ""
+          }
+        },
+        "clip_QT8BiV": {
+          "type": "clip",
+          "settings": {
+            "video": "shopify://files/videos/Recording 2026-11-02 190928.mp4",
+            "caption": "",
+            "name": ""
+          }
+        },
+        "clip_NXgC7V": {
+          "type": "clip",
+          "settings": {
+            "video": "shopify://files/videos/Recording 2026-11-02 190840.mp4",
+            "caption": "",
+            "name": ""
+          }
+        },
+        "clip_GCfFQd": {
+          "type": "clip",
+          "settings": {
+            "video": "shopify://files/videos/Recording 2026-11-02 190755.mp4",
+            "caption": "",
+            "name": ""
+          }
+        },
+        "clip_WtrMPz": {
+          "type": "clip",
+          "settings": {
+            "video": "shopify://files/videos/Recording 2026-11-02 190554.mp4",
+            "caption": "",
+            "name": ""
+          }
+        }
       },
-      "block_order": ["clip_8rUGqb", "clip_aAG3wU", "clip_QT8BiV", "clip_NXgC7V", "clip_GCfFQd", "clip_WtrMPz"],
+      "block_order": [
+        "clip_8rUGqb",
+        "clip_aAG3wU",
+        "clip_QT8BiV",
+        "clip_NXgC7V",
+        "clip_GCfFQd",
+        "clip_WtrMPz"
+      ],
       "name": "SL Customer videos",
-      "settings": { "eyebrow": "Real mornings", "heading": "See it on the wrist", "bg": "beige" }
+      "settings": {
+        "eyebrow": "Real mornings",
+        "heading": "See it on the wrist",
+        "bg": "beige"
+      }
     },
     "trust": {
       "type": "sl-trust",
       "blocks": {
-        "item_n3KV4R": { "type": "item", "settings": { "title": "Order processing", "text": "1 day" } },
-        "t1": { "type": "item", "settings": { "title": "30-day returns", "text": "Not for you? Send it back." } },
-        "t2": { "type": "item", "settings": { "title": "Secure checkout", "text": "Processed by Shopify" } },
-        "t4": { "type": "item", "settings": { "title": "Free US shipping", "text": "On every order" } }
+        "item_n3KV4R": {
+          "type": "item",
+          "settings": {
+            "title": "Order processing",
+            "text": "1 day"
+          }
+        },
+        "t1": {
+          "type": "item",
+          "settings": {
+            "title": "30-day returns",
+            "text": "Not for you? Send it back."
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "title": "Secure checkout",
+            "text": "Processed by Shopify"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "title": "Free US shipping",
+            "text": "On every order"
+          }
+        }
       },
-      "block_order": ["item_n3KV4R", "t1", "t2", "t4"],
-      "settings": { "bg": "beige" }
+      "block_order": [
+        "item_n3KV4R",
+        "t1",
+        "t2",
+        "t4"
+      ],
+      "settings": {
+        "bg": "beige"
+      }
     },
     "why": {
       "type": "sl-image-text",
       "settings": {
-        "image": "shopify://shop_images/sl-couple-dawn-b.png", "image_position": "left", "eyebrow": "Why it exists",
-        "heading": "Your alarm, <em>minus the room.</em>",
-        "text": "<p>Phone alarms are built to be loud enough for anyone to hear. The Wake Band is built to reach one person, so early starts stop being a household event.</p>",
-        "button_label": "", "button_link": "", "bg": "cream"
+        "image": "shopify://shop_images/sl-why-early-riser.jpg",
+        "image_position": "left",
+        "eyebrow": "Why we made it",
+        "heading": "Different alarm times. <em>Same bed.</em>",
+        "text": "<p>Most couples don't get up at the same time. A phone alarm goes off for everyone in the room, and every snooze wakes them again. The Silent Wake Band buzzes on the wrist of whoever's getting up, so the other person sleeps until their own alarm.</p>",
+        "button_label": "",
+        "button_link": "",
+        "bg": "cream"
       }
     },
     "steps": {
       "type": "sl-steps",
       "blocks": {
-        "s1": { "type": "step", "settings": { "image": "shopify://shop_images/sl-set-alarm-a.png", "label": "Step one", "title": "Set your time", "text": "Choose your wake-up time on the band before bed." } },
-        "s2": { "type": "step", "settings": { "image": "shopify://shop_images/sl-wrist-bed-night.png", "label": "Step two", "title": "Wear it to bed", "text": "A soft, adjustable strap you'll forget you have on." } },
-        "s3": { "type": "step", "settings": { "image": "shopify://shop_images/sl-wake-quietly-b.png", "label": "Step three", "title": "Wake to a pulse", "text": "Gentle vibrations wake you. The room stays quiet." } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/sl-set-alarm-a.png",
+            "label": "Step one",
+            "title": "Set your time",
+            "text": "Choose your wake-up time on the band before bed."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/sl-wrist-bed-night.png",
+            "label": "Step two",
+            "title": "Wear it to bed",
+            "text": "A soft, adjustable strap you'll forget you have on."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/sl-wake-quietly-b.png",
+            "label": "Step three",
+            "title": "Wake to a pulse",
+            "text": "Gentle vibrations wake you. The room stays quiet."
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
-      "settings": { "eyebrow": "How it works", "heading": "Three steps. No app.", "bg": "beige" }
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "Three steps. No app.",
+        "bg": "beige"
+      }
     },
     "compare": {
       "type": "sl-compare-pro",
       "blocks": {
-        "r1": { "type": "row", "settings": { "label": "Wakes only you", "us": "yes", "col2": "no", "col3": "yes" } },
-        "r2": { "type": "row", "settings": { "label": "Phone stays out of bed", "us": "yes", "col2": "no", "col3": "yes" } },
-        "r3": { "type": "row", "settings": { "label": "No bright screen in bed", "us": "yes", "col2": "no", "col3": "no" } },
-        "r4": { "type": "row", "settings": { "label": "7-day battery", "us": "yes", "col2": "no", "col3": "no" } },
-        "r5": { "type": "row", "settings": { "label": "Price", "us": "$39.99|$64.99 for 2", "col2": "$0", "col3": "$200–400" } }
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Wakes only you",
+            "us": "yes",
+            "col2": "no",
+            "col3": "yes"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Phone stays out of bed",
+            "us": "yes",
+            "col2": "no",
+            "col3": "yes"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "No bright screen in bed",
+            "us": "yes",
+            "col2": "no",
+            "col3": "no"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "7-day battery",
+            "us": "yes",
+            "col2": "no",
+            "col3": "no"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Price",
+            "us": "$39.99|$64.99 for 2",
+            "col2": "$0",
+            "col3": "$200–400"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5"],
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
       "settings": {
-        "eyebrow": "The difference", "heading": "The Silent Wake Band <em>isn't a louder alarm.</em>",
-        "subheading": "It's the one that wakes only you.", "us_title": "Wake Band", "col2_title": "Phone alarm",
-        "col2_icon": "phone", "show_col3": true, "col3_title": "Smartwatch", "col3_icon": "watch",
+        "eyebrow": "The difference",
+        "heading": "The Silent Wake Band <em>isn't a louder alarm.</em>",
+        "subheading": "It's the one that wakes only you.",
+        "us_title": "Wake Band",
+        "col2_title": "Phone alarm",
+        "col2_icon": "phone",
+        "show_col3": true,
+        "col3_title": "Smartwatch",
+        "col3_icon": "watch",
         "side_title": "No risk, quiet mornings.",
         "side_text": "<p>Try it for 30 days. If it's not for you, send it back for a full refund.</p>",
-        "button_label": "Choose your band", "button_link": "", "bg": "cream"
+        "button_label": "Choose your band",
+        "button_link": "",
+        "bg": "cream"
       }
     },
     "benefits": {
       "type": "sl-vibe",
       "blocks": {
-        "p1": { "type": "point", "settings": { "title": "Wake up on time, without a sound", "text": "A steady pulse on your wrist gets you up. No ringtone, no blaring alarm." } },
-        "p2": { "type": "point", "settings": { "title": "A gentle pulse, not a jarring alarm", "text": "Start the day calm instead of startled." } },
-        "p3": { "type": "point", "settings": { "title": "Zero disruption to anyone else", "text": "Your partner, baby or roommate sleeps right through it." } },
-        "p4": { "type": "point", "settings": { "title": "Made to sleep in", "text": "Light, low-profile and adjustable, with up to 7 days per charge." } }
+        "p1": {
+          "type": "point",
+          "settings": {
+            "title": "Wake up on time, without a sound",
+            "text": "A steady pulse on your wrist gets you up. No ringtone, no blaring alarm."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "title": "A gentle pulse, not a jarring alarm",
+            "text": "Start the day calm instead of startled."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "title": "Zero disruption to anyone else",
+            "text": "Your partner, baby or roommate sleeps right through it."
+          }
+        },
+        "p4": {
+          "type": "point",
+          "settings": {
+            "title": "Made to sleep in",
+            "text": "Light, low-profile and adjustable, with up to 7 days per charge."
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
       "settings": {
-        "image": "shopify://shop_images/sl-vibration-wrist.png", "image_position": "left", "eyebrow": "Why people switch",
-        "heading": "Gentle vibrations that <em>only you</em> feel.", "bg": "beige"
+        "image": "shopify://shop_images/sl-vibration-wrist.png",
+        "image_position": "left",
+        "eyebrow": "Why people switch",
+        "heading": "Gentle vibrations that <em>only you</em> feel.",
+        "bg": "beige"
       }
     },
     "reviews": {
       "type": "sl-reviews",
       "blocks": {
-        "review_gUYFGn": { "type": "review", "settings": { "rating": 5, "quote": "Very comfortable to sleep and wake up in felt like I was wearing nothing", "name": "Paul F", "detail": "Verified buyer" } },
-        "review_nwarcV": { "type": "review", "settings": { "rating": 5, "quote": "Woke me up but not my husband", "name": "Carris U", "detail": "verified buyer" } },
-        "review_c87RzC": { "type": "review", "settings": { "rating": 5, "quote": "Great responses my package got lost but because i had shipping insurance i got a full refund and a new one sent", "name": "Omar P", "detail": "Verified buyer" } },
-        "review_j4QMck": { "type": "review", "settings": { "rating": 4, "quote": "Fast shipping came very quick", "name": "Nathan L", "detail": "Verified buyer" } },
-        "review_VqrqU4": { "type": "review", "settings": { "rating": 5, "quote": "Woke me up very gently which helped me wake up slowly and not instantly", "name": "Jennifer O", "detail": "Verified buyer" } },
-        "review_NfieEb": { "type": "review", "settings": { "rating": 4, "quote": "Helped me wake up with energy", "name": "Adrian K", "detail": "Verified buyer" } },
-        "v1": { "type": "review", "settings": { "rating": 5, "quote": "Not noisy at all", "name": "James M", "detail": "Verified buyer" } },
-        "v2": { "type": "review", "settings": { "rating": 5, "quote": "Very comfortable to sleep in felt like I was wearing nothing on my wrist.", "name": "Kate L", "detail": "Verified buyer" } },
-        "v3": { "type": "review", "settings": { "rating": 5, "quote": "The vibration slowly woke me up which helped get me ready for my day making me not feel sluggish", "name": "Ethan J", "detail": "Verified buyer" } }
+        "review_gUYFGn": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Very comfortable to sleep and wake up in felt like I was wearing nothing",
+            "name": "Paul F",
+            "detail": "Verified buyer"
+          }
+        },
+        "review_nwarcV": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Woke me up but not my husband",
+            "name": "Carris U",
+            "detail": "verified buyer"
+          }
+        },
+        "review_c87RzC": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Great responses my package got lost but because i had shipping insurance i got a full refund and a new one sent",
+            "name": "Omar P",
+            "detail": "Verified buyer"
+          }
+        },
+        "review_j4QMck": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "quote": "Fast shipping came very quick",
+            "name": "Nathan L",
+            "detail": "Verified buyer"
+          }
+        },
+        "review_VqrqU4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Woke me up very gently which helped me wake up slowly and not instantly",
+            "name": "Jennifer O",
+            "detail": "Verified buyer"
+          }
+        },
+        "review_NfieEb": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "quote": "Helped me wake up with energy",
+            "name": "Adrian K",
+            "detail": "Verified buyer"
+          }
+        },
+        "v1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Not noisy at all",
+            "name": "James M",
+            "detail": "Verified buyer"
+          }
+        },
+        "v2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Very comfortable to sleep in felt like I was wearing nothing on my wrist.",
+            "name": "Kate L",
+            "detail": "Verified buyer"
+          }
+        },
+        "v3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "The vibration slowly woke me up which helped get me ready for my day making me not feel sluggish",
+            "name": "Ethan J",
+            "detail": "Verified buyer"
+          }
+        }
       },
-      "block_order": ["review_gUYFGn", "review_nwarcV", "review_c87RzC", "review_j4QMck", "review_VqrqU4", "review_NfieEb", "v1", "v2", "v3"],
-      "settings": { "eyebrow": "Reviews", "heading": "What customers say", "bg": "cream" }
+      "block_order": [
+        "review_gUYFGn",
+        "review_nwarcV",
+        "review_c87RzC",
+        "review_j4QMck",
+        "review_VqrqU4",
+        "review_NfieEb",
+        "v1",
+        "v2",
+        "v3"
+      ],
+      "settings": {
+        "eyebrow": "Reviews",
+        "heading": "What customers say",
+        "bg": "cream"
+      }
     },
     "box": {
       "type": "sl-image-text",
       "blocks": {
-        "i1": { "type": "item", "settings": { "item": "Silent Wake Band (Black)" } },
-        "i2": { "type": "item", "settings": { "item": "USB charging cable" } },
-        "i3": { "type": "item", "settings": { "item": "Quick-start guide" } }
+        "i1": {
+          "type": "item",
+          "settings": {
+            "item": "Silent Wake Band (Black)"
+          }
+        },
+        "i2": {
+          "type": "item",
+          "settings": {
+            "item": "USB charging cable"
+          }
+        },
+        "i3": {
+          "type": "item",
+          "settings": {
+            "item": "Quick-start guide"
+          }
+        }
       },
-      "block_order": ["i1", "i2", "i3"],
+      "block_order": [
+        "i1",
+        "i2",
+        "i3"
+      ],
       "settings": {
-        "image": "shopify://shop_images/sl-band-open-strap.png", "image_position": "right", "eyebrow": "In the box",
-        "heading": "Everything you need", "text": "", "button_label": "", "button_link": "", "bg": "beige"
+        "image": "shopify://shop_images/sl-band-open-strap.png",
+        "image_position": "right",
+        "eyebrow": "In the box",
+        "heading": "Everything you need",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "bg": "beige"
       }
     },
     "faq": {
       "type": "sl-faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "Shipping", "answer": "<p>Free standard shipping on every US order. Orders are processed within 1 business day.</p>" } },
-        "q2": { "type": "question", "settings": { "question": "30-day returns", "answer": "<p>Not right for you? <a href=\"/pages/contact\">Contact us</a> within 30 days of delivery to start a return.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "How do I set the alarm?", "answer": "<p>Set your wake-up time on the band itself. The quick-start guide walks you through it.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "Will it wake my partner?", "answer": "<p>It's designed not to. The vibration is felt on your wrist, not heard across the room.</p>" } },
-        "q6": { "type": "question", "settings": { "question": "I sleep through alarms. Will this wake me?", "answer": "<p>It buzzes on your wrist, so you feel it rather than hear it, and many people notice that more than a sound. Everyone sleeps differently, so if it doesn't work for you, send it back within 30 days for a full refund.</p>" } },
-        "q7": { "type": "question", "settings": { "question": "Will it wake the baby?", "answer": "<p>There's no ringtone. The alarm is a vibration on your wrist, not a sound across the room, so it's made to reach only you. If it doesn't suit your home, send it back within 30 days.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "How do I charge it?", "answer": "<p>Use the included USB cable. Charge it during the day and wear it at night.</p>" } }
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Shipping",
+            "answer": "<p>Free standard shipping on every US order. Orders are processed within 1 business day.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "30-day returns",
+            "answer": "<p>Not right for you? <a href=\"/pages/contact\">Contact us</a> within 30 days of delivery to start a return.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How do I set the alarm?",
+            "answer": "<p>Set your wake-up time on the band itself. The quick-start guide walks you through it.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Will it wake my partner?",
+            "answer": "<p>It's designed not to. The vibration is felt on your wrist, not heard across the room.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "I sleep through alarms. Will this wake me?",
+            "answer": "<p>It buzzes on your wrist, so you feel it rather than hear it, and many people notice that more than a sound. Everyone sleeps differently, so if it doesn't work for you, send it back within 30 days for a full refund.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Will it wake the baby?",
+            "answer": "<p>There's no ringtone. The alarm is a vibration on your wrist, not a sound across the room, so it's made to reach only you. If it doesn't suit your home, send it back within 30 days.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "How do I charge it?",
+            "answer": "<p>Use the included USB cable. Charge it during the day and wear it at night.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q6", "q7", "q5"],
-      "settings": { "eyebrow": "Details", "heading": "Shipping, returns and FAQ", "open_first": true, "bg": "cream" }
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q6",
+        "q7",
+        "q5"
+      ],
+      "settings": {
+        "eyebrow": "Details",
+        "heading": "Shipping, returns and FAQ",
+        "open_first": true,
+        "bg": "cream"
+      }
     },
     "cta": {
       "type": "sl-cta",
@@ -364,5 +925,17 @@
       }
     }
   },
-  "order": ["main", "sl_videos_HbPPm9", "trust", "why", "steps", "compare", "benefits", "reviews", "box", "faq", "cta"]
+  "order": [
+    "main",
+    "sl_videos_HbPPm9",
+    "trust",
+    "why",
+    "steps",
+    "compare",
+    "benefits",
+    "reviews",
+    "box",
+    "faq",
+    "cta"
+  ]
 }
