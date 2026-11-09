@@ -1,0 +1,51 @@
+{%- comment -%}
+  SL Trust badges: small outlined pills under the purchase box (2 x 2 on phones).
+  Each line of "Badges" is one pill. The icon is picked from the words in the line.
+{%- endcomment -%}
+{%- assign lines = block.settings.badges | newline_to_br | split: '<br />' -%}
+<ul class="sl-tb" {{ block.shopify_attributes }}>
+  {%- for raw in lines -%}
+    {%- assign label = raw | strip -%}
+    {%- if label != blank -%}
+      {%- assign l = label | downcase -%}
+      <li class="sl-tb__item">
+        <svg class="sl-tb__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          {%- if l contains 'ship' or l contains 'deliver' -%}
+            <path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3.2v2.8h-7z"/><circle cx="6.5" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/>
+          {%- elsif l contains 'return' or l contains 'refund' -%}
+            <path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M4.5 4.5v4h4"/>
+          {%- elsif l contains 'secure' or l contains 'checkout' -%}
+            <rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/>
+          {%- elsif l contains 'day' or l contains 'process' or l contains 'dispatch' -%}
+            <circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/>
+          {%- else -%}
+            <path d="M12 3.5l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9v-5z"/><path d="M9 12l2 2 4-4"/>
+          {%- endif -%}
+        </svg>
+        <span>{{ label }}</span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+<style>
+  .sl-tb{--n:#1E2A44;--ln:#d9d0c2;list-style:none;margin:2px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+  .sl-tb__item{display:flex;align-items:center;gap:8px;min-width:0;padding:9px 12px;border:1px solid var(--ln);border-radius:999px;background:rgba(255,255,255,.4);font-size:.82rem;font-weight:500;line-height:1.2;color:var(--n)}
+  .sl-tb__item span{min-width:0}
+  .sl-tb__icon{flex:0 0 18px;width:18px;height:18px;fill:none;stroke:var(--n);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  @media (min-width:990px){.sl-tb{grid-template-columns:repeat(4,minmax(0,1fr))}.sl-tb__item{justify-content:center;border-radius:12px;flex-direction:column;text-align:center;padding:12px 8px}}
+</style>
+{% schema %}
+{
+  "name": "SL Trust badges",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "badges",
+      "label": "Badges",
+      "info": "One per line. Icons are chosen from the words: shipping, returns, secure/checkout, day/processing.",
+      "default": "Free US shipping\n30-day returns\n1-day order processing\nSecure checkout"
+    }
+  ],
+  "presets": [{ "name": "SL Trust badges" }]
+}
+{% endschema %}
