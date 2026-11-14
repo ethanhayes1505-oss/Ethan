@@ -1,0 +1,46 @@
+{{ 'sl-premium.css' | asset_url | stylesheet_tag }}
+{{ 'sl-home.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Phones: keep the button on the first screen and the band clear of the text. {%- endcomment -%}
+<style>@media(max-width:999px){.slh-hero .slh-hero__inner{min-height:max(620px,calc(100svh - var(--header-group-height,94px)))}.slh-hero .slh-hero__copy{padding-bottom:24px}.slh-hero .slh-link{display:none}}</style>
+{%- assign p = section.settings.product -%}
+<section class="sl sl--navy slh-hero">
+  <div class="slh-hero__media">
+    {%- if section.settings.image -%}
+      <picture>
+        {%- if section.settings.image_mobile -%}
+          <source media="(max-width: 999px)" srcset="{{ section.settings.image_mobile | image_url: width: 800 }} 800w, {{ section.settings.image_mobile | image_url: width: 1200 }} 1200w" sizes="100vw">
+        {%- endif -%}
+        {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '1200, 1600, 2000, 2400' }}
+      </picture>
+    {%- endif -%}
+  </div>
+  <div class="slh-hero__inner">
+    <div class="slh-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}<p class="sl__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1>{{ section.settings.heading }}</h1>
+      {%- if section.settings.text != blank -%}<div class="sl__text">{{ section.settings.text }}</div>{%- endif -%}
+      <div class="slh-hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a class="sl__btn" href="{% if p %}{{ p.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">{{ section.settings.button_label }}{% if p and section.settings.show_price %} · {{ p.price | money }}{% endif %}</a>
+        {%- endif -%}
+        {%- if section.settings.link_label != blank -%}<a class="slh-link" href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a>{%- endif -%}
+      </div>
+      {%- if section.settings.fine != blank -%}<p class="sl__fine">{{ section.settings.fine }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"SL Home hero","settings":[
+{"type":"image_picker","id":"image","label":"Photo (wide)"},
+{"type":"image_picker","id":"image_mobile","label":"Photo for phones (tall)"},
+{"type":"text","id":"eyebrow","label":"Small label"},
+{"type":"inline_richtext","id":"heading","label":"Heading","default":"Wake up. <em>Let them sleep.</em>"},
+{"type":"richtext","id":"text","label":"Text"},
+{"type":"product","id":"product","label":"Product the button opens"},
+{"type":"text","id":"button_label","label":"Button label","default":"Shop the Wake Band"},
+{"type":"checkbox","id":"show_price","label":"Show price in button","default":true},
+{"type":"text","id":"link_label","label":"Second link label","info":"Shown on larger screens only"},
+{"type":"text","id":"link_url","label":"Second link","default":"#sl-how"},
+{"type":"text","id":"fine","label":"Small print under button"}],
+"presets":[{"name":"SL Home hero"}]}
+{% endschema %}
