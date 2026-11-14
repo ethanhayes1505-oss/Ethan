@@ -1,0 +1,361 @@
+{
+  "sections": {
+    "hero": {
+      "type": "sl-home-hero",
+      "settings": {
+        "image": "shopify://shop_images/sl-real-hero-wide.jpg",
+        "image_mobile": "shopify://shop_images/sl-real-hero-tall.jpg",
+        "eyebrow": "The SleepLabs Silent Wake Band",
+        "heading": "Wake up. <em>Let them sleep.</em>",
+        "text": "<p>A vibrating alarm you wear to bed. It wakes you at the time you set, without a ringtone filling the room.</p>",
+        "product": "sleeplabs-silent-wake-band",
+        "button_label": "Shop the Wake Band",
+        "show_price": true,
+        "link_label": "See how it works",
+        "link_url": "#sl-how",
+        "fine": "Free US shipping · 30-day returns"
+      }
+    },
+    "specs": {
+      "type": "sl-home-specs",
+      "blocks": {
+        "a": {
+          "type": "item",
+          "settings": {
+            "icon": "vibrate",
+            "title": "Vibrates, no ringtone",
+            "text": "A pulse on your wrist"
+          }
+        },
+        "b": {
+          "type": "item",
+          "settings": {
+            "icon": "noapp",
+            "title": "No app",
+            "text": "Set the time on the band"
+          }
+        },
+        "c": {
+          "type": "item",
+          "settings": {
+            "icon": "moon",
+            "title": "Made to sleep in",
+            "text": "Soft, adjustable strap"
+          }
+        },
+        "d": {
+          "type": "item",
+          "settings": {
+            "icon": "usb",
+            "title": "Charges by USB",
+            "text": "No batteries to replace"
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "settings": {
+        "bg": "cream"
+      }
+    },
+    "statement": {
+      "type": "sl-home-statement",
+      "blocks": {
+        "a": {
+          "type": "stat",
+          "settings": {
+            "value": "37%",
+            "text": "go to sleep at a different time than they'd like"
+          }
+        },
+        "b": {
+          "type": "stat",
+          "settings": {
+            "value": "31%",
+            "text": "sleep in another bed or another space"
+          }
+        },
+        "c": {
+          "type": "stat",
+          "settings": {
+            "value": "15%",
+            "text": "already use a silent alarm"
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c"
+      ],
+      "settings": {
+        "eyebrow": "Why we made it",
+        "heading": "One of you is up at 5:30. <em>The other shouldn't have to be.</em>",
+        "text": "<p>A phone alarm is built to fill a room. The Wake Band is built for one wrist. It vibrates at the time you set, so an early start stops being something that happens to both of you.</p>",
+        "stats_heading": "To accommodate a bed partner, US adults say they",
+        "source": "Source: American Academy of Sleep Medicine survey of 2,007 US adults, June 2025.",
+        "bg": "cream"
+      }
+    },
+    "cases": {
+      "type": "sl-home-cases",
+      "blocks": {
+        "a": {
+          "type": "case",
+          "settings": {
+            "image": "shopify://shop_images/sl-real-morning-run.jpg",
+            "title": "The 5:30 run",
+            "text": "Up and out before the house wakes. Your alarm is a vibration on your wrist, not a ringtone in the bedroom."
+          }
+        },
+        "b": {
+          "type": "case",
+          "settings": {
+            "image": "shopify://shop_images/sl-real-morning-shift.jpg",
+            "title": "Different shifts",
+            "text": "One of you starts at six, the other at nine. Each of you gets your own wake-up time."
+          }
+        },
+        "c": {
+          "type": "case",
+          "settings": {
+            "image": "shopify://shop_images/sl-real-morning-baby.jpg",
+            "title": "A sleeping baby",
+            "text": "It took an hour to get them down. The Wake Band has no ringtone to carry down the hall."
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c"
+      ],
+      "settings": {
+        "eyebrow": "Who it's for",
+        "heading": "Made for mornings <em>like these.</em>",
+        "text": "",
+        "bg": "beige"
+      }
+    },
+    "steps": {
+      "type": "sl-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/sl-real-step-set.jpg",
+            "label": "Step one",
+            "title": "Set your time",
+            "text": "Choose your wake-up time on the band before bed."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/sl-real-step-wear.jpg",
+            "label": "Step two",
+            "title": "Wear it to bed",
+            "text": "A soft, adjustable strap you can set snug or loose."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/sl-real-step-wake.jpg",
+            "label": "Step three",
+            "title": "Wake to a pulse",
+            "text": "The band vibrates on your wrist. No ringtone, no snooze battle."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "Three steps. <em>No app.</em>",
+        "rows_mobile": true,
+        "bg": "cream"
+      }
+    },
+    "compare": {
+      "type": "sl-compare-pro",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "No ringtone in the room",
+            "us": "yes",
+            "col2": "no",
+            "col3": "yes"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Phone stays out of bed",
+            "us": "yes",
+            "col2": "no",
+            "col3": "yes"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "No app or account",
+            "us": "yes",
+            "col2": "yes",
+            "col3": "no"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "No bright screen in bed",
+            "us": "yes",
+            "col2": "no",
+            "col3": "no"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Price",
+            "us": "$39.99|$64.99 for 2",
+            "col2": "$0",
+            "col3": "$200–400"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
+      "settings": {
+        "eyebrow": "The difference",
+        "heading": "Not a louder alarm. <em>A quieter one.</em>",
+        "subheading": "How it compares with what's already on your nightstand.",
+        "us_title": "Wake Band",
+        "us_image": "shopify://shop_images/sl-home-band-thumb.jpg",
+        "col2_title": "Phone alarm",
+        "col2_icon": "phone",
+        "show_col3": true,
+        "col3_title": "Smartwatch",
+        "col3_icon": "watch",
+        "side_title": "One job, done quietly.",
+        "side_text": "<p>No notifications, no sleep scores, no subscription. An alarm on your wrist, and the time when you want it.</p>",
+        "button_label": "Shop the Wake Band",
+        "button_link": "shopify://products/sleeplabs-silent-wake-band",
+        "bg": "beige"
+      }
+    },
+    "returns": {
+      "type": "sl-image-text",
+      "settings": {
+        "image": "shopify://shop_images/sl-band-bedside-0700.png",
+        "image_position": "right",
+        "eyebrow": "Try it for 30 days",
+        "heading": "If it doesn't fit your mornings, <em>send it back.</em>",
+        "text": "<p>Every order comes with 30-day returns and free US shipping. Questions before or after you buy? <a href=\"/pages/contact\">Get in touch</a>.</p>",
+        "button_label": "",
+        "button_link": "",
+        "bg": "cream"
+      }
+    },
+    "shop": {
+      "type": "sl-home-shop",
+      "settings": {
+        "product": "sleeplabs-silent-wake-band",
+        "image": "shopify://shop_images/sl-home-shop-band.jpg",
+        "eyebrow": "Choose your set",
+        "heading": "One for you. <em>Or one each.</em>",
+        "text": "<p>Every band is the same: black, adjustable, with the alarm set on the band itself.</p>",
+        "single_sub": "For your side of the bed",
+        "button_label": "Shop the Wake Band",
+        "fine": "Free US shipping · 30-day returns",
+        "bg": "navy"
+      }
+    },
+    "faq": {
+      "type": "sl-faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Will a vibration really wake me up?",
+            "answer": "<p>For most people, yes. The pulse sits right against your skin, which is harder to sleep through than sound from across the room. If it doesn't work for you, you have 30 days to send it back.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Does it make any noise?",
+            "answer": "<p>There's no ringtone and no beep. The alarm is a vibration against your wrist, so you feel it rather than hear it.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need an app?",
+            "answer": "<p>No. You set the time and the alarm on the band itself. There's nothing to download and no account to make.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Is it comfortable to sleep in?",
+            "answer": "<p>It's light, with a soft adjustable strap, so you can wear it snug or loose.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Is US shipping free?",
+            "answer": "<p>Yes. US shipping is free on every order.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "What if it isn't for me?",
+            "answer": "<p>You have 30 days to return it. <a href=\"/pages/contact\">Contact us</a> and we'll sort it out.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "eyebrow": "Questions",
+        "heading": "Before you buy",
+        "open_first": false,
+        "bg": "beige"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "specs",
+    "statement",
+    "cases",
+    "steps",
+    "compare",
+    "returns",
+    "shop",
+    "faq"
+  ]
+}

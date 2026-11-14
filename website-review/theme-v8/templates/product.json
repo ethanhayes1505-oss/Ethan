@@ -538,7 +538,7 @@
     "why": {
       "type": "sl-image-text",
       "settings": {
-        "image": "shopify://shop_images/sl-why-early-riser.jpg",
+        "image": "shopify://shop_images/sl-real-why.jpg",
         "image_position": "left",
         "eyebrow": "Why we made it",
         "heading": "Different alarm times. <em>Same bed.</em>",
@@ -554,7 +554,7 @@
         "a": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/sl-set-alarm-a.png",
+            "image": "shopify://shop_images/sl-real-step-set.jpg",
             "title": "Set on the band",
             "text": "Pick your wake-up time on the band itself. No app, no account, no pairing."
           }
@@ -570,7 +570,7 @@
         "c": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/sl-wrist-bed-night.png",
+            "image": "shopify://shop_images/sl-real-step-wear.jpg",
             "title": "Made to sleep in",
             "text": "Light and low-profile, with a soft adjustable strap you can wear snug or loose."
           }
@@ -578,7 +578,7 @@
         "d": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/sl-band-bedside-0700.png",
+            "image": "shopify://shop_images/sl-real-phone-away.jpg",
             "title": "Phone stays across the room",
             "text": "Your alarm is on your wrist, so your phone can charge somewhere that isn't your pillow."
           }
@@ -603,7 +603,7 @@
         "s1": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/sl-set-alarm-a.png",
+            "image": "shopify://shop_images/sl-real-step-set.jpg",
             "label": "Step one",
             "title": "Set your time",
             "text": "Choose your wake-up time on the band before bed."
@@ -612,7 +612,7 @@
         "s2": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/sl-wrist-bed-night.png",
+            "image": "shopify://shop_images/sl-real-step-wear.jpg",
             "label": "Step two",
             "title": "Wear it to bed",
             "text": "A soft, adjustable strap you can set snug or loose."
@@ -621,7 +621,7 @@
         "s3": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/sl-home-step-wake.jpg",
+            "image": "shopify://shop_images/sl-real-step-wake.jpg",
             "label": "Step three",
             "title": "Wake to a pulse",
             "text": "The band vibrates on your wrist. No ringtone, no snooze battle."
@@ -646,7 +646,7 @@
         "a": {
           "type": "case",
           "settings": {
-            "image": "shopify://shop_images/sl-home-morning-run.jpg",
+            "image": "shopify://shop_images/sl-real-morning-run.jpg",
             "title": "The 5:30 run",
             "text": "Up and out before the house wakes. Your alarm is a vibration on your wrist, not a ringtone in the bedroom."
           }
@@ -654,7 +654,7 @@
         "b": {
           "type": "case",
           "settings": {
-            "image": "shopify://shop_images/sl-home-morning-shift.jpg",
+            "image": "shopify://shop_images/sl-real-morning-shift.jpg",
             "title": "Different shifts",
             "text": "One of you starts at six, the other at nine. Each of you gets your own wake-up time."
           }
@@ -662,7 +662,7 @@
         "c": {
           "type": "case",
           "settings": {
-            "image": "shopify://shop_images/sl-home-morning-baby.jpg",
+            "image": "shopify://shop_images/sl-real-morning-baby.jpg",
             "title": "A sleeping baby",
             "text": "It took an hour to get them down. The Wake Band has no ringtone to carry down the hall."
           }
