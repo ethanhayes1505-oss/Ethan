@@ -1,0 +1,122 @@
+{%- liquid
+  assign has_video = false
+  for block in section.blocks
+    if block.settings.video != blank
+      assign has_video = true
+      break
+    endif
+  endfor
+-%}
+{%- if has_video or request.design_mode -%}
+{{ 'sl-premium.css' | asset_url | stylesheet_tag }}
+<section class="sl sl-vids sl--{{ section.settings.bg }}" data-sl-vids>
+  <div class="sl__wrap">
+    {%- if section.settings.eyebrow != blank -%}<p class="sl__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="sl-vids__track">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.video != blank or request.design_mode -%}
+        <figure class="sl-vid" {{ block.shopify_attributes }}>
+          <div class="sl-vid__frame">
+            {%- if block.settings.video != blank -%}
+              {{ block.settings.video | video_tag: image_size: '720x', autoplay: false, loop: true, muted: true, controls: false, class: 'sl-vid__media', playsinline: true, preload: 'metadata' }}
+              {%- if section.settings.show_sound -%}
+              <button type="button" class="sl-vid__sound" aria-label="Turn sound on" data-sl-sound>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="sl-vid__x" d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="sl-vid__wave" d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+              </button>
+              {%- endif -%}
+            {%- else -%}
+              <div class="sl-vid__empty"><span>Add a video</span><small>Vertical 9:16 works best</small></div>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.caption != blank or block.settings.name != blank -%}
+            <figcaption>
+              {%- if block.settings.caption != blank -%}<span class="sl-vid__cap">{{ block.settings.caption }}</span>{%- endif -%}
+              {%- if block.settings.name != blank -%}<span class="sl-vid__name">{{ block.settings.name }}</span>{%- endif -%}
+            </figcaption>
+          {%- endif -%}
+        </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="sl-vids__nav">
+      <button type="button" aria-label="Previous video" data-dir="-1">&#8592;</button>
+      <button type="button" aria-label="Next video" data-dir="1">&#8594;</button>
+    </div>
+  </div>
+</section>
+<style>
+  .sl-vids__track{display:flex;gap:12px;margin-top:32px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:-20px;padding:0 20px 8px;scroll-padding-inline:20px}
+  .sl-vids__track::-webkit-scrollbar{display:none}
+  .sl-vid{margin:0;flex:0 0 62%;max-width:280px;scroll-snap-align:start;display:grid;gap:10px}
+  @media(min-width:720px){.sl-vid{flex-basis:calc((100% - 36px)/4)}}
+  .sl-vid__frame{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:var(--sl-beige)}
+  .sl-vid__media{width:100%;height:100%;object-fit:cover;display:block}
+  .sl-vid__empty{position:absolute;inset:0;display:grid;place-content:center;gap:4px;text-align:center;border:1.5px dashed var(--sl-line);border-radius:14px;color:var(--sl-sub)}
+  .sl-vid__empty span{font-weight:600;color:var(--sl-fg)}
+  .sl-vid__sound{position:absolute;right:10px;bottom:10px;width:36px;height:36px;border-radius:50%;border:0;display:grid;place-items:center;background:rgba(20,27,44,.55);color:#fff;cursor:pointer}
+  .sl-vid__sound .sl-vid__wave{display:none}
+  .sl-vid__sound[aria-pressed="true"] .sl-vid__wave{display:block}
+  .sl-vid__sound[aria-pressed="true"] .sl-vid__x{display:none}
+  .sl-vid__sound:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .sl-vid figcaption{display:grid;gap:2px;font-size:.9rem}
+  .sl-vid__cap{color:var(--sl-fg)}
+  .sl-vid__name{color:var(--sl-sub);font-size:.82rem}
+  .sl-vids__nav{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+  .sl-vids__nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--sl-line);background:transparent;color:var(--sl-fg);font-size:1.1rem;cursor:pointer;display:grid;place-items:center}
+</style>
+<script>
+(function(){
+  var s = document.currentScript.previousElementSibling.previousElementSibling;
+  if (!s || !s.matches('[data-sl-vids]')) s = document.querySelector('[data-sl-vids]');
+  if (!s || s.__slv) return; s.__slv = true;
+  var track = s.querySelector('.sl-vids__track');
+  s.querySelectorAll('.sl-vids__nav button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var card = track.querySelector('.sl-vid');
+      var step = card ? card.getBoundingClientRect().width + 12 : track.clientWidth;
+      track.scrollBy({left: step * Number(b.dataset.dir), behavior: 'smooth'});
+    });
+  });
+  s.querySelectorAll('[data-sl-sound]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var v = btn.parentElement.querySelector('video'); if (!v) return;
+      var on = v.muted;
+      s.querySelectorAll('video').forEach(function(o){ o.muted = true; });
+      s.querySelectorAll('[data-sl-sound]').forEach(function(o){ o.setAttribute('aria-pressed','false'); o.setAttribute('aria-label','Turn sound on'); });
+      v.muted = !on;
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
+      if (on) v.play().catch(function(){});
+    });
+  });
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var vids = s.querySelectorAll('video');
+  vids.forEach(function(v){ v.muted = true; v.setAttribute('playsinline',''); });
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting && en.intersectionRatio > .6) { en.target.play().catch(function(){}); }
+        else { en.target.pause(); }
+      });
+    }, {threshold:[0,.6,1]});
+    vids.forEach(function(v){ io.observe(v); });
+  } else {
+    vids.forEach(function(v){ v.setAttribute('controls',''); });
+  }
+})();
+</script>
+{%- endif -%}
+{% schema %}
+{"name":"SL Customer videos","settings":[
+{"type":"text","id":"eyebrow","label":"Small label","default":"Real mornings"},
+{"type":"inline_richtext","id":"heading","label":"Heading","default":"See it on the wrist"},
+{"type":"select","id":"bg","label":"Background","options":[{"value":"cream","label":"Cream"},{"value":"beige","label":"Beige"},{"value":"navy","label":"Navy"}],"default":"beige"},
+{"type":"checkbox","id":"show_sound","label":"Show sound button on videos","info":"Off: videos always play silently and there is no speaker button.","default":false},
+{"type":"paragraph","content":"This section stays hidden on your store until at least one video is added."}],
+"blocks":[{"type":"clip","name":"Video","settings":[
+{"type":"video","id":"video","label":"Video","info":"Upload vertical (9:16) clips, under 60 seconds."},
+{"type":"text","id":"caption","label":"Caption"},
+{"type":"text","id":"name","label":"Name"}]}],
+"presets":[{"name":"SL Customer videos","blocks":[{"type":"clip"},{"type":"clip"},{"type":"clip"},{"type":"clip"}]}]}
+{% endschema %}
