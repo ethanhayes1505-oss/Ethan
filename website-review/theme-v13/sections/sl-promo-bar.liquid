@@ -1,0 +1,81 @@
+{%- comment -%}
+  SL Promo bar: bold top bar with a title, a pill and an optional countdown.
+  The countdown only shows when "Offer end date" is filled in and still in the future.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- if s.title != blank or s.pill != blank -%}
+<aside class="slx-bar" data-slx-bar style="--b1:{{ s.bg }};--b2:{{ s.bg2 | default: s.bg }};--fg:{{ s.fg }}">
+  {%- if s.link != blank -%}
+    <a class="slx-bar__link" href="{{ s.link }}"><span class="visually-hidden">{{ s.title }} {{ s.pill }}</span></a>
+  {%- endif -%}
+  <div class="slx-bar__in">
+    <div class="slx-bar__msg">
+      {%- if s.title != blank -%}<strong class="slx-bar__title">{{ s.title }}</strong>{%- endif -%}
+      {%- if s.pill != blank -%}<span class="slx-bar__pill">{{ s.pill }}</span>{%- endif -%}
+    </div>
+    {%- if s.end_date != blank -%}
+      <div class="slx-bar__timer" data-end="{{ s.end_date | strip }}T23:59:59-08:00" role="timer" aria-label="Offer ends in" hidden>
+        <span><b data-u="d">00</b><i>Days</i></span><em>:</em><span><b data-u="h">00</b><i>Hrs</i></span><em>:</em><span><b data-u="m">00</b><i>Min</i></span><em>:</em><span><b data-u="s">00</b><i>Sec</i></span>
+      </div>
+    {%- endif -%}
+    {%- if s.note != blank -%}<span class="slx-bar__note">{{ s.note }}</span>{%- endif -%}
+  </div>
+</aside>
+<style>
+  .slx-bar{position:relative;background:linear-gradient(90deg,var(--b1),var(--b2),var(--b1));color:var(--fg);padding:10px 16px}
+  .slx-bar__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 22px;max-width:1280px;margin:0 auto;text-align:center}
+  .slx-bar__msg{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 12px}
+  .slx-bar__title{display:inline;font-size:1.05rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+  .slx-bar__pill{display:inline-block;padding:5px 12px;border:1px solid rgba(255,255,255,.55);border-radius:6px;background:rgba(255,255,255,.14);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1.2}
+  .slx-bar__timer{display:flex;align-items:flex-start;gap:6px}
+  .slx-bar__timer[hidden]{display:none}
+  .slx-bar__timer span{display:grid;justify-items:center;gap:3px}
+  .slx-bar__timer b{display:block;min-width:38px;padding:5px 6px;border:1px solid rgba(255,255,255,.5);border-radius:8px;background:rgba(255,255,255,.14);font-size:1rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+  .slx-bar__timer i{font-style:normal;font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.85;line-height:1}
+  .slx-bar__timer em{font-style:normal;font-weight:800;padding-top:4px;line-height:1}
+  .slx-bar__note{display:none;font-size:.82rem;font-weight:500;opacity:.92}
+  .slx-bar__link{position:absolute;inset:0;z-index:1}
+  @media(min-width:990px){.slx-bar{padding:12px 24px}.slx-bar__title{font-size:1.3rem}.slx-bar__pill{font-size:.78rem}.slx-bar__note{display:inline}}
+</style>
+{%- if s.end_date != blank -%}
+<script>
+(function(){
+  var t = document.querySelector('[data-slx-bar] .slx-bar__timer');
+  if (!t || t.__slx) return; t.__slx = true;
+  var end = new Date(t.dataset.end).getTime();
+  if (isNaN(end)) return;
+  var iv;
+  function pad(n){ return String(n).padStart(2, '0'); }
+  function tick(){
+    var left = end - Date.now();
+    if (left <= 0) { t.hidden = true; clearInterval(iv); return; }
+    var sec = Math.floor(left / 1000);
+    var v = { d: Math.floor(sec / 86400), h: Math.floor(sec % 86400 / 3600), m: Math.floor(sec % 3600 / 60), s: sec % 60 };
+    Object.keys(v).forEach(function(k){ var e = t.querySelector('[data-u="' + k + '"]'); if (e) e.textContent = pad(v[k]); });
+    var days = t.querySelector('[data-u="d"]').parentElement;
+    days.style.display = v.d === 0 ? 'none' : '';
+    days.nextElementSibling.style.display = v.d === 0 ? 'none' : '';
+    t.hidden = false;
+  }
+  iv = setInterval(tick, 1000); tick();
+})();
+</script>
+{%- endif -%}
+{%- endif -%}
+{% schema %}
+{
+  "name": "SL Promo bar",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "title", "label": "Bold title", "default": "BLACK FRIDAY SALE" },
+    { "type": "text", "id": "pill", "label": "Pill text", "info": "Only say what is true on the site.", "default": "SAVE UP TO $29.98 ON BUNDLES" },
+    { "type": "text", "id": "note", "label": "Small note (desktop only)", "default": "Free US shipping · 30-day returns" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "text", "id": "end_date", "label": "Offer end date (optional)", "info": "Format YYYY-MM-DD, e.g. 2026-11-30. Shows a countdown to midnight Pacific time on that date, then hides itself. Only use the date the offer really ends. Leave empty for no countdown." },
+    { "type": "color", "id": "bg", "label": "Background colour", "default": "#1E2A44" },
+    { "type": "color", "id": "bg2", "label": "Background colour (centre glow)", "default": "#34497D" },
+    { "type": "color", "id": "fg", "label": "Text colour", "default": "#FFFFFF" }
+  ],
+  "presets": [{ "name": "SL Promo bar" }]
+}
+{% endschema %}
