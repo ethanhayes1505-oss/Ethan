@@ -1,0 +1,26 @@
+{%- comment -%}
+  SL Ticks: a row of short green-tick facts under the product tagline. One per line.
+{%- endcomment -%}
+{%- assign lines = block.settings.ticks | newline_to_br | split: '<br />' -%}
+<ul class="sl-tk" {{ block.shopify_attributes }}>
+  {%- for raw in lines -%}
+    {%- assign label = raw | strip -%}
+    {%- if label != blank -%}
+      <li><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg><span>{{ label }}</span></li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+<style>
+  .sl-tk{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;width:100%}
+  .sl-tk li{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500;line-height:1.25;color:#1E2A44;white-space:nowrap}
+  .sl-tk svg{flex:0 0 15px;width:15px;height:15px;fill:none;stroke:#2E8B57;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+</style>
+{% schema %}
+{
+  "name": "SL Ticks",
+  "settings": [
+    { "type": "textarea", "id": "ticks", "label": "Ticks", "info": "One short fact per line. Three works best.", "default": "Wakes only you\nNo app needed\n7-day battery" }
+  ],
+  "presets": [{ "name": "SL Ticks" }]
+}
+{% endschema %}
