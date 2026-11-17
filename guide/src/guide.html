@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Quiet Morning Guide</title>
+<style>
+  @font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;src:url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2")}
+  @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;src:url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2")}
+  @font-face{font-family:"Manrope";font-weight:400;src:url(fonts/manrope-latin-400-normal.woff2) format("woff2")}
+  @font-face{font-family:"Manrope";font-weight:500;src:url(fonts/manrope-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:"Manrope";font-weight:600;src:url(fonts/manrope-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:"Manrope";font-weight:700;src:url(fonts/manrope-latin-700-normal.woff2) format("woff2")}
+  @page{size:6in 9in;margin:0}
+  :root{--n:#1E2A44;--c:#F5F1EA;--b:#EBE5DA;--ln:#d9d0c2;--mu:#5d6273;--a:#B4531F}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#777}
+  body{font-family:"Manrope",sans-serif;font-size:10.4pt;line-height:1.5;color:var(--n);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{position:relative;width:6in;height:9in;overflow:hidden;background:var(--c);padding:.62in .58in .7in;page-break-after:always;break-after:page}
+  .page:last-child{page-break-after:auto;break-after:auto}
+  .page--beige{background:var(--b)}
+  .eyebrow{margin:0 0 8pt;font-size:7.6pt;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mu)}
+  h1,h2{font-family:"Instrument Serif",serif;font-weight:400;letter-spacing:-.01em;margin:0}
+  h2{font-size:27pt;line-height:1.05;margin-bottom:12pt}
+  h2 em,h1 em{font-style:italic}
+  h3{font-family:"Manrope",sans-serif;font-size:10.6pt;font-weight:700;margin:12pt 0 3pt}
+  p{margin:0 0 8pt}
+  .lead{font-size:11.4pt;line-height:1.45;color:var(--n)}
+  .mu{color:var(--mu)}
+  ul,ol{margin:0 0 8pt;padding-left:15pt}
+  li{margin:0 0 4.5pt;padding-left:2pt}
+  li::marker{color:var(--a);font-weight:700}
+  strong{font-weight:700}
+  .img{display:block;width:100%;border-radius:10pt;object-fit:cover;margin:0 0 13pt}
+  .img--top{position:absolute;inset:0 0 auto 0;width:100%;border-radius:0;margin:0}
+  .box{border:1pt solid var(--ln);border-radius:10pt;background:rgba(255,255,255,.45);padding:11pt 13pt;margin:10pt 0}
+  .box--navy{background:var(--n);border-color:var(--n);color:var(--c)}
+  .box--navy .eyebrow{color:#c9cfdd}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .note{font-size:8.6pt;line-height:1.45;color:var(--mu)}
+  .foot{position:absolute;left:.58in;right:.58in;bottom:.3in;display:flex;justify-content:space-between;font-size:7.4pt;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+  table{width:100%;border-collapse:collapse;margin:8pt 0 10pt;font-size:9.8pt}
+  th{font-size:7.6pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);text-align:left;padding:0 8pt 6pt 0;border-bottom:1pt solid var(--n)}
+  td{padding:7pt 8pt 7pt 0;border-bottom:1pt solid var(--ln);vertical-align:top}
+  td:first-child{font-weight:700;white-space:nowrap}
+  .day td:first-child{width:74pt;color:var(--a)}
+  .check{list-style:none;padding:0;margin:0 0 6pt}
+  .check li{position:relative;padding:0 0 0 20pt;margin:0 0 6pt}
+  .check li::before{content:"";position:absolute;left:0;top:2.5pt;width:10pt;height:10pt;border:1.2pt solid var(--n);border-radius:2.5pt}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14pt}
+  /* cover */
+  .cover{padding:0;background:var(--n);color:var(--c)}
+  .cover img{display:block;width:100%;height:5.15in;object-fit:cover}
+  .cover__txt{padding:.42in .58in 0}
+  .cover .eyebrow{color:#c9cfdd}
+  .cover h1{font-size:42pt;line-height:1}
+  .cover p{margin:12pt 0 0;font-size:11.6pt;color:#dfe3ec;max-width:3.9in}
+  .cover__brand{position:absolute;left:.58in;bottom:.42in;font-family:"Instrument Serif",serif;font-size:17pt}
+  .toc{list-style:none;padding:0;margin:10pt 0 0}
+  .toc li{display:flex;justify-content:space-between;gap:10pt;padding:6pt 0;border-bottom:1pt solid var(--ln);margin:0}
+  .toc span:last-child{color:var(--mu);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+
+<!-- 1 cover -->
+<section class="page cover">
+  <img src="img/sl-home-shop-band.jpg" alt="">
+  <div class="cover__txt">
+    <p class="eyebrow">Sleep Labs</p>
+    <h1>The Quiet <em>Morning</em> Guide</h1>
+    <p>Your first 7 days with the Silent Wake Band, and the small habits that make getting up easier.</p>
+  </div>
+  <div class="cover__brand">Sleep Labs</div>
+</section>
+
+<!-- 2 welcome -->
+<section class="page">
+  <p class="eyebrow">Start here</p>
+  <h2>A calmer way <em>to get up.</em></h2>
+  <p class="lead">Your band has one job: wake you with a pulse on your wrist, and leave everyone else asleep. This guide helps you get that working in a week.</p>
+  <p>It is short on purpose. Read pages 3 to 6 before your first night. Pick up the rest when you need it.</p>
+  <ul class="toc">
+    <li><span>Before night one</span><span>3</span></li>
+    <li><span>Keep a backup for three nights</span><span>4</span></li>
+    <li><span>Pick one wake-up time</span><span>5</span></li>
+    <li><span>Your first 7 mornings</span><span>6</span></li>
+    <li><span>The first ten minutes</span><span>7</span></li>
+    <li><span>Evenings that make mornings easier</span><span>8</span></li>
+    <li><span>If you share a bed</span><span>9</span></li>
+    <li><span>If you work shifts</span><span>10</span></li>
+    <li><span>If you sleep through alarms</span><span>11</span></li>
+    <li><span>Quick fixes</span><span>12</span></li>
+    <li><span>The one-page checklist</span><span>13</span></li>
+  </ul>
+  <p class="note" style="margin-top:14pt">This guide shares general information about sleep habits. It is not medical advice and does not diagnose or treat any condition. If you often struggle to sleep or to wake, talk with a health care provider.</p>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>2</span></div>
+</section>
+
+<!-- 3 before night one -->
+<section class="page page--beige">
+  <p class="eyebrow">Before night one</p>
+  <h2>Charge it, set it, <em>fit it.</em></h2>
+  <img class="img" src="img/sl-real-step-set.jpg" alt="" style="height:2.35in">
+  <ol>
+    <li><strong>Charge it during the day.</strong> Use the USB cable from the box, so the band is ready before bed.</li>
+    <li><strong>Set the time and your alarm on the band.</strong> Follow the quick-start card in the box. There is no app and nothing to pair.</li>
+    <li><strong>Test the pulse while you're awake.</strong> Set an alarm for two minutes from now and wear the band. You'll know what it feels like, and how to stop it.</li>
+    <li><strong>Fit it snug, not tight.</strong> It shouldn't slide around your wrist, and it shouldn't leave a mark. Most people forget it's there within a night or two.</li>
+  </ol>
+  <div class="box"><p><strong>Which wrist?</strong> Start with the one you don't sleep on. If the pulse feels faint, try the other wrist or move the strap one notch tighter.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>3</span></div>
+</section>
+
+<!-- 4 backup -->
+<section class="page">
+  <p class="eyebrow">Nights one to three</p>
+  <h2>Keep a backup <em>for three nights.</em></h2>
+  <img class="img" src="img/sl-real-phone-away.jpg" alt="" style="height:2.5in">
+  <p class="lead">Everyone sleeps differently. Give yourself a few mornings to learn how the pulse wakes you before you rely on it alone.</p>
+  <ul>
+    <li><strong>Set a phone alarm 5 minutes after your band.</strong> If the band wakes you, you'll be up in time to switch the phone off before it sounds.</li>
+    <li><strong>Leave the phone across the room,</strong> on low volume. You have to stand up to reach it.</li>
+    <li><strong>Tell your partner it's only for a few days.</strong></li>
+  </ul>
+  <div class="box"><p><strong>When to drop it.</strong> If the band has woken you three mornings in a row before the phone went off, you can stop setting the backup. On days you can't afford to be late, such as a flight or an exam, keep one anyway.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>4</span></div>
+</section>
+
+<!-- 5 wake time -->
+<section class="page page--beige">
+  <p class="eyebrow">The one habit that matters most</p>
+  <h2>Pick one <em>wake-up time.</em></h2>
+  <p class="lead">The American Academy of Sleep Medicine (AASM) advises getting up at the same time every day, weekends and holidays included.</p>
+  <p>A steady wake-up time gives your body a rhythm to work with. Choose a time you can keep seven days a week, then work backwards to a bedtime.</p>
+  <p>The AASM also advises choosing a bedtime that allows at least 7 to 8 hours of sleep. Use this table to find yours.</p>
+  <table>
+    <tr><th>If you wake at</th><th>Lights out for 8 hours</th><th>Latest, for 7 hours</th></tr>
+    <tr><td>5:00 am</td><td>9:00 pm</td><td>10:00 pm</td></tr>
+    <tr><td>5:30 am</td><td>9:30 pm</td><td>10:30 pm</td></tr>
+    <tr><td>6:00 am</td><td>10:00 pm</td><td>11:00 pm</td></tr>
+    <tr><td>6:30 am</td><td>10:30 pm</td><td>11:30 pm</td></tr>
+    <tr><td>7:00 am</td><td>11:00 pm</td><td>12:00 am</td></tr>
+  </table>
+  <div class="box"><p><strong>Not sleepy at lights-out?</strong> The AASM suggests not going to bed before you feel sleepy. Keep the wake-up time fixed and let the bedtime settle over a week or two.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>5</span></div>
+</section>
+
+<!-- 6 seven mornings -->
+<section class="page">
+  <p class="eyebrow">The plan</p>
+  <h2>Your first <em>7 mornings.</em></h2>
+  <p>One small thing each day. Don't try to change your whole routine at once.</p>
+  <table class="day">
+    <tr><th>Morning</th><th>What to do</th></tr>
+    <tr><td>1</td><td>Band on, backup phone alarm 5 minutes later, across the room. Notice what the pulse feels like when it wakes you.</td></tr>
+    <tr><td>2</td><td>Same set-up. When the band pulses, sit up straight away, before you decide anything.</td></tr>
+    <tr><td>3</td><td>Feet on the floor within a minute of the pulse. Switch the backup off on your way out of the room.</td></tr>
+    <tr><td>4</td><td>If the band woke you on mornings 1 to 3, skip the backup. Get some light as soon as you're up.</td></tr>
+    <tr><td>5</td><td>Keep the same wake-up time, even if it's the weekend.</td></tr>
+    <tr><td>6</td><td>Plan the first ten minutes the night before: clothes out, water by the kettle, shoes by the door.</td></tr>
+    <tr><td>7</td><td>Look back. Did the band wake you every day? Was the time right? Adjust one thing for next week.</td></tr>
+  </table>
+  <div class="box box--navy"><p>If the band didn't wake you on a morning, don't push on without a backup. Go to page 11.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>6</span></div>
+</section>
+
+<!-- 7 first ten minutes -->
+<section class="page page--beige">
+  <p class="eyebrow">When the pulse comes</p>
+  <h2>The first <em>ten minutes.</em></h2>
+  <img class="img" src="img/sl-real-morning-run.jpg" alt="" style="height:2.3in;object-position:50% 62%">
+  <ul>
+    <li><strong>Sit up, then stand up.</strong> Deciding from the pillow is where most mornings are lost.</li>
+    <li><strong>Leave the bedroom.</strong> Take your clothes with you so you don't need the light on.</li>
+    <li><strong>Get some light.</strong> The AASM describes light and darkness as the body's most powerful timing cues for alertness and sleepiness.</li>
+    <li><strong>Have water ready,</strong> then move a little: stairs, a stretch, a short walk.</li>
+  </ul>
+  <div class="box"><p><strong>Groggy at first?</strong> It's common to feel foggy for a while after waking, and it passes. Judge the morning by how you feel after you've been up and moving, not in the first minute.</p></div>
+  <p class="note">A word on snoozing: studies disagree on whether it does any harm. The simple approach is to set the alarm for the time you need to get up, and get up then.</p>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>7</span></div>
+</section>
+
+<!-- 8 evenings -->
+<section class="page">
+  <p class="eyebrow">The night before</p>
+  <h2>Evenings that make <em>mornings easier.</em></h2>
+  <img class="img" src="img/sl-real-step-wear.jpg" alt="" style="height:2.15in;object-position:50% 70%">
+  <p>These come from the AASM's healthy sleep habits. Pick one or two; you don't need them all.</p>
+  <ul>
+    <li><strong>Screens off 30 minutes before bed,</strong> and keep the lights low in the last hour.</li>
+    <li><strong>Limit caffeine later in the day.</strong> In one small study of 12 people, a large dose taken six hours before bed cut sleep by more than an hour, and they didn't notice.</li>
+    <li><strong>Keep the bedroom quiet, cool and relaxing.</strong></li>
+    <li><strong>Go easy on alcohol and big meals</strong> close to bedtime. Both can interfere with sleep.</li>
+    <li><strong>Wind down the same way each night.</strong> A short routine tells your body the day is over.</li>
+  </ul>
+  <div class="box"><p><strong>Your band helps here too.</strong> With the alarm on your wrist, your phone can charge in another room.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>8</span></div>
+</section>
+
+<!-- 9 couples -->
+<section class="page page--beige">
+  <p class="eyebrow">If you share a bed</p>
+  <h2>Different alarms, <em>same bed.</em></h2>
+  <img class="img" src="img/sl-real-why.jpg" alt="" style="height:2.2in">
+  <p>You're not unusual. In a 2025 AASM survey of 2,007 US adults, 37% said they go to sleep at a different time than they'd like to fit around a bed partner, and 31% sleep in another bed or space.</p>
+  <ul>
+    <li><strong>Put tomorrow's clothes outside the bedroom.</strong> No wardrobe doors, no light.</li>
+    <li><strong>Agree the exit.</strong> The first one up leaves quietly and doesn't come back in until the other alarm.</li>
+    <li><strong>Stop the pulse quickly.</strong> Practise finding the button with your eyes shut.</li>
+    <li><strong>Keep the backup phone in the hall</strong> during your first three nights, not on the bedside table.</li>
+    <li><strong>With a baby in the room,</strong> the same rules apply. There is no ringtone to carry across the room.</li>
+  </ul>
+  <div class="box"><p><strong>Both wearing one?</strong> Each of you sets your own time. Neither alarm is for the other person.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>9</span></div>
+</section>
+
+<!-- 10 shifts -->
+<section class="page">
+  <p class="eyebrow">If you work shifts</p>
+  <h2>Early starts <em>and night shifts.</em></h2>
+  <img class="img" src="img/sl-real-morning-shift.jpg" alt="" style="height:2.2in;object-position:50% 55%">
+  <p>The AASM's guidance on shift work says plainly that there is no one-size-fits-all solution. These are the parts most people can use.</p>
+  <ul>
+    <li><strong>Keep your sleep times as steady as your rota allows,</strong> including on days off where you can.</li>
+    <li><strong>Plan a nap</strong> before a night shift if you can fit one in. Set the band so you wake on time without an alarm sounding through the house.</li>
+    <li><strong>Cut the light on the way home.</strong> After a night shift, sunglasses on the commute and a dark bedroom help your body accept that it's time to sleep.</li>
+    <li><strong>Tell the household your sleep hours.</strong> A note on the door works.</li>
+    <li><strong>Set the band for every sleep,</strong> day or night, so nobody else is woken by it.</li>
+  </ul>
+  <p class="note">If you regularly can't sleep when you need to, or can't stay awake at work, talk with a health care provider. Shift work disorder is a recognised condition, and there is clinical guidance for managing it.</p>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>10</span></div>
+</section>
+
+<!-- 11 heavy sleepers -->
+<section class="page page--beige">
+  <p class="eyebrow">If you sleep through alarms</p>
+  <h2>Making sure <em>it reaches you.</em></h2>
+  <img class="img" src="img/sl-real-step-wake.jpg" alt="" style="height:2.15in;object-position:50% 40%">
+  <p class="lead">A pulse on the wrist is felt, not heard, and many people notice that more than a sound. It still pays to stack things in your favour.</p>
+  <ul>
+    <li><strong>Keep the backup alarm for a full week,</strong> not three nights.</li>
+    <li><strong>Wear the band one notch tighter</strong> than feels natural, as long as it's still comfortable.</li>
+    <li><strong>Try the other wrist</strong> if you slept through it once.</li>
+    <li><strong>Protect your sleep length.</strong> Check your bedtime on page 5.</li>
+    <li><strong>Charge it at the same time every day,</strong> so it is never flat at night.</li>
+  </ul>
+  <div class="box"><p><strong>Still not waking you after a week?</strong> It may not suit the way you sleep. Send it back within 30 days of delivery; start at sleeplabs.shop/pages/contact.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>11</span></div>
+</section>
+
+<!-- 12 quick fixes -->
+<section class="page">
+  <p class="eyebrow">Quick fixes</p>
+  <h2>When something's <em>not right.</em></h2>
+  <h3>I slept through the pulse</h3>
+  <p>Check the alarm was switched on and the band was charged. Tighten the strap one notch or change wrist. Keep a backup alarm until it has woken you three mornings running.</p>
+  <h3>I keep waking before the alarm</h3>
+  <p>Some people find this once their wake-up time is steady. If you feel rested, get up. If you don't, look at your bedtime first.</p>
+  <h3>My partner still woke up</h3>
+  <p>The band makes no ringtone, so look at what happens next: the bedside light, a drawer, a phone screen. Move those steps out of the room.</p>
+  <h3>It feels odd to sleep in</h3>
+  <p>Loosen it one notch and give it three nights. Wearing it for an hour in the evening first helps you get used to it.</p>
+  <h3>I can't remember how to set it</h3>
+  <p>The steps are on the quick-start card in the box. If you've lost it, message us through sleeplabs.shop/pages/contact and we'll send them.</p>
+  <div class="box"><p><strong>Need a person?</strong> Use the contact page and we'll reply by email. Include your order number.</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>12</span></div>
+</section>
+
+<!-- 13 checklist -->
+<section class="page page--beige">
+  <p class="eyebrow">Print this page</p>
+  <h2>The one-page <em>checklist.</em></h2>
+  <h3>Tonight</h3>
+  <ul class="check">
+    <li>Band charged and on my wrist</li>
+    <li>Alarm set for my one wake-up time</li>
+    <li>Backup phone alarm, 5 minutes later, across the room (first three nights)</li>
+    <li>Clothes and shoes outside the bedroom</li>
+    <li>Screens off 30 minutes before lights-out</li>
+  </ul>
+  <h3>Every morning</h3>
+  <ul class="check">
+    <li>Sit up as soon as the pulse starts</li>
+    <li>Feet on the floor within a minute</li>
+    <li>Leave the bedroom, get some light, drink some water</li>
+  </ul>
+  <h3>Every week</h3>
+  <ul class="check">
+    <li>Same wake-up time all seven days</li>
+    <li>Did the band wake me every morning?</li>
+    <li>Change one thing for next week</li>
+  </ul>
+  <div class="box"><p><strong>My wake-up time:</strong> __________</p><p><strong>Lights out by:</strong> __________</p></div>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>13</span></div>
+</section>
+
+<!-- 14 sources -->
+<section class="page">
+  <p class="eyebrow">Sources and small print</p>
+  <h2>Where this <em>comes from.</em></h2>
+  <p>The sleep habits in this guide are taken from the American Academy of Sleep Medicine. Sleep Labs is not affiliated with the AASM, and the AASM has not reviewed or endorsed this guide or the Silent Wake Band.</p>
+  <ul class="note" style="padding-left:13pt">
+    <li>AASM, "Healthy Sleep Habits" patient handout: same wake-up time every day; a bedtime that allows at least 7 to 8 hours; don't go to bed before you feel sleepy; reduce bright light and stop screens 30 minutes before bed; limit caffeine later in the day; alcohol and large meals. aasm.org</li>
+    <li>AASM, statement on light and sleep (2024): light and darkness as timing cues.</li>
+    <li>AASM press release on Drake and colleagues, Journal of Clinical Sleep Medicine (2013): caffeine taken six hours before bed; 12 participants.</li>
+    <li>AASM clinical guideline release on shift work disorder: no one-size-fits-all solution; consistent sleep scheduling when feasible; naps; light-filtering on the commute.</li>
+    <li>AASM survey of 2,007 US adults, June 2025: sleep habits of bed partners.</li>
+  </ul>
+  <div class="box"><p><strong>When to talk to a professional.</strong> If sleep difficulties continue despite healthy habits, the AASM advises talking with your health care provider or an accredited sleep center. The same goes if you regularly cannot wake up, or feel very sleepy during the day.</p></div>
+  <p class="note">This guide is general information, not medical advice. The Silent Wake Band is a consumer alarm, not a medical device, and is not intended to diagnose, treat or prevent any condition. People sleep differently, and we can't promise it will wake every person in every situation.</p>
+  <p class="note">© 2026 Sleep Labs. For personal use. sleeplabs.shop</p>
+  <div class="foot"><span>The Quiet Morning Guide</span><span>14</span></div>
+</section>
+
+</body>
+</html>
