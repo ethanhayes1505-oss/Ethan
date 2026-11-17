@@ -4,18 +4,18 @@
 {%- endcomment -%}
 {%- assign r = block.settings.rating | times: 1.0 -%}
 {%- if r > 0 -%}
-<button type="button" class="sl-rt" {{ block.shopify_attributes }}
+<button type="button" class="slx-rating" {{ block.shopify_attributes }}
   aria-label="Rated {{ block.settings.rating }} out of 5 from {{ block.settings.count }} reviews. Go to reviews."
   onclick="var t=document.querySelector('.sl-reviews');if(t){t.scrollIntoView({behavior:'smooth'})}">
-  <strong class="sl-rt__avg">{{ block.settings.rating }}/5</strong>
-  <span class="sl-rt__stars" aria-hidden="true" style="--p:{{ r | times: 20 | round }}%">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-  <span class="sl-rt__count">{{ block.settings.count }} reviews</span>
+  <strong class="slx-rating__avg">{{ block.settings.rating }}/5</strong>
+  <span class="slx-rating__stars" aria-hidden="true" style="--p:{{ r | times: 20 | round }}%">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+  <span class="slx-rating__count">{{ block.settings.count }} reviews</span>
 </button>
 <style>
-  .sl-rt{display:inline-flex;align-items:center;gap:8px;margin:0;padding:0;border:0;background:none;cursor:pointer;font:inherit;font-size:.92rem;line-height:1;color:#1E2A44}
-  .sl-rt__avg{font-weight:700}
-  .sl-rt__stars{font-size:1.05rem;letter-spacing:2px;background:linear-gradient(90deg,#E0A32E var(--p),#d9d0c2 var(--p));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-  .sl-rt__count{color:#5d6273;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c9c0b2}
+  .slx-rating{display:inline-flex;align-items:center;gap:8px;margin:0;padding:0;border:0;background:none;cursor:pointer;font:inherit;font-size:.92rem;line-height:1;color:#1E2A44}
+  .slx-rating__avg{font-weight:700}
+  .slx-rating__stars{font-size:1.05rem;letter-spacing:2px;background:linear-gradient(90deg,#E0A32E var(--p),#d9d0c2 var(--p));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .slx-rating__count{color:#5d6273;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c9c0b2}
 </style>
 {%- endif -%}
 {% schema %}

@@ -2,7 +2,7 @@
   SL Ticks: a row of short green-tick facts under the product tagline. One per line.
 {%- endcomment -%}
 {%- assign lines = block.settings.ticks | newline_to_br | split: '<br />' -%}
-<ul class="sl-tk" {{ block.shopify_attributes }}>
+<ul class="slx-ticks" {{ block.shopify_attributes }}>
   {%- for raw in lines -%}
     {%- assign label = raw | strip -%}
     {%- if label != blank -%}
@@ -11,9 +11,9 @@
   {%- endfor -%}
 </ul>
 <style>
-  .sl-tk{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;width:100%}
-  .sl-tk li{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500;line-height:1.25;color:#1E2A44;white-space:nowrap}
-  .sl-tk svg{flex:0 0 15px;width:15px;height:15px;fill:none;stroke:#2E8B57;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .slx-ticks{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;width:100%}
+  .slx-ticks li{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500;line-height:1.25;color:#1E2A44;white-space:nowrap}
+  .slx-ticks svg{flex:0 0 15px;width:15px;height:15px;fill:none;stroke:#2E8B57;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 </style>
 {% schema %}
 {
