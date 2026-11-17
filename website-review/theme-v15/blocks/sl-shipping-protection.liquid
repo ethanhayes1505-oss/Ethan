@@ -1,0 +1,270 @@
+{%- liquid
+  assign mp = product
+  if mp == blank
+    assign mp = section.settings.product
+  endif
+  assign p = block.settings.product
+  assign pv = p.selected_or_first_available_variant
+  assign cur = mp.selected_or_first_available_variant
+  assign bopt = blank
+  for opt in mp.options_with_values
+    if opt.values.size > 1
+      assign bopt = opt
+      break
+    endif
+  endfor
+  assign sid = section.id
+  assign a1 = block.settings.addon1
+  assign a2 = block.settings.addon2
+  assign has_addons = false
+  if a1 != blank and a1.available
+    assign has_addons = true
+  endif
+  if a2 != blank and a2.available
+    assign has_addons = true
+  endif
+-%}
+{%- if mp != blank -%}
+<div class="sl-pb" data-sl-pb data-section="{{ sid }}" data-option-name="{{ bopt.name | escape }}" data-prot-id="{{ pv.id }}" {{ block.shopify_attributes }}>
+
+  {%- if bopt != blank -%}
+    <div class="sl-pb__head">
+      <span>{{ block.settings.heading }}</span>
+      {%- for opt in mp.options_with_values -%}{%- if opt.values.size == 1 -%}<span class="sl-pb__muted">{{ opt.selected_value }}</span>{%- endif -%}{%- endfor -%}
+    </div>
+    <div class="sl-pb__opts" role="radiogroup" aria-label="{{ bopt.name | escape }}">
+      {%- assign base = bopt.values.first.variant.price -%}
+      {%- for val in bopt.values -%}
+        {%- liquid
+          assign v = val.variant
+          assign n = val.name | split: ' ' | first | plus: 0
+          if n < 1
+            assign n = 1
+          endif
+          assign full = base | times: n
+          assign save = full | minus: v.price
+          assign per = v.price | divided_by: n
+        -%}
+        <button type="button" class="sl-pb__opt{% if save > 0 %} sl-pb__opt--deal{% endif %}" role="radio"
+          aria-checked="{% if val.selected %}true{% else %}false{% endif %}"
+          data-value="{{ val.name | escape }}" data-variant-id="{{ v.id }}" data-price="{{ v.price | money }}"
+          {% if v.available == false %}disabled{% endif %}>
+          {%- if save > 0 -%}<span class="sl-pb__badge">Save {{ save | money }}</span>{%- endif -%}
+          <span class="sl-pb__dot" aria-hidden="true"></span>
+          <span class="sl-pb__main">
+            <span class="sl-pb__name">{{ val.name }}</span>
+            <span class="sl-pb__sub">{% if n > 1 %}{{ per | money }} per band{% else %}{{ block.settings.single_sub }}{% endif %}{% if v.available == false %} · Sold out{% endif %}</span>
+          </span>
+          <span class="sl-pb__price">{{ v.price | money }}{% if save > 0 %}<s>{{ full | money }}</s>{% endif %}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if has_addons -%}
+    {%- if block.settings.addons_heading != blank -%}
+      <div class="sl-pb__head sl-add__head"><span>{{ block.settings.addons_heading }}</span></div>
+    {%- endif -%}
+    {%- for i in (1..2) -%}
+      {%- liquid
+        if i == 1
+          assign ap = a1
+          assign at = block.settings.addon1_title
+          assign ax = block.settings.addon1_text
+        else
+          assign ap = a2
+          assign at = block.settings.addon2_title
+          assign ax = block.settings.addon2_text
+        endif
+        assign av = ap.selected_or_first_available_variant
+      -%}
+      {%- if ap != blank and ap.available and av -%}
+        <label class="sl-prot__row sl-add__row" for="SlAdd{{ i }}-{{ block.id }}">
+          <input type="checkbox" id="SlAdd{{ i }}-{{ block.id }}" class="sl-prot__check" data-variant-id="{{ av.id }}">
+          <span class="sl-prot__box" aria-hidden="true"></span>
+          {%- if ap.featured_image -%}
+            <img class="sl-add__img" src="{{ ap.featured_image | image_url: width: 120 }}" alt="" width="52" height="52" loading="lazy">
+          {%- endif -%}
+          <span class="sl-prot__copy">
+            <span class="sl-prot__title">{{ at | default: ap.title }} <span class="sl-prot__price">+{{ av.price | money }}</span></span>
+            {%- if ax != blank -%}<span class="sl-prot__text">{{ ax }}</span>{%- endif -%}
+          </span>
+        </label>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- if p != blank and pv -%}
+    <label class="sl-prot__row" for="SlProt-{{ block.id }}">
+      <input type="checkbox" id="SlProt-{{ block.id }}" class="sl-prot__check" data-variant-id="{{ pv.id }}"{% if block.settings.checked %} checked{% endif %}>
+      <span class="sl-prot__box" aria-hidden="true"></span>
+      <span class="sl-prot__copy">
+        <span class="sl-prot__title">{{ block.settings.title }} <span class="sl-prot__price">+{{ pv.price | money }}</span></span>
+        <span class="sl-prot__text">{{ block.settings.text }}</span>
+      </span>
+    </label>
+  {%- endif -%}
+
+  <div class="sl-pb__ctas">
+    <button type="button" class="sl-pb__atc" data-sl-atc {% unless cur.available %}disabled{% endunless %}>
+      {%- if cur.available -%}Add to cart <span class="sl-pb__sep">·</span> <span data-sl-price>{{ cur.price | money }}</span>{%- else -%}Sold out{%- endif -%}
+    </button>
+    {%- if block.settings.show_shop_pay -%}
+      <button type="button" class="sl-pb__shop" data-sl-shop {% unless cur.available %}disabled{% endunless %}>
+        Buy with <span class="sl-pb__shop-word">Shop<span>Pay</span></span>
+      </button>
+    {%- endif -%}
+  </div>
+  {%- if block.settings.fine != blank -%}<p class="sl-pb__fine">{{ block.settings.fine }}</p>{%- endif -%}
+</div>
+
+<style>
+  /* hide the theme's own picker and buttons; this box drives them */
+  #shopify-section-{{ sid }} variant-picker,
+  #shopify-section-{{ sid }} .buy-buttons-block{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+  {%- if block.settings.hide_express -%}
+  .accelerated-checkout-block,.shopify-payment-button{display:none!important}
+  {%- endif -%}
+  .sl-pb{--n:#1E2A44;--c:#F5F1EA;--ln:#d9d0c2;--mu:#5d6273;display:grid;gap:14px;width:100%}
+  .sl-pb__head{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:.95rem}
+  .sl-pb__muted{font-weight:400;color:var(--mu);font-size:.88rem}
+  .sl-pb__opts{display:grid;gap:12px}
+  .sl-pb__opt{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;
+    padding:16px 18px;border:1px solid var(--ln);border-radius:14px;background:rgba(255,255,255,.35);color:inherit;font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
+  .sl-pb__opt[aria-checked="true"]{border:1.5px solid var(--n);background:rgba(30,42,68,.045);padding:15.5px 17.5px}
+  .sl-pb__opt:disabled{opacity:.45;cursor:not-allowed}
+  .sl-pb__opt:focus-visible{outline:2px solid var(--n);outline-offset:2px}
+  .sl-pb__dot{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--n);display:grid;place-items:center}
+  .sl-pb__opt[aria-checked="true"] .sl-pb__dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--n)}
+  .sl-pb__main{display:grid;gap:2px;min-width:0}
+  .sl-pb__name{font-weight:600}
+  .sl-pb__sub{font-size:.85rem;color:var(--mu)}
+  .sl-pb__price{display:grid;justify-items:end;font-weight:600;font-variant-numeric:tabular-nums}
+  .sl-pb__price s{font-weight:400;font-size:.82rem;color:var(--mu)}
+  .sl-pb__badge{position:absolute;top:-10px;right:14px;background:var(--n);color:var(--c);font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:3px 10px;border-radius:99px}
+  .sl-prot__row{display:flex;gap:14px;align-items:flex-start;padding:14px 18px;border:1px dashed var(--ln);border-radius:14px;cursor:pointer}
+  .sl-prot__check{position:absolute;opacity:0;width:1px;height:1px}
+  .sl-prot__box{flex:0 0 20px;height:20px;border:1.5px solid var(--n);border-radius:5px;margin-top:2px;display:grid;place-items:center}
+  .sl-prot__check:checked + .sl-prot__box{background:var(--n)}
+  .sl-prot__check:checked + .sl-prot__box::after{content:"";width:6px;height:10px;border:solid var(--c);border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+  .sl-prot__check:focus-visible + .sl-prot__box{outline:2px solid var(--n);outline-offset:2px}
+  .sl-prot__copy{display:grid;gap:2px}
+  .sl-prot__title{font-weight:600}
+  .sl-prot__price{font-weight:400;color:var(--mu);margin-left:4px}
+  .sl-prot__text{font-size:.85rem;color:var(--mu);line-height:1.45}
+  .sl-add__head{margin-top:4px}
+  .sl-add__row{align-items:center;border-style:solid;background:rgba(255,255,255,.35)}
+  .sl-add__row .sl-prot__box{margin-top:0}
+  .sl-add__img{flex:0 0 52px;width:52px;height:52px;border-radius:10px;object-fit:cover;background:#fff}
+  .sl-pb__ctas{display:grid;gap:10px;margin-top:4px}
+  .sl-pb__atc,.sl-pb__shop{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;border:0;border-radius:999px;font:inherit;font-weight:600;cursor:pointer;transition:transform .1s,opacity .15s}
+  .sl-pb__atc{min-height:58px;background:var(--n);color:var(--c);font-size:1.02rem;letter-spacing:.01em;box-shadow:0 6px 18px rgba(30,42,68,.18)}
+  .sl-pb__atc:active,.sl-pb__shop:active{transform:scale(.99)}
+  .sl-pb__atc[aria-busy="true"]{opacity:.7}
+  .sl-pb__sep{opacity:.5}
+  .sl-pb__shop{min-height:52px;background:#5A31F4;color:#fff;font-size:.98rem}
+  .sl-pb__shop-word{font-weight:800;letter-spacing:-.01em}
+  .sl-pb__shop-word span{margin-left:1px}
+  .sl-pb__atc:disabled,.sl-pb__shop:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+  .sl-pb__atc:focus-visible,.sl-pb__shop:focus-visible{outline:2px solid var(--n);outline-offset:3px}
+  .sl-pb__fine{margin:0;text-align:center;font-size:.82rem;color:var(--mu)}
+</style>
+<script>
+(function(){
+  if (window.__slPB) return; window.__slPB = true;
+  var busy = false, passThrough = false;
+
+  function box(el){ var r = el && el.closest('[data-sl-pb]'); return r || document.querySelector('[data-sl-pb]'); }
+  function sectionEl(r){ return document.getElementById('shopify-section-' + r.dataset.section) || document; }
+  // every ticked extra: add-ons and shipping protection
+  function extras(r){ return Array.prototype.map.call(r.querySelectorAll('.sl-prot__check:checked'), function(cb){ return cb.dataset.variantId; }); }
+  function selectedVariant(r){ var o = r.querySelector('.sl-pb__opt[aria-checked="true"]'); if (o) return o.dataset.variantId;
+    var inp = sectionEl(r).querySelector('form[data-type="add-to-cart-form"] input[name="id"]'); return inp && inp.value; }
+
+  async function addExtras(ids){
+    try {
+      var cart = await (await fetch('/cart.js', {headers:{'Accept':'application/json'}})).json();
+      var need = ids.filter(function(id){ return !cart.items.some(function(i){ return String(i.variant_id) === String(id); }); });
+      if (!need.length) return;
+      await fetch('/cart/add.js', {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({items: need.map(function(id){ return {id:Number(id), quantity:1}; })})});
+    } catch(e) {}
+  }
+
+  document.addEventListener('click', function(e){
+    // bundle cards
+    var opt = e.target.closest('.sl-pb__opt');
+    if (opt && !opt.disabled) {
+      var r = box(opt);
+      r.querySelectorAll('.sl-pb__opt').forEach(function(o){ o.setAttribute('aria-checked', o === opt ? 'true' : 'false'); });
+      var price = r.querySelector('[data-sl-price]'); if (price) price.textContent = opt.dataset.price;
+      var sec = sectionEl(r);
+      var form = sec.querySelector('form[data-type="add-to-cart-form"] input[name="id"]'); if (form) form.value = opt.dataset.variantId;
+      var name = r.dataset.optionName;
+      sec.querySelectorAll('variant-picker input[type="radio"]').forEach(function(i){
+        if (i.dataset.optionName === name && i.value === opt.dataset.value && !i.checked) i.click();
+      });
+      return;
+    }
+    // our add to cart -> theme add to cart
+    var atc = e.target.closest('[data-sl-atc]');
+    if (atc && !atc.disabled) {
+      var r2 = box(atc);
+      var native = sectionEl(r2).querySelector('.buy-buttons-block .add-to-cart-button, .buy-buttons-block button[name="add"]');
+      if (native) { native.click(); }
+      return;
+    }
+    // Shop Pay: selected bundle + ticked extras straight to Shop Pay
+    var shop = e.target.closest('[data-sl-shop]');
+    if (shop && !shop.disabled) {
+      var r3 = box(shop);
+      var items = [selectedVariant(r3) + ':1'];
+      extras(r3).forEach(function(id){ items.push(id + ':1'); });
+      window.location.href = '/cart/' + items.join(',') + '?payment=shop_pay';
+      return;
+    }
+  });
+
+  // any theme add-to-cart (incl. sticky bar): add ticked extras first
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('button[name="add"], .add-to-cart-button, [data-testid="standalone-add-to-cart"]');
+    if (!btn || passThrough || busy) return;
+    var r = box(btn); var ids = r ? extras(r) : [];
+    if (!ids.length) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    busy = true;
+    var ours = r.querySelector('[data-sl-atc]'); if (ours) ours.setAttribute('aria-busy','true');
+    addExtras(ids).then(function(){
+      busy = false; passThrough = true;
+      btn.click();
+      passThrough = false;
+      if (ours) ours.removeAttribute('aria-busy');
+    });
+  }, true);
+})();
+</script>
+{%- endif -%}
+{% schema %}
+{"name":"SL Purchase box","settings":[
+{"type":"text","id":"heading","label":"Bundle heading","default":"Choose your bundle"},
+{"type":"text","id":"single_sub","label":"Line under 1 band","default":"Just for you"},
+{"type":"header","content":"Add-ons"},
+{"type":"paragraph","content":"Optional extras shown as tick boxes under the bundles. An add-on only appears once its product is chosen here and is active and in stock."},
+{"type":"text","id":"addons_heading","label":"Add-ons heading","default":"Add to your order"},
+{"type":"product","id":"addon1","label":"Add-on 1 product"},
+{"type":"text","id":"addon1_title","label":"Add-on 1 title","info":"Leave empty to use the product's name."},
+{"type":"text","id":"addon1_text","label":"Add-on 1 line of text"},
+{"type":"product","id":"addon2","label":"Add-on 2 product"},
+{"type":"text","id":"addon2_title","label":"Add-on 2 title","info":"Leave empty to use the product's name."},
+{"type":"text","id":"addon2_text","label":"Add-on 2 line of text"},
+{"type":"header","content":"Shipping protection"},
+{"type":"product","id":"product","label":"Protection product"},
+{"type":"text","id":"title","label":"Title","default":"Shipping protection"},
+{"type":"text","id":"text","label":"Text","default":"Covers loss, theft or damage in transit. We'll replace or refund your order."},
+{"type":"checkbox","id":"checked","label":"Ticked by default","default":false},
+{"type":"header","content":"Checkout"},
+{"type":"checkbox","id":"show_shop_pay","label":"Show Buy with Shop Pay button","default":true},
+{"type":"checkbox","id":"hide_express","label":"Hide theme's express checkout buttons","info":"The theme's own express buttons skip shipping protection.","default":true},
+{"type":"text","id":"fine","label":"Small print","default":"30-day returns · Secure checkout"}],
+"presets":[{"name":"SL Purchase box"}]}
+{% endschema %}
