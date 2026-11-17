@@ -18,6 +18,7 @@
   assign a2 = block.settings.addon2
   assign bonus = all_products[block.settings.bonus_handle]
   assign bv = bonus.selected_or_first_available_variant
+  assign bmin = block.settings.bonus_min | plus: 0
   assign has_bonus = false
   if block.settings.bonus_handle != blank and bonus.id != blank and bonus.available and bv
     assign has_bonus = true
@@ -54,21 +55,21 @@
         <button type="button" class="sl-pb__opt{% if save > 0 %} sl-pb__opt--deal{% endif %}" role="radio"
           aria-checked="{% if val.selected %}true{% else %}false{% endif %}"
           data-value="{{ val.name | escape }}" data-variant-id="{{ v.id }}" data-price="{{ v.price | money }}"
-          {% if has_bonus and n >= block.settings.bonus_min %}data-bonus="1"{% endif %}
+          {% if has_bonus and n >= bmin %}data-bonus="1"{% endif %}
           {% if v.available == false %}disabled{% endif %}>
           {%- if save > 0 -%}<span class="sl-pb__badge">Save {{ save | money }}</span>{%- endif -%}
           <span class="sl-pb__dot" aria-hidden="true"></span>
           <span class="sl-pb__main">
             <span class="sl-pb__name">{{ val.name }}</span>
             <span class="sl-pb__sub">{% if n > 1 %}{{ per | money }} per band{% else %}{{ block.settings.single_sub }}{% endif %}{% if v.available == false %} · Sold out{% endif %}</span>
-            {%- if has_bonus and n >= block.settings.bonus_min -%}<span class="sl-pb__gift">+ Free: {{ block.settings.bonus_label }}</span>{%- endif -%}
+            {%- if has_bonus and n >= bmin -%}<span class="sl-pb__gift">+ Free: {{ block.settings.bonus_label }}</span>{%- endif -%}
           </span>
           <span class="sl-pb__price">{{ v.price | money }}{% if save > 0 %}<s>{{ full | money }}</s>{% endif %}</span>
         </button>
       {%- endfor -%}
     </div>
     {%- if has_bonus -%}
-      <p class="sl-pb__bonus-note"><strong>Free with {{ block.settings.bonus_min }} or more bands:</strong> {{ block.settings.bonus_label }}. {{ block.settings.bonus_note }} {{ bv.price | money }} on its own.</p>
+      <p class="sl-pb__bonus-note"><strong>Free with {% if bmin >= 3 %}3 bands{% else %}2 or 3 bands{% endif %}:</strong> {{ block.settings.bonus_label }}. {{ block.settings.bonus_note }} {{ bv.price | money }} on its own.</p>
     {%- endif -%}
   {%- endif -%}
 
@@ -271,7 +272,7 @@
 {"type":"header","content":"Free bonus with bundles"},
 {"type":"paragraph","content":"A product that is added to the cart automatically with the larger bundles. It needs an automatic discount in Shopify that makes it free, or customers will be charged for it. It only shows while the product is active."},
 {"type":"text","id":"bonus_handle","label":"Bonus product handle","info":"The last part of the product's web address. Leave empty to switch the bonus off.","default":"the-quiet-morning-guide"},
-{"type":"range","id":"bonus_min","label":"Smallest bundle that gets the bonus","min":2,"max":3,"step":1,"default":2},
+{"type":"select","id":"bonus_min","label":"Which bundles get the bonus","options":[{"value":"2","label":"2 bands or more"},{"value":"3","label":"3 bands only"}],"default":"2"},
 {"type":"text","id":"bonus_label","label":"Bonus name","default":"The Quiet Morning Guide (PDF)"},
 {"type":"text","id":"bonus_note","label":"Bonus line of text","default":"A 14-page guide to your first week, emailed after you order."},
 {"type":"header","content":"Add-ons"},
