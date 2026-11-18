@@ -23,6 +23,11 @@
   if block.settings.bonus_handle != blank and bonus.id != blank and bonus.available and bv
     assign has_bonus = true
   endif
+  assign pmin = block.settings.free_prot_min | plus: 0
+  assign has_pfree = false
+  if p != blank and pv and pv.available and pmin > 0
+    assign has_pfree = true
+  endif
   assign has_addons = false
   if a1 != blank and a1.available
     assign has_addons = true
@@ -54,7 +59,7 @@
         -%}
         <button type="button" class="sl-pb__opt{% if save > 0 %} sl-pb__opt--deal{% endif %}" role="radio"
           aria-checked="{% if val.selected %}true{% else %}false{% endif %}"
-          data-value="{{ val.name | escape }}" data-variant-id="{{ v.id }}" data-price="{{ v.price | money }}"
+          data-n="{{ n }}" data-value="{{ val.name | escape }}" data-variant-id="{{ v.id }}" data-price="{{ v.price | money }}"
           {% if has_bonus and n >= bmin %}data-bonus="1"{% endif %}
           {% if v.available == false %}disabled{% endif %}>
           {%- if save > 0 -%}<span class="sl-pb__badge">Save {{ save | money }}</span>{%- endif -%}
@@ -68,8 +73,10 @@
         </button>
       {%- endfor -%}
     </div>
+    {%- if has_bonus or has_pfree -%}
+    <div class="sl-pb__rewards">
     {%- if has_bonus -%}
-      <div class="sl-pb__reward" data-sl-reward data-state="locked" role="button" tabindex="0">
+      <div class="sl-pb__reward" data-sl-reward data-min="{{ bmin }}" data-state="locked" role="button" tabindex="0">
         <span class="sl-pb__rico" aria-hidden="true">
           <svg class="sl-pb__lock" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
           <svg class="sl-pb__tick" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
@@ -82,6 +89,23 @@
         </span>
         <span class="sl-pb__rval"><s>{{ bv.price | money }}</s><b>FREE</b></span>
       </div>
+    {%- endif -%}
+    {%- if has_pfree -%}
+      <div class="sl-pb__reward" data-sl-reward data-prot="1" data-min="{{ pmin }}" data-state="locked" role="button" tabindex="0">
+        <span class="sl-pb__rico" aria-hidden="true">
+          <svg class="sl-pb__lock" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <svg class="sl-pb__tick" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+        <span class="sl-pb__rtxt">
+          <span class="sl-pb__rtitle sl-pb__only-locked">Free bonus: {{ block.settings.title }}</span>
+          <span class="sl-pb__rtitle sl-pb__only-open">Unlocked: {{ block.settings.title }}</span>
+          <span class="sl-pb__rsub sl-pb__only-locked">{% if pmin >= 3 %}Pick the 3-pack{% else %}Pick the 2-pack or 3-pack{% endif %} to unlock it.</span>
+          <span class="sl-pb__rsub sl-pb__only-open">Added to your order, free. {{ block.settings.text }}</span>
+        </span>
+        <span class="sl-pb__rval"><s>{{ pv.price | money }}</s><b>FREE</b></span>
+      </div>
+    {%- endif -%}
+    </div>
     {%- endif -%}
   {%- endif -%}
 
@@ -119,7 +143,7 @@
   {%- endif -%}
 
   {%- if p != blank and pv -%}
-    <label class="sl-prot__row" for="SlProt-{{ block.id }}">
+    <label class="sl-prot__row sl-prot__row--prot" for="SlProt-{{ block.id }}">
       <input type="checkbox" id="SlProt-{{ block.id }}" class="sl-prot__check" data-variant-id="{{ pv.id }}"{% if block.settings.checked %} checked{% endif %}>
       <span class="sl-prot__box" aria-hidden="true"></span>
       <span class="sl-prot__copy">
@@ -164,6 +188,8 @@
   .sl-pb__name{font-weight:600}
   .sl-pb__sub{font-size:.85rem;color:var(--mu)}
   .sl-pb__gift{font-size:.82rem;font-weight:600;color:#2E8B57}
+  .sl-pb__rewards{display:grid;gap:10px}
+  .sl-pb--protfree .sl-prot__row--prot{display:none}
   .sl-pb__reward{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 18px;border:1.5px dashed #b9ae9b;border-radius:14px;background:rgba(255,255,255,.35);cursor:pointer;transition:background .25s,border-color .25s}
   .sl-pb__reward:focus-visible{outline:2px solid var(--n);outline-offset:2px}
   .sl-pb__rico{position:relative;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#ebe5da;color:#6b6f7e;transition:background .25s,color .25s}
@@ -224,16 +250,25 @@
     // free bonus that comes with the larger bundles
     var o = r.querySelector('.sl-pb__opt[aria-checked="true"]');
     if (o && o.dataset.bonus === '1' && r.dataset.bonusId) ids.push(r.dataset.bonusId);
+    // free shipping protection with the biggest bundle
+    var pr = r.querySelector('[data-sl-reward][data-prot][data-state="open"]');
+    if (pr && r.dataset.protId) ids.push(r.dataset.protId);
+    ids = ids.filter(function(id, i){ return ids.indexOf(id) === i; });
     return ids;
   }
   function selectedVariant(r){ var o = r.querySelector('.sl-pb__opt[aria-checked="true"]'); if (o) return o.dataset.variantId;
     var inp = sectionEl(r).querySelector('form[data-type="add-to-cart-form"] input[name="id"]'); return inp && inp.value; }
 
   // lock / unlock the free-bonus panel to match the chosen bundle
+  function selN(r){ var o = r.querySelector('.sl-pb__opt[aria-checked="true"]'); return o ? (parseInt(o.dataset.n, 10) || 1) : 1; }
   function syncReward(r){
-    var rw = r.querySelector('[data-sl-reward]'); if (!rw) return;
-    var o = r.querySelector('.sl-pb__opt[aria-checked="true"]');
-    rw.setAttribute('data-state', (o && o.dataset.bonus === '1') ? 'open' : 'locked');
+    var n = selN(r), freeProt = false;
+    r.querySelectorAll('[data-sl-reward]').forEach(function(rw){
+      var open = n >= (parseInt(rw.dataset.min, 10) || 99);
+      rw.setAttribute('data-state', open ? 'open' : 'locked');
+      if (open && rw.dataset.prot) freeProt = true;
+    });
+    r.classList.toggle('sl-pb--protfree', freeProt);
   }
   function initRewards(){ document.querySelectorAll('[data-sl-pb]').forEach(syncReward); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initRewards); else initRewards();
@@ -272,7 +307,11 @@
     var rw = e.target.closest('[data-sl-reward]');
     if (rw) {
       var rb = box(rw);
-      if (rw.getAttribute('data-state') === 'locked') { var target = rb.querySelector('.sl-pb__opt[data-bonus="1"]:not(:disabled)'); if (target) target.click(); }
+      if (rw.getAttribute('data-state') === 'locked') {
+        var need = parseInt(rw.dataset.min, 10) || 2;
+        var target = Array.prototype.filter.call(rb.querySelectorAll('.sl-pb__opt:not(:disabled)'), function(o){ return (parseInt(o.dataset.n, 10) || 1) >= need; })[0];
+        if (target) target.click();
+      }
       return;
     }
     // our add to cart -> theme add to cart
@@ -337,6 +376,7 @@
 {"type":"text","id":"title","label":"Title","default":"Shipping protection"},
 {"type":"text","id":"text","label":"Text","default":"Covers loss, theft or damage in transit. We'll replace or refund your order."},
 {"type":"checkbox","id":"checked","label":"Ticked by default","default":false},
+{"type":"select","id":"free_prot_min","label":"Free protection with","info":"Needs an automatic discount that makes the protection free, or customers will be charged for it.","options":[{"value":"0","label":"Never (always paid)"},{"value":"2","label":"2 bands or more"},{"value":"3","label":"3 bands only"}],"default":"3"},
 {"type":"header","content":"Checkout"},
 {"type":"checkbox","id":"show_shop_pay","label":"Show Buy with Shop Pay button","default":true},
 {"type":"checkbox","id":"hide_express","label":"Hide theme's express checkout buttons","info":"The theme's own express buttons skip shipping protection.","default":true},
