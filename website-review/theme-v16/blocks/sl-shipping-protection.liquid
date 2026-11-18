@@ -68,6 +68,7 @@
             <span class="sl-pb__name">{{ val.name }}</span>
             <span class="sl-pb__sub">{% if n > 1 %}{{ per | money }} per band{% else %}{{ block.settings.single_sub }}{% endif %}{% if v.available == false %} · Sold out{% endif %}</span>
             {%- if has_bonus and n >= bmin -%}<span class="sl-pb__gift">+ Free sleep guide</span>{%- endif -%}
+            {%- if has_pfree and n >= pmin -%}<span class="sl-pb__gift">+ Free shipping protection</span>{%- endif -%}
           </span>
           <span class="sl-pb__price">{{ v.price | money }}{% if save > 0 %}<s>{{ full | money }}</s>{% endif %}</span>
         </button>
