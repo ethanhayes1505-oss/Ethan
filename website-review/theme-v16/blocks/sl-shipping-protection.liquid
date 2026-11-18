@@ -62,14 +62,26 @@
           <span class="sl-pb__main">
             <span class="sl-pb__name">{{ val.name }}</span>
             <span class="sl-pb__sub">{% if n > 1 %}{{ per | money }} per band{% else %}{{ block.settings.single_sub }}{% endif %}{% if v.available == false %} · Sold out{% endif %}</span>
-            {%- if has_bonus and n >= bmin -%}<span class="sl-pb__gift">+ Free: {{ block.settings.bonus_label }}</span>{%- endif -%}
+            {%- if has_bonus and n >= bmin -%}<span class="sl-pb__gift">+ Free sleep guide</span>{%- endif -%}
           </span>
           <span class="sl-pb__price">{{ v.price | money }}{% if save > 0 %}<s>{{ full | money }}</s>{% endif %}</span>
         </button>
       {%- endfor -%}
     </div>
     {%- if has_bonus -%}
-      <p class="sl-pb__bonus-note"><strong>Free with {% if bmin >= 3 %}3 bands{% else %}2 or 3 bands{% endif %}:</strong> {{ block.settings.bonus_label }}. {{ block.settings.bonus_note }} {{ bv.price | money }} on its own.</p>
+      <div class="sl-pb__reward" data-sl-reward data-state="locked" role="button" tabindex="0">
+        <span class="sl-pb__rico" aria-hidden="true">
+          <svg class="sl-pb__lock" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <svg class="sl-pb__tick" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+        <span class="sl-pb__rtxt">
+          <span class="sl-pb__rtitle sl-pb__only-locked">Free bonus: {{ block.settings.bonus_label }}</span>
+          <span class="sl-pb__rtitle sl-pb__only-open">Unlocked: {{ block.settings.bonus_label }}</span>
+          <span class="sl-pb__rsub sl-pb__only-locked">{% if bmin >= 3 %}Pick the 3-pack{% else %}Pick the 2-pack or 3-pack{% endif %} to unlock it.</span>
+          <span class="sl-pb__rsub sl-pb__only-open">Added to your order, free. {{ block.settings.bonus_note }}</span>
+        </span>
+        <span class="sl-pb__rval"><s>{{ bv.price | money }}</s><b>FREE</b></span>
+      </div>
     {%- endif -%}
   {%- endif -%}
 
@@ -152,8 +164,23 @@
   .sl-pb__name{font-weight:600}
   .sl-pb__sub{font-size:.85rem;color:var(--mu)}
   .sl-pb__gift{font-size:.82rem;font-weight:600;color:#2E8B57}
-  .sl-pb__bonus-note{margin:0;font-size:.85rem;line-height:1.45;color:var(--mu)}
-  .sl-pb__bonus-note strong{color:var(--n)}
+  .sl-pb__reward{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 18px;border:1.5px dashed #b9ae9b;border-radius:14px;background:rgba(255,255,255,.35);cursor:pointer;transition:background .25s,border-color .25s}
+  .sl-pb__reward:focus-visible{outline:2px solid var(--n);outline-offset:2px}
+  .sl-pb__rico{position:relative;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#ebe5da;color:#6b6f7e;transition:background .25s,color .25s}
+  .sl-pb__rico svg{grid-area:1/1}
+  .sl-pb__rtxt{display:grid;gap:2px;min-width:0}
+  .sl-pb__rtitle{font-weight:600;font-size:.95rem;line-height:1.3}
+  .sl-pb__rsub{font-size:.83rem;line-height:1.4;color:var(--mu)}
+  .sl-pb__rval{display:grid;justify-items:end;gap:2px;font-size:.8rem;color:var(--mu)}
+  .sl-pb__rval b{font-size:.74rem;letter-spacing:.06em;padding:3px 9px;border-radius:99px;background:#ebe5da;color:#6b6f7e;transition:background .25s,color .25s}
+  .sl-pb__reward[data-state="locked"] .sl-pb__only-open,.sl-pb__reward[data-state="locked"] .sl-pb__tick{display:none}
+  .sl-pb__reward[data-state="open"] .sl-pb__only-locked,.sl-pb__reward[data-state="open"] .sl-pb__lock{display:none}
+  .sl-pb__reward[data-state="open"]{border:1.5px solid #2E8B57;background:rgba(46,139,87,.08)}
+  .sl-pb__reward[data-state="open"] .sl-pb__rico{background:#2E8B57;color:#fff;animation:slpop .35s ease-out}
+  .sl-pb__reward[data-state="open"] .sl-pb__rval b{background:#2E8B57;color:#fff}
+  .sl-pb__reward[data-state="open"] .sl-pb__rtitle{color:#1f6b42}
+  @keyframes slpop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.sl-pb__reward[data-state="open"] .sl-pb__rico{animation:none}}
   .sl-pb__price{display:grid;justify-items:end;font-weight:600;font-variant-numeric:tabular-nums}
   .sl-pb__price s{font-weight:400;font-size:.82rem;color:var(--mu)}
   .sl-pb__badge{position:absolute;top:-10px;right:14px;background:var(--n);color:var(--c);font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:3px 10px;border-radius:99px}
@@ -202,6 +229,19 @@
   function selectedVariant(r){ var o = r.querySelector('.sl-pb__opt[aria-checked="true"]'); if (o) return o.dataset.variantId;
     var inp = sectionEl(r).querySelector('form[data-type="add-to-cart-form"] input[name="id"]'); return inp && inp.value; }
 
+  // lock / unlock the free-bonus panel to match the chosen bundle
+  function syncReward(r){
+    var rw = r.querySelector('[data-sl-reward]'); if (!rw) return;
+    var o = r.querySelector('.sl-pb__opt[aria-checked="true"]');
+    rw.setAttribute('data-state', (o && o.dataset.bonus === '1') ? 'open' : 'locked');
+  }
+  function initRewards(){ document.querySelectorAll('[data-sl-pb]').forEach(syncReward); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initRewards); else initRewards();
+  document.addEventListener('keydown', function(e){
+    var rw = e.target.closest && e.target.closest('[data-sl-reward]');
+    if (rw && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); rw.click(); }
+  });
+
   async function addExtras(ids){
     try {
       var cart = await (await fetch('/cart.js', {headers:{'Accept':'application/json'}})).json();
@@ -219,12 +259,20 @@
       var r = box(opt);
       r.querySelectorAll('.sl-pb__opt').forEach(function(o){ o.setAttribute('aria-checked', o === opt ? 'true' : 'false'); });
       var price = r.querySelector('[data-sl-price]'); if (price) price.textContent = opt.dataset.price;
+      syncReward(r);
       var sec = sectionEl(r);
       var form = sec.querySelector('form[data-type="add-to-cart-form"] input[name="id"]'); if (form) form.value = opt.dataset.variantId;
       var name = r.dataset.optionName;
       sec.querySelectorAll('variant-picker input[type="radio"]').forEach(function(i){
         if (i.dataset.optionName === name && i.value === opt.dataset.value && !i.checked) i.click();
       });
+      return;
+    }
+    // tapping the locked bonus panel picks the first bundle that unlocks it
+    var rw = e.target.closest('[data-sl-reward]');
+    if (rw) {
+      var rb = box(rw);
+      if (rw.getAttribute('data-state') === 'locked') { var target = rb.querySelector('.sl-pb__opt[data-bonus="1"]:not(:disabled)'); if (target) target.click(); }
       return;
     }
     // our add to cart -> theme add to cart
