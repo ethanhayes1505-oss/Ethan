@@ -1,0 +1,163 @@
+{%- liquid
+  assign code = section.settings.code | strip
+  assign gift = section.settings.gift_product
+  assign gv = gift.selected_or_first_available_variant
+-%}
+{%- if section.settings.enabled and code != blank -%}
+<div class="sl-sc" data-sl-scratch data-delay="{{ section.settings.delay }}" data-days="{{ section.settings.days }}" data-code="{{ code | escape }}" data-gift-id="{% if gift != blank and gift.available %}{{ gv.id }}{% endif %}" hidden>
+  <div class="sl-sc__backdrop" data-sc-close></div>
+  <div class="sl-sc__card" role="dialog" aria-modal="true" aria-labelledby="SlScTitle">
+    <button type="button" class="sl-sc__x" data-sc-close aria-label="Close">&times;</button>
+    <p class="sl-sc__eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2 class="sl-sc__title" id="SlScTitle">{{ section.settings.heading }}</h2>
+    <p class="sl-sc__sub">{{ section.settings.subheading }}</p>
+    <div class="sl-sc__ticket">
+      <div class="sl-sc__prize">
+        <span class="sl-sc__prize-k">{{ section.settings.prize_label }}</span>
+        <span class="sl-sc__prize-t">{{ section.settings.prize_title }}</span>
+        <span class="sl-sc__prize-s">{{ section.settings.prize_text }}</span>
+      </div>
+      <canvas class="sl-sc__canvas" aria-hidden="true"></canvas>
+    </div>
+    <button type="button" class="sl-sc__reveal" data-sc-reveal>Reveal without scratching</button>
+    <div class="sl-sc__won" data-sc-won hidden>
+      <p class="sl-sc__code">Your code: <strong>{{ code }}</strong></p>
+      <button type="button" class="sl-sc__claim" data-sc-claim>{{ section.settings.button }}</button>
+      <p class="sl-sc__fine">{{ section.settings.fine }}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sl-sc[hidden]{display:none}
+  .sl-sc,.sl-sc *{box-sizing:border-box}
+  .sl-sc{--n:#1E2A44;--c:#F5F1EA;--a:#B4531F;--mu:#5d6273;position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:16px}
+  .sl-sc__backdrop{position:absolute;inset:0;background:rgba(20,26,40,.55);opacity:0;transition:opacity .25s}
+  .sl-sc__card{position:relative;width:100%;max-width:400px;background:var(--c);color:var(--n);border-radius:22px;padding:30px 24px 24px;text-align:center;box-shadow:0 24px 60px rgba(20,26,40,.35);opacity:0;transform:translateY(14px) scale(.98);transition:opacity .25s,transform .25s}
+  .sl-sc.is-open .sl-sc__backdrop{opacity:1}
+  .sl-sc.is-open .sl-sc__card{opacity:1;transform:none}
+  .sl-sc__x{position:absolute;top:8px;right:10px;width:40px;height:40px;border:0;background:none;color:var(--mu);font-size:1.7rem;line-height:1;cursor:pointer;border-radius:50%}
+  .sl-sc__x:focus-visible,.sl-sc__reveal:focus-visible,.sl-sc__claim:focus-visible{outline:2px solid var(--n);outline-offset:2px}
+  .sl-sc__eyebrow{margin:0 0 8px;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a)}
+  .sl-sc__title{margin:0;font-family:var(--font-heading--family,Georgia,serif);font-weight:400;font-size:2rem;line-height:1.08;letter-spacing:-.01em;color:var(--n)}
+  .sl-sc__sub{margin:10px auto 18px;max-width:30ch;font-size:.92rem;line-height:1.45;color:var(--mu)}
+  .sl-sc__ticket{position:relative;height:150px;border-radius:16px;overflow:hidden;background:#fff;border:1.5px dashed #b9ae9b}
+  .sl-sc__prize{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;gap:4px;padding:12px}
+  .sl-sc__prize-k{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2E8B57}
+  .sl-sc__prize-t{font-family:var(--font-heading--family,Georgia,serif);font-size:1.7rem;line-height:1.1;color:var(--n)}
+  .sl-sc__prize-s{font-size:.84rem;line-height:1.35;color:var(--mu);max-width:28ch}
+  .sl-sc__canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none;transition:opacity .45s}
+  .sl-sc.is-won .sl-sc__canvas{opacity:0;pointer-events:none}
+  .sl-sc.is-won .sl-sc__ticket{border:1.5px solid #2E8B57;background:rgba(46,139,87,.07)}
+  .sl-sc__reveal{margin-top:12px;border:0;background:none;color:var(--mu);font:inherit;font-size:.82rem;text-decoration:underline;cursor:pointer;padding:6px}
+  .sl-sc.is-won .sl-sc__reveal{display:none}
+  .sl-sc__won{margin-top:14px;display:grid;gap:10px}
+  .sl-sc__won[hidden]{display:none}
+  .sl-sc__code{margin:0;font-size:.9rem;color:var(--mu)}
+  .sl-sc__code strong{color:var(--n);letter-spacing:.06em}
+  .sl-sc__claim{min-height:54px;border:0;border-radius:999px;background:var(--n);color:var(--c);font:inherit;font-weight:600;font-size:1rem;cursor:pointer;box-shadow:0 6px 18px rgba(30,42,68,.18)}
+  .sl-sc__claim[aria-busy="true"]{opacity:.7}
+  .sl-sc__fine{margin:0;font-size:.76rem;line-height:1.4;color:var(--mu)}
+  @media (prefers-reduced-motion:reduce){.sl-sc__backdrop,.sl-sc__card,.sl-sc__canvas{transition:none}}
+</style>
+
+<script>
+(function(){
+  if (window.__slScratch) return; window.__slScratch = true;
+  var root = document.querySelector('[data-sl-scratch]'); if (!root) return;
+  var KEY = 'slScratch', canvas = root.querySelector('canvas'), ctx, down = false, moves = 0, done = false, lastFocus = null;
+  function store(v){ try { localStorage.setItem(KEY, JSON.stringify(v)); } catch(e){} }
+  function read(){ try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e){ return null; } }
+
+  function paint(){
+    var r = canvas.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    canvas.width = Math.round(r.width * d); canvas.height = Math.round(r.height * d);
+    ctx = canvas.getContext('2d'); ctx.scale(d, d);
+    var g = ctx.createLinearGradient(0, 0, r.width, r.height);
+    g.addColorStop(0, '#2b3a5c'); g.addColorStop(.5, '#1E2A44'); g.addColorStop(1, '#34497D');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, r.width, r.height);
+    ctx.fillStyle = 'rgba(245,241,234,.10)';
+    for (var x = -r.height; x < r.width; x += 18) { ctx.beginPath(); ctx.moveTo(x, r.height); ctx.lineTo(x + r.height, 0); ctx.lineTo(x + r.height + 6, 0); ctx.lineTo(x + 6, r.height); ctx.fill(); }
+    ctx.fillStyle = '#F5F1EA'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = '600 17px system-ui,-apple-system,Segoe UI,sans-serif'; ctx.fillText('Scratch here', r.width / 2, r.height / 2 - 8);
+    ctx.font = '400 12px system-ui,-apple-system,Segoe UI,sans-serif'; ctx.fillStyle = 'rgba(245,241,234,.75)'; ctx.fillText('Use your finger or mouse', r.width / 2, r.height / 2 + 14);
+  }
+  function scratch(e){
+    var r = canvas.getBoundingClientRect();
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath(); ctx.arc(e.clientX - r.left, e.clientY - r.top, 24, 0, Math.PI * 2); ctx.fill();
+    if (++moves % 6 === 0) check();
+  }
+  function check(){
+    var w = canvas.width, h = canvas.height, data, clear = 0, total = 0;
+    try { data = ctx.getImageData(0, 0, w, h).data; } catch(e){ return; }
+    for (var y = 4; y < h; y += 12) for (var x = 4; x < w; x += 12) { total++; if (data[(y * w + x) * 4 + 3] < 40) clear++; }
+    if (total && clear / total > .45) win();
+  }
+  function win(){
+    if (done) return; done = true;
+    root.classList.add('is-won');
+    root.querySelector('[data-sc-won]').hidden = false;
+    store({ t: Date.now(), won: true });
+    var b = root.querySelector('[data-sc-claim]'); if (b) b.focus();
+  }
+  function open(){
+    lastFocus = document.activeElement;
+    root.hidden = false; paint();
+    requestAnimationFrame(function(){ root.classList.add('is-open'); });
+    store({ t: Date.now() });
+    var x = root.querySelector('.sl-sc__x'); if (x) x.focus();
+  }
+  function close(){
+    root.classList.remove('is-open');
+    setTimeout(function(){ root.hidden = true; }, 250);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  canvas.addEventListener('pointerdown', function(e){ down = true; try { canvas.setPointerCapture(e.pointerId); } catch(_){} scratch(e); });
+  canvas.addEventListener('pointermove', function(e){ if (down) scratch(e); });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(n){ canvas.addEventListener(n, function(){ if (down) { down = false; check(); } }); });
+
+  root.addEventListener('click', function(e){
+    if (e.target.closest('[data-sc-close]')) { close(); return; }
+    if (e.target.closest('[data-sc-reveal]')) { win(); return; }
+    var claim = e.target.closest('[data-sc-claim]');
+    if (claim && claim.getAttribute('aria-busy') !== 'true') {
+      claim.setAttribute('aria-busy', 'true');
+      var go = function(){ window.location.href = '/discount/' + encodeURIComponent(root.dataset.code) + '?redirect=' + encodeURIComponent(location.pathname + location.search); };
+      var gid = root.dataset.giftId;
+      if (!gid) { go(); return; }
+      fetch('/cart.js', { headers: { Accept: 'application/json' } }).then(function(r){ return r.json(); }).then(function(c){
+        if (c.items.some(function(i){ return String(i.variant_id) === String(gid); })) return;
+        return fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ items: [{ id: Number(gid), quantity: 1 }] }) });
+      }).catch(function(){}).then(go);
+    }
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !root.hidden) close(); });
+
+  // show once per visitor, then again only after the set number of days; never on cart or checkout
+  var seen = read(), days = parseFloat(root.dataset.days) || 14;
+  if (/^\/(cart|checkouts?)/.test(location.pathname)) return;
+  if (seen && Date.now() - seen.t < days * 864e5) return;
+  setTimeout(open, (parseFloat(root.dataset.delay) || 8) * 1000);
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{"name":"SL Scratch card","settings":[
+{"type":"paragraph","content":"A pop-up scratch card that reveals a welcome gift. It only shows once a discount code is entered below. The code must exist in Shopify Discounts and really give the gift named on the card."},
+{"type":"checkbox","id":"enabled","label":"Show the scratch card","default":true},
+{"type":"text","id":"code","label":"Discount code","info":"Leave empty to switch the scratch card off."},
+{"type":"product","id":"gift_product","label":"Gift product (optional)","info":"Added to the cart when the visitor claims. Use it when the gift is a free product."},
+{"type":"text","id":"eyebrow","label":"Small top line","default":"A welcome gift"},
+{"type":"text","id":"heading","label":"Heading","default":"Scratch to see yours"},
+{"type":"text","id":"subheading","label":"Line under the heading","default":"One for every new visitor. Scratch the card to see what's inside."},
+{"type":"text","id":"prize_label","label":"Small line above the gift","default":"Your gift"},
+{"type":"text","id":"prize_title","label":"Gift name","default":"Free sleep guide"},
+{"type":"text","id":"prize_text","label":"Gift line of text","default":"The Quiet Morning Guide, free with your Silent Wake Band."},
+{"type":"text","id":"button","label":"Button","default":"Add my gift"},
+{"type":"text","id":"fine","label":"Small print","default":"Applied at checkout with any Silent Wake Band. One per order."},
+{"type":"range","id":"delay","label":"Seconds before it shows","min":2,"max":30,"step":1,"default":8},
+{"type":"range","id":"days","label":"Days before showing it to the same visitor again","min":1,"max":60,"step":1,"default":14}]}
+{% endschema %}
