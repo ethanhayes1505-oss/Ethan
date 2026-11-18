@@ -145,8 +145,18 @@
       "type": "sl-scratch",
       "settings": {
         "enabled": true,
-        "code": "",
-        "gift_product": "the-quiet-morning-guide"
+        "code": "PROTECTED",
+        "gift_product": "shipping-protection",
+        "eyebrow": "A welcome gift",
+        "heading": "Scratch to see yours",
+        "subheading": "One for every new visitor. Scratch the card to see what's inside.",
+        "prize_label": "Your gift",
+        "prize_title": "Free shipping protection",
+        "prize_text": "Worth $2.99, free with your order. Free US shipping is included on every order too.",
+        "button": "Add my gift",
+        "fine": "Shipping protection is added to your cart and made free at checkout with code PROTECTED.",
+        "delay": 8,
+        "days": 14
       }
     }
   },
