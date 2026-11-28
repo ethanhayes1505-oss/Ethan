@@ -1,0 +1,523 @@
+<title>Seven Product Sheet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: one comparison table up top, then one card per product built around a receipt-style "per order" ledger. */
+:root{
+  --bg:#f3f6f8; --surface:#ffffff; --ink:#14212b; --muted:#566673; --line:#d7dfe5;
+  --accent:#0f6e8c; --pos:#1c7548; --neg:#b0352d; --warn:#8f5b00;
+  --pos-bg:#e6f3ec; --neg-bg:#f9e9e7; --warn-bg:#fbf1dc; --tint:#e9f1f5;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif;
+  --body:"Inter","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e151b; --surface:#162029; --ink:#e6edf2; --muted:#9bafbc; --line:#2a3945;
+    --accent:#62c3e0; --pos:#62cf9a; --neg:#ff938a; --warn:#f0bb57;
+    --pos-bg:#143024; --neg-bg:#3a1c1a; --warn-bg:#35290f; --tint:#1b2a35; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e151b; --surface:#162029; --ink:#e6edf2; --muted:#9bafbc; --line:#2a3945;
+  --accent:#62c3e0; --pos:#62cf9a; --neg:#ff938a; --warn:#f0bb57;
+  --pos-bg:#143024; --neg-bg:#3a1c1a; --warn-bg:#35290f; --tint:#1b2a35; color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 56px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:flex;flex-direction:column;gap:28px;}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2;}
+h1{font-size:30px;font-weight:700;}
+h2{font-size:21px;font-weight:600;}
+h3{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+p{margin:0;max-width:68ch;}
+a{color:var(--accent);}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.lede{color:var(--muted);}
+.head{display:flex;flex-direction:column;gap:8px;}
+.note{background:var(--tint);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;}
+.note ul{margin:0;padding-left:18px;}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface);}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:14px;font-variant-numeric:tabular-nums;}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+th{font-family:var(--display);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+tr:last-child td{border-bottom:0;}
+td.num{white-space:nowrap;}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;}
+.p-pos{background:var(--pos-bg);color:var(--pos);}
+.p-neg{background:var(--neg-bg);color:var(--neg);}
+.p-warn{background:var(--warn-bg);color:var(--warn);}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:16px;}
+.card-top{display:flex;flex-direction:column;gap:4px;}
+.brand{font-size:13px;color:var(--muted);}
+.grid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0;}
+.ledger{border:1px dashed var(--line);border-radius:8px;padding:12px 14px;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;gap:6px;}
+.ledger div{display:flex;justify-content:space-between;gap:12px;}
+.ledger span:first-child{color:var(--muted);}
+.ledger .total{border-top:1px solid var(--line);padding-top:8px;font-weight:600;}
+.facts{display:flex;flex-direction:column;gap:4px;font-size:14px;}
+.facts b{font-weight:600;}
+.block{display:flex;flex-direction:column;gap:6px;}
+.block ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.good,.bad{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0;}
+.good{background:var(--pos-bg);} .bad{background:var(--neg-bg);}
+.good h3{color:var(--pos);} .bad h3{color:var(--neg);}
+.good ul,.bad ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;}
+.src{font-size:13px;color:var(--muted);}
+.src ul{margin:0;padding-left:18px;columns:2;column-gap:28px;}
+.src li{break-inside:avoid;margin-bottom:4px;}
+@media (max-width:720px){
+  .grid,.two{grid-template-columns:minmax(0,1fr);}
+  .src ul{columns:1;}
+  h1{font-size:25px;}
+}
+</style>
+
+<div class="wrap">
+
+<div class="head">
+  <h1>Seven Product Sheet</h1>
+  <p class="lede">Research date: 28 November 2026. Every number below was read from the seller's own page, Meta's Ad Library, AliExpress or a named source. Anything I estimated or could not check is labelled.</p>
+</div>
+
+<div class="note">
+  <h3>How to read the money</h3>
+  <ul>
+    <li><b>Left per order</b> is the selling price minus supplier cost, shipping and card fees. It is before ad spend.</li>
+    <li>The wake band test showed we need about <b>£40 left per order</b> to survive Meta's ad costs.</li>
+    <li>Supplier prices are AliExpress single-unit prices. Bulk prices from Alibaba should be lower.</li>
+    <li>Shipping figures are my estimates, not quotes. Card fees are 2.9% plus $0.30. $1 = £0.76.</li>
+  </ul>
+</div>
+
+<div class="block">
+  <h2>All seven side by side</h2>
+  <div class="scroll">
+  <table>
+    <thead><tr>
+      <th>Product</th><th>Sells for</th><th>Supplier cost</th><th>Left per order</th><th>£40 bar</th><th>Live US ads</th><th>On sale since</th><th>Main block</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>PureNest cat odour puck</td><td class="num">$45.99</td><td class="num">$16.54</td><td class="num">about £18</td><td><span class="pill p-neg">Below</span></td><td class="num">198</td><td class="num">Jul 2026</td><td>Core claim disputed by the EPA</td></tr>
+      <tr><td>TruLink golf wrist trainer</td><td class="num">about $33</td><td class="num">$3.45–$7.33</td><td class="num">about £15</td><td><span class="pill p-neg">Below</span></td><td class="num">182</td><td class="num">Jul 2025</td><td>Low price, needs a bundle</td></tr>
+      <tr><td>SmoothPaw cat nail box</td><td class="num">$49.99</td><td class="num">$15–$17</td><td class="num">about £18</td><td><span class="pill p-neg">Below</span></td><td class="num">626</td><td class="num">Jul 2026</td><td>No proof it works</td></tr>
+      <tr><td>Canivet dog tooth cleaner</td><td class="num">$99.90</td><td class="num">$8.43–$13.65</td><td class="num">about £64</td><td><span class="pill p-pos">Clears</span></td><td class="num">234</td><td class="num">Mar 2026</td><td>Vets advise against it</td></tr>
+      <tr><td>Cattasaurus cat cave</td><td class="num">$89 for two</td><td class="num">$6–$19 each</td><td class="num">£25–£35</td><td><span class="pill p-warn">Close</span></td><td class="num">484</td><td class="num">2021–22</td><td>Design patent</td></tr>
+      <tr><td>Uahpet air purifier</td><td class="num">$79</td><td class="num">not available</td><td class="num">not known</td><td><span class="pill p-warn">Not known</span></td><td class="num">241</td><td class="num">Jan 2026</td><td>Their own product</td></tr>
+      <tr><td>Chewie herding ball</td><td class="num">about $71</td><td class="num">$11–$27</td><td class="num">£26–£38</td><td><span class="pill p-warn">Close</span></td><td class="num">644</td><td class="num">Mar 2026</td><td>Free-replacement promise</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="src">Live US ads are Meta's estimate for the pages each brand advertises from. The TruLink and Uahpet counts cover every product those brands sell. TruLink and Chewie showed me UK prices (£24.99 and £54), so their dollar prices are conversions.</p>
+</div>
+
+<div class="note">
+  <h3>What the numbers show, criterion by criterion</h3>
+  <ul>
+    <li><b>Most money per order:</b> Canivet, by a wide margin. The herding ball and cat cave come next.</li>
+    <li><b>Most ad activity:</b> the herding ball (644) and SmoothPaw (626).</li>
+    <li><b>Longest running:</b> Cattasaurus (four to five years) and TruLink (16 months).</li>
+    <li><b>Can be sold with no health claim:</b> SmoothPaw, herding ball, wrist trainer, cat cave.</li>
+    <li><b>Claim disputed by an authority:</b> PureNest (EPA) and Canivet (veterinary bodies).</li>
+    <li><b>Cannot be copied as it is:</b> the cat cave (design patent) and the Uahpet purifier (their own design).</li>
+    <li><b>Lightest to ship:</b> wrist trainer, tooth cleaner, odour puck.</li>
+  </ul>
+</div>
+
+<!-- 1 -->
+<div class="card">
+  <div class="card-top">
+    <h2>PureNest cat odour puck</h2>
+    <div class="brand">Zoosnug · a small rechargeable disc that sits near the litter box and releases negative ions</div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <div class="ledger">
+        <div><span>Sells for</span><span>$45.99</span></div>
+        <div><span>Supplier (matching puck)</span><span>−$16.54</span></div>
+        <div><span>Shipping (estimate)</span><span>−$4.50</span></div>
+        <div><span>Card fees</span><span>−$1.63</span></div>
+        <div class="total"><span>Left per order</span><span>$23.32 · £18</span></div>
+      </div>
+      <div class="facts">
+        <div><b>Live US ads:</b> 198, from a page called "Your pet trainer"</div>
+        <div><b>On sale since:</b> 11 July 2026</div>
+        <div><b>Guarantee:</b> 60 days, no questions</div>
+        <div><b>Other ionisers on AliExpress:</b> $3–$20</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="block"><h3>Who buys</h3><p>Indoor-cat owners, often with two or more cats. Every review on the page is from a woman, and the ads are written to women who host family at home. That is the seller's targeting, not measured data.</p></div>
+      <div class="block"><h3>What they want</h3><p>To stop being the house that smells of cat. The page leans on shame: avoiding guests, being told by a sister, lighting candles before visitors.</p></div>
+      <div class="block"><h3>Angles</h3><ul>
+        <li><b>Seller leads with:</b> "What Happens to Your Nose After Living With Cats for a Year" (you have gone nose-blind).</li>
+        <li><b>Also used:</b> sprays only mask it; host again without worrying.</li>
+        <li><b>Usable honestly:</b> none of the strong ones, because the product would have to deliver the odour removal.</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="good"><h3>Positives</h3><ul>
+      <li>Small and light, cheap to ship.</li>
+      <li>Strong emotional pull, and the nose-blind idea makes people doubt their own home.</li>
+      <li>One per room, so two- and three-packs are natural.</li>
+      <li>About 53 million US households own a cat.</li>
+    </ul></div>
+    <div class="bad"><h3>Negatives</h3><ul>
+      <li>The EPA says ion generators do not remove gases or odours. That is the whole promise.</li>
+      <li>California requires every indoor air cleaner sold there to be certified, including online sales.</li>
+      <li>Ionisers can produce ozone, so "100% safe for cats" is a claim you would have to prove.</li>
+      <li>Left per order is about £18 on a single unit.</li>
+      <li>The odour pitch is crowded: Petmizer alone runs 716 ads, with many look-alike pages.</li>
+      <li>Their page shows "June: sold out, 5,320 sold" for a product created on 11 July. We would not copy that.</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="card">
+  <div class="card-top">
+    <h2>TruLink golf wrist trainer</h2>
+    <div class="brand">TruLink Golf · a strap-on brace with a rigid plate that stops the lead wrist bending</div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <div class="ledger">
+        <div><span>Sells for (£24.99 seen)</span><span>about $32.73</span></div>
+        <div><span>Supplier (matching brace)</span><span>−$7.33</span></div>
+        <div><span>Shipping (estimate)</span><span>−$4.00</span></div>
+        <div><span>Card fees</span><span>−$1.25</span></div>
+        <div class="total"><span>Left per order</span><span>$20.15 · £15</span></div>
+      </div>
+      <div class="facts">
+        <div><b>Live US ads:</b> 182 across all their products</div>
+        <div><b>On sale since:</b> 28 July 2025</div>
+        <div><b>Guarantee:</b> 30 days</div>
+        <div><b>Weight:</b> 337 g in their product data</div>
+        <div><b>Cheapest supplier:</b> $3.45</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="block"><h3>Who buys</h3><p>Golfers who play regularly and want to fix their own swing. In 2025 the US had 29.1 million on-course golfers, average age 44, and about 72% were men.</p></div>
+      <div class="block"><h3>What they want</h3><p>Clean, repeatable contact and more distance without paying for lessons. The pain is hitting one shot fat and the next thin in front of friends.</p></div>
+      <div class="block"><h3>Angles</h3><ul>
+        <li><b>Seller leads with:</b> "2 Weeks to Consistent Contact" and "Free Video Series From Pro Coach".</li>
+        <li><b>Page line:</b> "No swing thoughts. Just put it on and go."</li>
+        <li><b>Usable honestly:</b> what it physically does (keeps the wrist flat), plus a free drill video as the extra.</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="good"><h3>Positives</h3><ul>
+      <li>Sixteen months on sale, the longest of the products we could copy.</li>
+      <li>Light and very cheap to source.</li>
+      <li>No health claim needed.</li>
+      <li>Buyers are mostly men aged 25 to 50, the cheapest group to reach in the wake band test.</li>
+      <li>A free video series adds value at no cost per order.</li>
+    </ul></div>
+    <div class="bad"><h3>Negatives</h3><ul>
+      <li>About £15 left per order. It only works as a bundle or with add-ons.</li>
+      <li>At least six funded golf-aid advertisers, including Finalputt and Torc.</li>
+      <li>Walmart sells similar braces for $6–$20, which caps the price.</li>
+      <li>"More distance" is a results promise that leads to refunds.</li>
+      <li>Winter is the off-season in much of the US.</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="card">
+  <div class="card-top">
+    <h2>SmoothPaw cat nail filing box</h2>
+    <div class="brand">Feline Friends · a wooden puzzle box lined with sandpaper; the cat reaches in for treats and files its claws</div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <div class="ledger">
+        <div><span>Sells for</span><span>$49.99</span></div>
+        <div><span>Supplier (wooden box)</span><span>−$16.00</span></div>
+        <div><span>Shipping (estimate)</span><span>−$8.50</span></div>
+        <div><span>Card fees</span><span>−$1.75</span></div>
+        <div class="total"><span>Left per order</span><span>$23.74 · £18</span></div>
+      </div>
+      <div class="facts">
+        <div><b>Live US ads:</b> 626, from "Anne's Cat Diary" and "Mabel's Cat Diary"</div>
+        <div><b>On sale since:</b> 4 July 2026</div>
+        <div><b>Guarantee:</b> 30 days if nails are not smoother</div>
+        <div><b>Cheaper versions:</b> $4–$7, lower quality</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="block"><h3>Who buys</h3><p>Cat owners who dread nail trims. The ads run from pages posing as older women's cat diaries, which points to women aged 45 and over. That is the seller's targeting, not measured data.</p></div>
+      <div class="block"><h3>What they want</h3><p>No more wrestling the cat into a towel, no scratched arms or sofa, and no guilt about hurting her.</p></div>
+      <div class="block"><h3>Angles</h3><ul>
+        <li><b>Seller leads with:</b> "Cat breeder of 30 years nail care secret" and "They almost cut my cat's toe off...".</li>
+        <li><b>Page line:</b> "No clippers, no towel burritos and no stressed out cat."</li>
+        <li><b>Usable honestly:</b> a treat puzzle she scratches at, shown on video. Promise the play, not the result.</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="good"><h3>Positives</h3><ul>
+      <li>No health claim needed.</li>
+      <li>Very high ad activity for a five-month-old product.</li>
+      <li>Easy to show working in a short video.</li>
+      <li>Simple object with no electronics to fail.</li>
+      <li>Only one other seller appeared in my ad search.</li>
+    </ul></div>
+    <div class="bad"><h3>Negatives</h3><ul>
+      <li>I found no vet or independent source saying it shortens nails.</li>
+      <li>Similar boxes on Walmart score 1 to 3 stars on small samples.</li>
+      <li>About £18 left per order, and wood is heavy to ship.</li>
+      <li>Their own page warns of copycats, so the product is easy to clone.</li>
+      <li>A "nails not smoother" guarantee invites returns.</li>
+      <li>Their ads use invented diary personas, which we would not copy.</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="card">
+  <div class="card-top">
+    <h2>Canivet dog tooth cleaner</h2>
+    <div class="brand">Canivet · a pen-shaped ultrasonic scaler with five strength levels for scraping tartar off a dog's teeth at home</div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <div class="ledger">
+        <div><span>Sells for</span><span>$99.90</span></div>
+        <div><span>Supplier (5-mode scaler)</span><span>−$9.35</span></div>
+        <div><span>Shipping (estimate)</span><span>−$4.00</span></div>
+        <div><span>Card fees</span><span>−$3.20</span></div>
+        <div class="total"><span>Left per order</span><span>$83.35 · £64</span></div>
+      </div>
+      <div class="facts">
+        <div><b>Live US ads:</b> 234, from four pages</div>
+        <div><b>On sale since:</b> 28 March 2026</div>
+        <div><b>Guarantee:</b> 60 days, based on visible results</div>
+        <div><b>Supplier orders:</b> 2,000 on the matching listing</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="block"><h3>Who buys</h3><p>Dog owners worried about bad breath and brown teeth, and about the vet bill. A professional clean under anaesthesia is usually quoted at $300–$700, and about 80% of dogs show gum disease by age three.</p></div>
+      <div class="block"><h3>What they want</h3><p>To avoid the cost and the fear of putting the dog under anaesthesia, and to feel they are looking after the dog properly.</p></div>
+      <div class="block"><h3>Angles</h3><ul>
+        <li><b>Seller leads with:</b> "Silent Ultrasonic Plaque &amp; Tartar Remover for dogs".</li>
+        <li><b>Page lines:</b> "That brown buildup isn't a stain" and "no need for a general anesthesia".</li>
+        <li><b>Usable honestly:</b> hard to find one. The selling point is replacing the vet, which vets say it cannot do.</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="good"><h3>Positives</h3><ul>
+      <li>About £64 left per order, the only product clearly above our bar.</li>
+      <li>Small, light and cheap to source.</li>
+      <li>Eight months on sale with steady ad activity.</li>
+      <li>A real, expensive problem that most dog owners have.</li>
+      <li>No other brand appeared in the 20 ads I saw for this search.</li>
+    </ul></div>
+    <div class="bad"><h3>Negatives</h3><ul>
+      <li>No major vet body recommends cleaning without anaesthesia, according to PetMD, which names the AVMA, AAHA and AVDC.</li>
+      <li>A Swedish university found ultrasonic toothbrushes do not remove tartar in dogs.</li>
+      <li>A pointed metal tip on an awake dog can injure the gums.</li>
+      <li>The page promises to prevent gum disease. That is a health claim, which our rules exclude.</li>
+      <li>The page header says 863 reviews while its own review box says 38.</li>
+      <li>A results-based guarantee invites refunds. One Trustpilot review calls theirs misleading.</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="card">
+  <div class="card-top">
+    <h2>Cattasaurus Peekaboo cat cave</h2>
+    <div class="brand">Cattasaurus · a stiff felt ring-shaped tunnel that works as a bed, a hideout and a scratcher</div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <div class="ledger">
+        <div><span>Sells for (two caves)</span><span>$89.00</span></div>
+        <div><span>Supplier (two at $12.39)</span><span>−$24.78</span></div>
+        <div><span>Shipping (estimate)</span><span>−$15.00</span></div>
+        <div><span>Card fees</span><span>−$2.88</span></div>
+        <div class="total"><span>Left per order</span><span>$46.34 · £35</span></div>
+      </div>
+      <div class="facts">
+        <div><b>Live US ads:</b> 484, plus 68 in the UK, Canada and Australia</div>
+        <div><b>On sale since:</b> 2021–22</div>
+        <div><b>Guarantee:</b> 90 days</div>
+        <div><b>Reviews:</b> about 4,200 on Trustpilot at 4.5</div>
+        <div><b>Large-size supplier price:</b> not confirmed</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="block"><h3>Who buys</h3><p>Cat owners who spoil their cats, often with several cats or a large one. The page speaks to older buyers too ("no problem with old fingers").</p></div>
+      <div class="block"><h3>What they want</h3><p>A happy, busy cat, claws kept off the furniture, and something that looks good in the living room.</p></div>
+      <div class="block"><h3>Angles</h3><ul>
+        <li><b>Seller leads with:</b> "Cat Loves It or Your Money Back!"</li>
+        <li><b>Page line:</b> "9 reasons why this is a BIG hit with cats, even with picky ones".</li>
+        <li><b>Usable honestly:</b> cats playing in it on video, and furniture saved.</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="good"><h3>Positives</h3><ul>
+      <li>The most proven of the seven: years on sale and thousands of reviews.</li>
+      <li>No health claim needed.</li>
+      <li>Only three small copycats appeared in my ad search.</li>
+      <li>Naturally sold in pairs, which lifts the order value.</li>
+    </ul></div>
+    <div class="bad"><h3>Negatives</h3><ul>
+      <li>US design patent D1029404 protects the look. Selling the same design risks a takedown.</li>
+      <li>Bulky to ship.</li>
+      <li>Buyers complain about zips, cats that ignore it and returns.</li>
+      <li>Generic versions are $19–$45 at Walmart.</li>
+      <li>A "cat loves it or money back" promise is costly to match.</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- 6 -->
+<div class="card">
+  <div class="card-top">
+    <h2>Uahpet Air Purifier Slim</h2>
+    <div class="brand">Uahpet · a slim filter-based air purifier built to catch pet hair, dander and odour</div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <div class="ledger">
+        <div><span>Sells for</span><span>$79 · two for $139.99</span></div>
+        <div><span>Supplier</span><span>not available</span></div>
+        <div><span>Generic pet purifiers</span><span>$22–$65</span></div>
+        <div><span>Weight</span><span>2.6 kg</span></div>
+        <div class="total"><span>Left per order</span><span>not known</span></div>
+      </div>
+      <div class="facts">
+        <div><b>Live US ads:</b> 241 across the whole brand</div>
+        <div><b>On sale since:</b> 8 January 2026</div>
+        <div><b>Certifications claimed:</b> ETL, EPA, FCC, CE, CARB</div>
+        <div><b>Extras sold:</b> replacement filters</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="block"><h3>Who buys</h3><p>Pet owners bothered by floating hair, dust and smell, and people with allergies who still want pets. Uahpet is an established pet-tech brand with feeders, fountains and trackers.</p></div>
+      <div class="block"><h3>What they want</h3><p>A cleaner home with less hair on everything, fewer sneezes and quieter nights.</p></div>
+      <div class="block"><h3>Angles</h3><ul>
+        <li><b>Seller leads with:</b> "Let Your Air Purifier Catch the Fur".</li>
+        <li><b>Offer:</b> "Buy 2 &amp; Save".</li>
+        <li><b>Usable honestly:</b> catching hair and dust is a fair claim for a real filter.</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="good"><h3>Positives</h3><ul>
+      <li>Filters are a repeat purchase.</li>
+      <li>A real filter does what it says, so the claim holds up.</li>
+      <li>Higher price point than most of the list.</li>
+    </ul></div>
+    <div class="bad"><h3>Negatives</h3><ul>
+      <li>It is their own product, so there is no supplier listing to buy from.</li>
+      <li>Heavy at 2.6 kg, which makes shipping expensive.</li>
+      <li>Needs electrical and California certification.</li>
+      <li>Competes with large brands such as Levoit and Oneisall, around $89.</li>
+      <li>"Helps reduce sneezing and allergies" is a health claim.</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- 7 -->
+<div class="card">
+  <div class="card-top">
+    <h2>Chewie herding ball</h2>
+    <div class="brand">Chewie · a 22-inch inflatable ball in a tough fabric cover that dogs push around a yard</div>
+  </div>
+  <div class="grid">
+    <div class="col">
+      <div class="ledger">
+        <div><span>Sells for (£54 seen)</span><span>about $70.73</span></div>
+        <div><span>Supplier (ball, cover, pump)</span><span>−$18.00</span></div>
+        <div><span>Shipping (estimate)</span><span>−$7.50</span></div>
+        <div><span>Card fees</span><span>−$2.35</span></div>
+        <div class="total"><span>Left per order</span><span>$42.88 · £33</span></div>
+      </div>
+      <div class="facts">
+        <div><b>Live US ads:</b> 644</div>
+        <div><b>On sale since:</b> 26 March 2026</div>
+        <div><b>Guarantee:</b> 30 days, plus a free replacement if the dog destroys it</div>
+        <div><b>Supplier range:</b> $10.95–$26.75</div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="block"><h3>Who buys</h3><p>Owners of large, high-energy dogs with a yard: shepherds, collies, cattle dogs, Malinois. The German Shepherd is the fourth most popular US breed. Men and women both buy.</p></div>
+      <div class="block"><h3>What they want</h3><p>A tired, calm dog, a toy that survives more than ten minutes, and less guilt about not exercising the dog enough.</p></div>
+      <div class="block"><h3>Angles</h3><ul>
+        <li><b>Seller leads with:</b> "45% Off + Free Gift Today Only!"</li>
+        <li><b>Other sellers use:</b> "Instantly tires dogs out" and "Give That Herding Instinct a Job to Do".</li>
+        <li><b>Usable honestly:</b> the dog chasing it on video and the nap afterwards. Avoid the word indestructible.</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="two">
+    <div class="good"><h3>Positives</h3><ul>
+      <li>The most ad activity of the seven, sustained for eight months.</li>
+      <li>No health claim needed.</li>
+      <li>About £33 left per order, close to our bar.</li>
+      <li>Sells itself on video.</li>
+      <li>Ships deflated.</li>
+    </ul></div>
+    <div class="bad"><h3>Negatives</h3><ul>
+      <li>"Indestructible" with free replacements is a cost that grows with sales.</li>
+      <li>A similar ball on Chewy scores 3.0 from 97 ratings, with punctures and broken zips.</li>
+      <li>Amazon has 139 herding balls, mostly $20–$50.</li>
+      <li>Needs a yard, which narrows the audience.</li>
+      <li>Supplier listings have few orders, so quality is untested.</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="note">
+  <h3>What I could not verify</h3>
+  <ul>
+    <li>Whether any of these sellers is profitable. Ad counts show activity, not profit.</li>
+    <li>What these audiences cost to reach on your ad account.</li>
+    <li>Real shipping costs and parcel sizes.</li>
+    <li>Supplier quality, and bulk prices from Alibaba.</li>
+    <li>The US prices for TruLink and Chewie.</li>
+    <li>The age and sex split of buyers. The pet industry survey that holds it is paywalled.</li>
+    <li>The "12,000+", "20,000+" and "5,000+" customer counts on the sellers' pages.</li>
+  </ul>
+</div>
+
+<div class="src">
+  <h3>Sources</h3>
+  <ul>
+    <li><a href="https://zoosnug.com/products/purenest">Zoosnug PureNest page</a></li>
+    <li><a href="https://trulinkgolf.com/products/wrist-trainer">TruLink wrist trainer page</a></li>
+    <li><a href="https://felinefriends.store/products/smoothpaw">Feline Friends SmoothPaw page</a></li>
+    <li><a href="https://trycanivet.com/products/canivet-kit-silent-ultrasonic-plaque-tartar-remover-for-dogs">Canivet page</a></li>
+    <li><a href="https://cattasaurus.com/pages/9-reasons-bogo">Cattasaurus offer page</a></li>
+    <li><a href="https://www.uahpet.com/products/pre-orderuahpet-air-purifier-slim">Uahpet Air Purifier Slim page</a></li>
+    <li><a href="https://getchewie.com/products/indestructible-herding-ball">Chewie herding ball page</a></li>
+    <li><a href="https://19january2025snapshot.epa.gov/indoor-air-quality-iaq/what-are-ionizers-and-other-ozone-generating-air-cleaners">EPA on ionisers</a></li>
+    <li><a href="https://ww2.arb.ca.gov/resources/fact-sheets/californias-regulation-limit-ozone-emissions-indoor-air-cleaning-devices">California air cleaner rule</a></li>
+    <li><a href="https://petmd.com/dog/general-health/is-non-anesthetic-teeth-cleaning-safe">PetMD on cleaning without anaesthesia</a></li>
+    <li><a href="https://avdc.org/wp-content/uploads/2019/AVDC-pos-stmts/Dental_Scaling_Without_Anesthesia.pdf">AVDC position statement</a></li>
+    <li><a href="https://www.slu.se/en/research/knowledge-bank/vh/sport--och-sallskapsdjur/hund/the-ultrasonic-toothbrush-does-not-remove-tartar-in-dogs--but-may-help-prevent-it-from-forming/">Swedish university on ultrasonic toothbrushes</a></li>
+    <li><a href="https://www.webvet.com/dog-teeth-cleaning-cost/">Dog dental cleaning costs</a></li>
+    <li><a href="https://www.aaha.org/resources/why-your-pet-needs-dental-cleanings-under-anesthesia/">AAHA on dental disease</a></li>
+    <li><a href="https://uk.trustpilot.com/review/rarepet.co?page=3">Trustpilot review mentioning Canivet</a></li>
+    <li><a href="https://americanpetproducts.org/news/the-american-pet-products-association-appa-releases-2025-dog-cat-report">APPA 2025 dog and cat report</a></li>
+    <li><a href="https://www.ngf.org/member-publication/golf-participation-in-the-u-s-2025/">National Golf Foundation 2025</a></li>
+    <li><a href="https://www.golfdigest.com/story/women-play-golf-womens-golf-day-national-golf-foundation">Golf Digest on women golfers</a></li>
+    <li><a href="https://www.akc.org/expert-advice/dog-breeds/most-popular-dog-breeds-2025/">AKC most popular breeds 2025</a></li>
+    <li><a href="https://www.chewy.com/herding-buddy-blue/dp/1674742">Herding Buddy ball on Chewy</a></li>
+    <li><a href="https://www.asinsight.com/report/US/herding-ball-for-dogs">Amazon herding ball listings report</a></li>
+    <li><a href="https://www.walmart.com/ip/18901650184">Walmart cat nail file box listing</a></li>
+    <li><a href="https://patents.justia.com/patent/D1029404">Cattasaurus design patent</a></li>
+    <li><a href="https://www.trustpilot.com/review/cattasaurus.com?page=2">Trustpilot: Cattasaurus</a></li>
+  </ul>
+</div>
+
+</div>
